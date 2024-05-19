@@ -8,11 +8,11 @@
 #include <stdbool.h>
 #include "builtins.h"
 
-Object *get(Object *obj, const char *key);
+Object *getattr(Object *obj, const char *key);
 
-bool contains(const Object *obj, const char *key);
+bool hasattr(const Object *obj, const char *key);
 
-Object *set(Object *obj, const char *key, Object *value);
+Object *setattr(Object *obj, const char *key, Object *value);
 
 void dir(const Object *obj);
 

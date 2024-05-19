@@ -37,7 +37,7 @@ void allocator_clean(void) {
 
 void init_allocator(void) {
     //IMPORTANT to explicitly not use 'throw' (or something that uses it under the hood)
-    // if we get an exception
+    // if we getattr an exception
     global_allocator = (Allocator *) builtin_new(sizeof(Allocator));
     if (global_allocator == NULL) {
         fprintf(stderr, "%s at line number %d: %s(%s)\n", __FILE__, __LINE__, "FailedAllocation",

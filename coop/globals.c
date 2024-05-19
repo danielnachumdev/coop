@@ -7,33 +7,21 @@
 #include <stdio.h>
 #include "globals.h"
 
-Object *get(Object *obj, const char *key) {
+Object *getattr(Object *obj, const char *key) {
     if (obj == NULL || key == NULL) return NULL;
     for (int i = 0; i < obj->num_attributes; ++i) {
         Object *attr = obj->attributes[i];
-        for (int j = 0; j < attr->num_attributes; ++j) {
-            Object *sub_attr_data = attr->attributes[j]->data;
-            if (sub_attr_data->type != String) continue;
 
-        }
-        if (attr->type == Field) {
-            Object *field = attr;
-            if (field->data == NULL)
-                continue;
-            if (((FieldData *) attr->data)->type == String)
-                if (strcmp(((Object *) ((FieldData *) attr->data)->value)->data, key) == 0)
-                    return ((FieldData *) attr->data)->value;
-        }
     }
     return NULL;
 }
 
-bool contains(const Object *obj, const char *key) {
-    return get((Object *) obj, key) != NULL;
+bool hasattr(const Object *obj, const char *key) {
+    return getattr((Object *) obj, key) != NULL;
 }
 
-Object *set(Object *obj, const char *key, Object *value) {
-    Object *existing_object = get(obj, key);
+Object *setattr(Object *obj, const char *key, Object *value) {
+    Object *existing_object = getattr(obj, key);
     if (existing_object == NULL) {
 
     } else {
