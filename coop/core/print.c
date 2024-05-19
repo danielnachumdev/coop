@@ -7,8 +7,7 @@
 #include <stdarg.h>
 
 #include "utils.h"
-#include "memory_management/allocator.h"
-#include "../../../C/coop/coop/macros.h"
+#include "macros.h"
 #include "logging/logger.h"
 
 void print_imp(const char *sep, const char *end, unsigned int n, ...) {

@@ -6,7 +6,7 @@
 #define MACROPYTHON_PRINT_H
 
 #include "utils.h"
-
+#include "macros.h"
 void print_imp(const char *sep, const char *end, unsigned int n, ...);
 
 #define print(...) print_imp(" ","\n", NUM_POINTERS(__VA_ARGS__), ## __VA_ARGS__)

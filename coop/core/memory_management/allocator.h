@@ -8,7 +8,7 @@
 #include <stddef.h>
 #include "../data_structures//linked_list.h"
 #include "../data_structures/interface_random_access.h"
-#include "../structs/optional.h"
+#include "../optional.h"
 
 typedef struct Allocator {
     IRandomAccess *structure;

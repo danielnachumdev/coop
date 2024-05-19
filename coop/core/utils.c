@@ -55,9 +55,3 @@ Optional concatenate_strings(unsigned int n, ...) {
     return (Optional) {res};
 }
 
-Optional duplicate_string(const char *s) {
-    char *res = acquire(strlen(s) + 1).nullable;
-    if (res != NULL)
-        strcpy(res, s);
-    return (Optional) {res};
-}

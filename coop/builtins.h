@@ -1,12 +1,24 @@
 //
-// Created by danie on 17/05/2024.
+// Created by danie on 18/05/2024.
 //
 
-#ifndef MACROPYTHON_BUILTINS_H
-#define MACROPYTHON_BUILTINS_H
+#ifndef COOP_BUILTINS_H
+#define COOP_BUILTINS_H
 
-#include <malloc.h>
+#include "object.h"
 
-#define builtin_free(ptr) free(ptr)
-#define builtin_new(ptr) malloc(ptr)
-#endif //MACROPYTHON_BUILTINS_H
+extern Object *Type;
+extern Object *Integer;
+extern Object *String;
+extern Object *Array;
+extern Object *Field;
+extern Object *Function;
+
+
+typedef struct FieldData {
+    const Object *type;
+    void *value;
+} FieldData;
+
+#endif //COOP_BUILTINS_H
+

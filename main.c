@@ -1,8 +1,8 @@
 //
 // Created by danie on 18/05/2024.
 //
-#include "coop/logging/logger.h"
-#include "coop/memory_management//allocator.h"
+#include "coop/core/logging/logger.h"
+#include "coop/core/memory_management/allocator.h"
 #include "_main.h"
 
 

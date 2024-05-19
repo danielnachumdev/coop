@@ -5,7 +5,6 @@
 #include "linked_list.h"
 #include "../exceptions/exception.h"
 #include "../builtins.h"
-#include "../utils.h"
 
 Node *linked_list_get(LinkedList *ll, void *p) {
     if (ll == NULL)return NULL;

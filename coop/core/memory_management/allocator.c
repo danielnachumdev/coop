@@ -5,7 +5,6 @@
 #include <malloc.h>
 #include <stdlib.h>
 #include "allocator.h"
-#include "../exceptions/exception.h"
 #include "../logging/logger.h"
 #include "../builtins.h"
 

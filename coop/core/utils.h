@@ -5,11 +5,10 @@
 #ifndef MACROPYTHON_UTILS_H
 #define MACROPYTHON_UTILS_H
 
-#include "structs/optional.h"
+#include "optional.h"
 
 Optional concatenate_strings(unsigned int n, ...);
-Optional join_strings(const char* s1, const char* s2);
 
-Optional duplicate_string(const char *s);
+Optional join_strings(const char *s1, const char *s2);
 
 #endif //MACROPYTHON_UTILS_H
