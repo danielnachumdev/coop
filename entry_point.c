@@ -11,54 +11,9 @@
 #include "coop/core/memory_management//allocator.h"
 #include "coop/core/logging/logger.h"
 #include "coop/duplicators.h"
+#include "coop/globals.h"
 
 #define F(x) STR(x)," => ", x
-
-
-Object *get(Object *obj, const char *key) {
-    if (obj == NULL || key == NULL) return NULL;
-    for (int i = 0; i < obj->num_attributes; ++i) {
-        Object *attr = obj->attributes[i];
-        if (attr->type == Field) {
-            if (attr->data != NULL) {
-                if (((FieldData *) attr->data)->type == String)
-                    if (strcmp(((Object *) ((FieldData *) attr->data)->value)->data, key) == 0)
-                        return ((FieldData *) attr->data)->value;
-            }
-        }
-    }
-    return NULL;
-}
-
-bool contains(const Object *obj, const char *key) {
-    return get((Object *) obj, key) != NULL;
-}
-
-Object *set(Object *obj, const char *key, Object *value) {
-    Object *existing_object = get(obj, key);
-    if (existing_object == NULL) {
-
-    } else {
-
-    }
-
-}
-
-void dir(const Object *obj) {
-    if (obj == NULL) return;
-    for (unsigned int i = 0; i < obj->num_attributes; ++i) {
-        Object *attr = obj->attributes[i];
-        for (unsigned int j = 0; j < attr->num_attributes; ++j) {
-            Object *sub_attr = attr->attributes[j];
-            if (sub_attr->type == Field) {
-                FieldData *fd = sub_attr->data;
-                assert(fd->type == String);
-                char *name = ((Object *) fd->value)->data;
-                printf("%s", name);
-            }
-        }
-    }
-}
 
 
 Object *new_field_instance(
@@ -187,27 +142,53 @@ Object *new_function_instance(
     }
 #define set_attr(obj, index, f) (obj)->attributes[index]=f
 #define get_attr(obj, index) (obj)->attributes[index]
+#define declare_object(name) Object * name = new_object(1)
+#define declare_fd(name) FieldData* name = acquire(sizeof(FieldData)).nullable
 
-void _main(void) {
-    Object *name_object_name_object = new_object(1);
-    Object *name_object_name_field = new_object(1);
-    FieldData *name_object_name_field_fielddata = acquire(sizeof(FieldData)).nullable;
-    Object *name_object_name_field_length_object = new_object(1);
-    Object *length_object_name_field = new_object(1);
-    FieldData *length_object_name_field_fielddata = acquire(sizeof(FieldData)).nullable;
-    Object *length_object_name_field_name_object = new_object(1);
+void *new_int(unsigned int n) {
+    unsigned int *res = acquire(sizeof(unsigned int)).nullable;
+    *res = n;
+    return res;
+}
 
-    *name_object_name_object = init_object(String, 1, duplicate_string("name"));
-    set_attr(name_object_name_object, 0, name_object_name_field);
-    *name_object_name_field = init_object(Field, 1, name_object_name_field_fielddata);
-    *name_object_name_field_fielddata = init_fielddata(String, name_object_name_object);
-    set_attr(name_object_name_field, 0, name_object_name_field_length_object);
-    *name_object_name_field_length_object = init_object(Integer, 1, acquire(sizeof(unsigned int *)).nullable);
-    *((unsigned int *) name_object_name_field_length_object->data) = strlen(name_object_name_object->data);
-    set_attr(name_object_name_field_length_object, 0, length_object_name_field);
-    *length_object_name_field = init_object(Field, 1, length_object_name_field_fielddata);
-    *length_object_name_field_fielddata = init_fielddata(String, length_object_name_field_name_object);
-    *length_object_name_field_name_object = init_object(String, 1, duplicate_string("length"));
-    set_attr(length_object_name_field_name_object, 0, length_object_name_field);
+#define NAME "__name__"
+#define LENGTH "__len__"
+
+void entry_point(void) {
+//    NOTE: "dot notation" is symbolic and not actually possible. It means that an object has some attr with the same name.
+//    the String "__name__"
+    declare_object(string_name);
+    *string_name = init_object(String, 2, duplicate_string(NAME));
+//    "__name__".__len__ = Field
+    declare_object(string_name_length_field);
+    set_attr(string_name, 0, string_name_length_field);
+//    "__name__".__len__.data = strlen("__name__")
+    declare_object(string_name_length_field_value_object);
+    *string_name_length_field = init_object(Field, 1, string_name_length_field_value_object);
+    *string_name_length_field_value_object = init_object(Integer, 0, new_int(strlen(NAME)));
+//    "__name__".__name__ = Field
+    declare_object(string_name_name_field);
+    set_attr(string_name, 1, string_name_name_field);
+    *string_name_name_field = init_object(Field, 1, string_name);
+//    "__name__".__name__.__name__ = "__name__".__name__
+    set_attr(string_name_name_field, 0, string_name_name_field);
+
+    get(string_name, "__len__");
+
+
+
+
+//    the String "__len__"
+    declare_object(string_length);
+    *string_length = init_object(String, 1, duplicate_string(LENGTH));
+//    create "__len__".__len__
+    declare_object(string_length_length_field);
+    set_attr(string_length, 0, string_length_length_field);
+//    "__len__".__len__ = strlen("__len__")
+    declare_object(string_length_length_field_value_object);
+    *string_length_length_field = init_object(Field, 1, string_length_length_field_value_object);
+    *string_length_length_field_value_object = init_object(Integer, 0, new_int(strlen(LENGTH)));
+
+//    but the there exists "__len__".__len__
 
 }

@@ -6,6 +6,6 @@
 #define MACROPYTHON__MAIN_H
 
 
-void _main(void);
+void entry_point(void);
 
 #endif //MACROPYTHON__MAIN_H
