@@ -5,9 +5,10 @@
 #ifndef MACROPYTHON_PRINT_H
 #define MACROPYTHON_PRINT_H
 
-#include "utils.h"
-#include "macros.h"
+#include "core/utils.h"
+#include "core/macros.h"
 void print_imp(const char *sep, const char *end, unsigned int n, ...);
 
+#define str(x)
 #define print(...) print_imp(" ","\n", NUM_POINTERS(__VA_ARGS__), ## __VA_ARGS__)
 #endif //MACROPYTHON_PRINT_H

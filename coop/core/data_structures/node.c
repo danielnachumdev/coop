@@ -4,7 +4,7 @@
 
 #include <malloc.h>
 #include "node.h"
-#include "../builtins.h"
+#include "../memory/wrappers.h"
 
 Node *node_new() {
     //Explicitly dont use get_allocator()->new because then it will recurse infinitely

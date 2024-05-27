@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include "allocator.h"
 #include "../logging/logger.h"
-#include "../builtins.h"
+#include "wrappers.h"
 
 static Allocator *global_allocator = NULL;
 

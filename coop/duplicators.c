@@ -4,7 +4,7 @@
 
 #include <string.h>
 #include "duplicators.h"
-#include "core/memory_management/allocator.h"
+#include "core/memory/allocator.h"
 
 char *duplicate_string(const char *s) {
     char *res = acquire(sizeof(char) * strlen(s) + 1).nullable;

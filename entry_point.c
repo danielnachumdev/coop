@@ -6,9 +6,9 @@
 #include <stdbool.h>
 #include <assert.h>
 #include "coop/builtins.h"
-#include "coop/core/print.h"
+#include "coop/print.h"
 #include "coop/core/macros.h"
-#include "coop/core/memory_management//allocator.h"
+#include "coop/core/memory//allocator.h"
 #include "coop/core/logging/logger.h"
 #include "coop/duplicators.h"
 #include "coop/globals.h"

@@ -6,7 +6,7 @@
 #define MACROPYTHON_LINKED_LIST_H
 
 #include "node.h"
-#include "../memory_management/allocator.h"
+#include "../memory/allocator.h"
 #include "interface_random_access.h"
 
 typedef struct DoublyLinkedList {

@@ -7,12 +7,26 @@
 
 #include "linked_list.h"
 
+typedef LinkedList *Bucket;
 typedef struct Hashmap {
-    LinkedList **arr;
-    unsigned int size;
+    Bucket *buckets;
+    unsigned int num_buckets;
+    unsigned int count;
+    unsigned int change_factor;
+    double scale_down_threshold;
+    double scale_up_threshold;
+
+    long unsigned int (*hash)(long unsigned int);
 } Hashmap;
 
-Hashmap * hashmap_new();
+Hashmap *hashmap_new();
 
-extern IRandomAccess random_access_hash_map;
+void hashmap_free(Hashmap **);
+
+Node *hashmap_get(Hashmap *, void *);
+
+Node *hashmap_del(Hashmap *, void *);
+
+Node *hashmap_add(Hashmap *ll, void *p);
+
 #endif //COOP_HASHMAP_H

@@ -6,9 +6,9 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-#include "utils.h"
-#include "macros.h"
-#include "logging/logger.h"
+#include "core/utils.h"
+#include "core/macros.h"
+#include "core/logging/logger.h"
 
 void print_imp(const char *sep, const char *end, unsigned int n, ...) {
     RETURN_DO_IF(n == 0, {

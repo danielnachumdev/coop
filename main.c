@@ -2,7 +2,7 @@
 // Created by danie on 18/05/2024.
 //
 #include "coop/core/logging/logger.h"
-#include "coop/core/memory_management/allocator.h"
+#include "coop/core/memory/allocator.h"
 #include "entry_point.h"
 
 

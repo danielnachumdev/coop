@@ -5,7 +5,7 @@
 #ifndef COOP_OBJECT_H
 #define COOP_OBJECT_H
 
-#include "core/memory_management/allocator.h"
+#include "core/memory/allocator.h"
 
 typedef struct Object {
     struct Object *type;

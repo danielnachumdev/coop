@@ -4,7 +4,7 @@
 #include <stddef.h>
 #include <memory.h>
 #include "logger.h"
-#include "../memory_management//allocator.h"
+#include "../memory//allocator.h"
 #include "../exceptions/exception.h"
 
 static Logger *global_logger = NULL;

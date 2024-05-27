@@ -3,7 +3,7 @@
 //
 #include <stdbool.h>
 #include "exception.h"
-#include "../memory_management//allocator.h"
+#include "../memory//allocator.h"
 
 void print_stack(const Exception *e) {
     const Exception *cur = e;
