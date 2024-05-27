@@ -3,3 +3,12 @@
 //
 
 #include "Field.h"
+#include "../object.h"
+#include "../memory/allocator.h"
+
+Object *Field = NULL;
+
+void init_field(void) {
+    Function = acquire(sizeof(Object));
+    *Function = init_object(Number);
+}

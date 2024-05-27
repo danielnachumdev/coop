@@ -20,12 +20,8 @@ extern Object *Type;
 extern Object *String;
 extern Object *Number;
 extern Object *Integer;
-extern Object *Address;
 extern Object *Function;
 extern Object *Field;
-extern Object *Array;
-extern Object *NoneType;
-extern Object *None;
 
 #define init_object(type_) (Object){ \
     .type=type_,                     \

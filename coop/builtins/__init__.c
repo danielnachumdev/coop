@@ -7,10 +7,14 @@
 #include "String.h"
 #include "Type.h"
 #include "Number.h"
+#include "Function.h"
+#include "Field.h"
 
 void init_builtins(void) {
     init_type();
     init_number();
     init_string();
     init_integer();
+    init_function();
+    init_field();
 }

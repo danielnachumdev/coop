@@ -4,8 +4,11 @@
 
 #include "Function.h"
 #include "../object.h"
+#include "../memory/allocator.h"
 
 Object *Function = NULL;
-void init_function(void){
 
+void init_function(void) {
+    Function = acquire(sizeof(Object));
+    *Function = init_object(Number);
 }
