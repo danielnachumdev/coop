@@ -31,28 +31,8 @@ Object *getattr(const Object *obj, const char *name) {
 }
 
 
-void setattr_helper_case_null(Object *obj, const char *name, const Object *value) {
-    Object *(*dup_func)(const Object *) = getattr(value, COPY);
-    if (dup_func == NULL) return;
-    Object *duplication = dup_func(value);
-    Object **new_attributes = acquire(sizeof(Object *) * (obj->num_attributes + 1));
-    memcpy(new_attributes, obj->attributes, obj->num_attributes * sizeof(Object *));
-    new_attributes[obj->num_attributes] = duplication;
-    obj->attributes = new_attributes;
-    obj->num_attributes += 1;
-}
-
-void setattr_helper_case_not_null(Object *obj, const char *name, const Object *value) {
-
-}
-
 void setattr(Object *obj, const char *name, const Object *value) {
-    Object *attr = getattr(obj, name);
-    if (attr == NULL) {
-        setattr_helper_case_null(obj, name, value);
-        return;
-    }
-    setattr_helper_case_not_null(obj, name, value);
+
 }
 
 bool hasattr(Object *obj, const char *name) {
@@ -129,22 +109,25 @@ void print_object(const Object *obj, const char *end) {
 
 
 void _main(void) {
-    Object *the_string___len__ = new_string(LEN);
+    Object *string__len__ = new_string(LEN);
     Object *string__len__value__len__ = new_integer(strlen(LEN));
     Object *string__name__ = new_string(NAME);
     Object *string__name__value__len__ = new_integer(strlen(NAME));
     Object *string__name__field__len__ = new_field(NULL, string__name__value__len__);
     Object *string__len__field__len__ = new_field(NULL, string__len__value__len__);
-    Object *field__len__field__name__ = new_field(NULL, the_string___len__);
+    Object *field__len__field__name__ = new_field(NULL, string__len__);
     Object *field__name__field__name__ = new_field(NULL, string__name__);
+
     append_attr(string__name__field__len__, field__len__field__name__);
+    append_attr(string__len__field__len__, field__len__field__name__);
     append_attr(field__len__field__name__, field__name__field__name__);
     append_attr(field__name__field__name__, field__name__field__name__);
-    append_attr(string__len__field__len__, field__len__field__name__);
-    println(the_string___len__);
+
+    println(string__len__);
     println(string__len__value__len__);
     println(string__name__);
     println(string__name__value__len__);
+
     println(string__name__field__len__);
     println(string__len__field__len__);
     println(field__len__field__name__);
