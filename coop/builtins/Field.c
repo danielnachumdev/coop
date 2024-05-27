@@ -9,6 +9,6 @@
 Object *Field = NULL;
 
 void init_field(void) {
-    Function = acquire(sizeof(Object));
-    *Function = init_object(Number);
+    Field = acquire(sizeof(Object));
+    *Field = init_object(Type);
 }

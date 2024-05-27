@@ -10,5 +10,5 @@ Object *Function = NULL;
 
 void init_function(void) {
     Function = acquire(sizeof(Object));
-    *Function = init_object(Number);
+    *Function = init_object(Type);
 }

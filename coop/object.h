@@ -12,7 +12,6 @@ typedef struct Object {
     const struct Object *type;
     unsigned long num_attributes;
     struct Object **attributes;
-    bool has_data;
     void *data;
 } Object;
 
@@ -27,7 +26,6 @@ extern Object *Field;
     .type=type_,                     \
     .num_attributes=0,               \
     .attributes=NULL,                \
-    .has_data=false,                 \
     .data=NULL                       \
 }
 

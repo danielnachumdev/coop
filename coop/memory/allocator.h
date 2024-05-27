@@ -18,5 +18,5 @@ typedef struct Allocator {
 Allocator *get_allocator(void);
 
 #define acquire(n) get_allocator()->acquire(n)
-#define release(p) get_allocator()->release(p);
+#define release(p) get_allocator()->release(p)
 #endif //LOCAL_PLAYGROUND_ALLOCATOR_H

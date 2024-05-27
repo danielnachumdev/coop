@@ -12,7 +12,7 @@
 
 #define NAME "__name__"
 #define INIT "__init__"
-#define LENGTH "__length__"
+#define LEN "__len__"
 #define COPY "__copy__"
 
 #endif //LOCAL_PLAYGROUND_MACROS_H
