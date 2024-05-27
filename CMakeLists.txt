@@ -19,5 +19,5 @@ foreach (element IN LISTS MY_LIST)
     message(STATUS "\t${element}")
 endforeach ()
 
-add_executable(coop main.c entry_point.h entry_point.c ${SOURCE_FILES} ${HEADER_FILES}
-        coop/builtins.h)
+add_executable(coop main.c _main.c _main.h ${SOURCE_FILES} ${HEADER_FILES}
+        old/builtins.h)

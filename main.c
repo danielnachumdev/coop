@@ -1,15 +1,16 @@
 //
 // Created by danie on 18/05/2024.
 //
-#include "coop/core/logging/logger.h"
-#include "coop/core/memory/allocator.h"
-#include "entry_point.h"
+#include "_main.h"
+#include "coop/memory/allocator.h"
+#include "coop/log/logger.h"
+#include "coop/builtins/__init__.h"
 
-
-int main(void) {
-    get_logger()->debug("Starting \"Main\"\n");
-    entry_point();
-    get_logger()->debug("Exiting \"Main\"\n");
+int main() {
+    _DEBUG("Starting main\n");
+    init_builtins();
+    _main();
+    _DEBUG("Finished main\n");
     get_allocator()->clean();
     return 0;
 }
