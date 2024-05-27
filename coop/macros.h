@@ -15,4 +15,6 @@
 #define LEN "__len__"
 #define COPY "__copy__"
 
+#define cast(obj, T) ((T)obj)
+
 #endif //LOCAL_PLAYGROUND_MACROS_H

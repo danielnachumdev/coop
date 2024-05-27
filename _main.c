@@ -6,12 +6,9 @@
 #include <stdbool.h>
 #include <string.h>
 #include "_main.h"
-#include "coop/log/logger.h"
 #include "coop/memory/allocator.h"
 #include "coop/object.h"
 #include "coop/macros.h"
-
-#define cast(obj, T) ((T)obj)
 
 Object *getattr(const Object *obj, const char *name) {
     if (obj == NULL || name == NULL) return NULL;
@@ -24,7 +21,6 @@ Object *getattr(const Object *obj, const char *name) {
             for (int k = 0; k < subattr->num_attributes; ++k) {
                 Object *subsubattr = subattr->attributes[k];
                 if (subsubattr->type != Field) continue;
-
                 if (cast(subsubattr->data, Object*)->type != String) continue;
                 if (strcmp(cast(subsubattr->data, Object*)->data, NAME) == 0)
                     return cast(subattr->data, Object*);
