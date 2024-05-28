@@ -5,7 +5,7 @@
 #ifndef COOP_SETATTR_H
 #define COOP_SETATTR_H
 
-#include "../../object.h"
+#include "../../../object.h"
 
 void setattr(Object *obj, const char *name, const Object *value);
 #endif //COOP_SETATTR_H

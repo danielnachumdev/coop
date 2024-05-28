@@ -3,7 +3,6 @@
 //
 
 #include "Integer.h"
-#include "../../object.h"
 #include "../../memory/allocator.h"
 
 Object *Integer = NULL;
@@ -11,4 +10,12 @@ Object *Integer = NULL;
 void init_integer(void) {
     Integer = acquire(sizeof(Object));
     *Integer = init_object(Number);
+}
+
+
+Object *new_integer(int n) {
+    Object *res = new_object(Integer);
+    res->data = acquire(sizeof(int));
+    *((int *) res->data) = n;
+    return res;
 }

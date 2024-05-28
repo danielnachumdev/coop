@@ -4,5 +4,11 @@
 
 #ifndef LOCAL_PLAYGROUND_INTEGER_H
 #define LOCAL_PLAYGROUND_INTEGER_H
+
+#include "../../object.h"
+
 void init_integer(void);
+
+Object *new_integer(int n);
+
 #endif //LOCAL_PLAYGROUND_INTEGER_H

@@ -29,4 +29,6 @@ extern Object *Field;
     .data=NULL                       \
 }
 
+Object *new_object(Object *type);
+
 #endif //LOCAL_PLAYGROUND_OBJECT_H

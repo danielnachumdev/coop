@@ -1,9 +1,10 @@
 //
-// Created by danie on 16/05/2024.
+// Created by danie on 28/05/2024.
 //
+
 #include <stdbool.h>
-#include "exception.h"
-#include "../memory//allocator.h"
+#include "throw.h"
+#include "../../memory/allocator.h"
 
 void print_stack(const Exception *e) {
     const Exception *cur = e;

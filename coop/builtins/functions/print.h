@@ -6,9 +6,11 @@
 #define COOP_PRINT_H
 
 #include "../../object.h"
+#include "../../macros.h"
 
-void print_object(const Object *obj, const char *end);
+void print_imp(const char *sep, const char *end, unsigned int n, ...);
 
-#define print(obj) print_object(obj,"")
-#define println(obj) print_object(obj,"\n")
+#define print(...) print_imp(" ","", NUM_POINTERS(__VA_ARGS__), ## __VA_ARGS__)
+#define println(...) print_imp(" ","\n", NUM_POINTERS(__VA_ARGS__), ## __VA_ARGS__)
+
 #endif //COOP_PRINT_H
