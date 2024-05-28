@@ -26,7 +26,16 @@ bool object_equals(const Object *a, const Object *b) {
     if (a == NULL && b == NULL) return true;
     if (a == NULL || b == NULL) return false;
     if (not(a->type == b->type)) return false;
+    if (a->type == Type) return object_equals(getattr(a, NAME), getattr(b, NAME));
     if (a->type == String) return strcmp(a->data, b->data) == 0;
     if (a->type == Integer) return *cast(a->data, unsigned int *) == *cast(b->data, unsigned int *);
-    return true;
+    if (a->type == Boolean) return *cast(a->data, bool *) == *cast(b->data, bool *);
+    if (a->type == Array) {
+        Object *len;
+        if (not(object_equals(len = getattr(a, LEN), getattr(b, LEN)))) return false;
+        for (unsigned int i = 0; i < *cast(len->data, unsigned int *); ++i)
+            if (not(object_equals(array_get(a, i), array_get(b, i)))) return false;
+    }
+    if (a->type == Union) return object_equals(a->data, b->data);
+    return a == b;
 }

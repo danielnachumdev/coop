@@ -54,14 +54,14 @@ Object *new_array(unsigned int num_objects, Object *items_type) {
     return res;
 }
 
-Object *array_get(Object *arr, unsigned int index) {
+Object *array_get(const Object *arr, unsigned int index) {
     if (arr == NULL) return NULL;
     Object *length = getattr(arr, LEN);
     if (*cast(length, unsigned int *) <= index) return NULL;
     return cast(arr->data, Object**)[index];
 }
 
-void array_set(Object *arr, unsigned int index, Object *value) {
+void array_set(Object *arr, unsigned int index, const Object *value) {
     if (arr == NULL) return;
     Object *length = getattr(arr, LEN);
     if (*cast(length, unsigned int *) <= index) return;

@@ -23,6 +23,7 @@ Object *new_union(unsigned long int num_types, ...) {
     for (unsigned int i = 0; i < num_types; ++i) {
         const Object *cur = va_arg(valist, const Object*);
         if (not(isinstance(cur, Type))) return NULL;
+        array_set(res->data, i, cur);
     }
     va_end(valist);
     return res;

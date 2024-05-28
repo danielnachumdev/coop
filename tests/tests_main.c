@@ -11,23 +11,15 @@ int passed_tests = 0;
 
 
 void test_global_constants(void) {
-    Object *a = getattr(__global__field__name__field__name__, NAME);
-    ASSERT_NOT_NULL(a);
-    Object *b = new_string(NAME);
-    ASSERT_NOT_NULL(b);
-    ASSERT_OBJECT_EQUALS(a, b);
+    ASSERT_OBJECT_EQUALS(getattr(__global__field__name__field__name__, NAME), new_string(NAME));
     ASSERT_OBJECT_EQUALS(getattr(__global__field__name__field__name__, LEN), new_integer(strlen(NAME)));
-
-    Object *c = getattr(__global__field__len__field__name__, NAME);
-    ASSERT_NOT_NULL(c);
-    Object *d = new_string(LEN);
-    ASSERT_NOT_NULL(d);
-    ASSERT_OBJECT_EQUALS(c, d);
+    ASSERT_OBJECT_EQUALS(getattr(__global__field__len__field__name__, NAME), new_string(LEN));
 }
 
 void test_isinstance(void) {
     ASSERT_TRUE(isinstance(Integer, Number));
     ASSERT_TRUE(isinstance(Number, Type));
+    ASSERT_TRUE(isinstance(Integer, Type));
     Object *Attr = new_union(2, Field, Function);
     ASSERT_TRUE(isinstance(Field, Attr));
     ASSERT_TRUE(isinstance(Function, Attr));
