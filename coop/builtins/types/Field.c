@@ -3,8 +3,8 @@
 //
 
 #include "Field.h"
-#include "../object.h"
-#include "../memory/allocator.h"
+#include "../../object.h"
+#include "../../memory/allocator.h"
 
 Object *Field = NULL;
 
