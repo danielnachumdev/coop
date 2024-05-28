@@ -21,7 +21,7 @@ Object *new_union(unsigned long int num_types, ...) {
     va_list valist;
     va_start(valist, num_types);
     for (unsigned int i = 0; i < num_types; ++i) {
-        const Object *cur = va_arg(valist, const Object*);
+        Object *cur = va_arg(valist, Object*);
         if (not(isinstance(cur, Type))) return NULL;
         array_set(res->data, i, cur);
     }
