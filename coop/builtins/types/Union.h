@@ -11,4 +11,8 @@ void __init_union(void);
 
 Object *new_union(unsigned long int num_types, ...);
 
+bool union_contains(const Object *uni, const Object *T);
+
+bool union_equals(const Object *a, const Object *b);
+
 #endif //COOP_UNION_H

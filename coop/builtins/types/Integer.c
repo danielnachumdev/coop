@@ -3,7 +3,7 @@
 //
 
 #include "Integer.h"
-#include "../../memory/allocator.h"
+#include "../../globals.h"
 
 Object *Integer = NULL;
 
@@ -12,14 +12,22 @@ void __init_integer(void) {
 }
 
 
-Object *new_integer(unsigned long n) {
+Object *new_integer(long long int n) {
     Object *res = new_object(Integer);
     if (res == NULL) return NULL;
-    res->data = acquire(sizeof(unsigned long));
+    res->data = acquire(sizeof(long long int));
     if (res->data == NULL) {
         release(res);
         return NULL;
     }
-    *((unsigned long *) res->data) = n;
+    *((long long int *) res->data) = n;
     return res;
+}
+
+bool integer_equals(const Object *a, const Object *b) {
+    if (a == NULL && b == NULL) return true;
+    if (a == NULL || b == NULL) return false;
+    if (not(a->type == b->type)) return false;
+    if (not(a->type == Integer)) return false;
+    return *cast(a->data, long long int *) == *cast(b->data, long long int *);
 }

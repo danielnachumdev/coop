@@ -13,4 +13,6 @@ Object *new_string_explicit(const char *s, Object *length_field);
 
 Object *new_string(const char *s);
 
+bool string_equals(const Object *a, const Object *b);
+
 #endif //LOCAL_PLAYGROUND_STRING_H

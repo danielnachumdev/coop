@@ -11,4 +11,6 @@ void __init_boolean(void);
 
 Object *new_boolean(bool v);
 
+bool boolean_equals(const Object *a, const Object *b);
+
 #endif //COOP_BOOLEAN_H

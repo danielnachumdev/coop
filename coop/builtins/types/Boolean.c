@@ -21,3 +21,11 @@ Object *new_boolean(bool v) {
     *cast(res->data, bool *) = v;
     return res;
 }
+
+bool boolean_equals(const Object *a, const Object *b) {
+    if (a == NULL && b == NULL) return true;
+    if (a == NULL || b == NULL) return false;
+    if (not(a->type == b->type)) return false;
+    if (not(a->type == Boolean)) return false;
+    return *cast(a->data, bool *) == *cast(b->data, bool *);
+}

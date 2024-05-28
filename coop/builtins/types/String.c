@@ -26,3 +26,11 @@ Object *new_string_explicit(const char *s, Object *length_field) {
 Object *new_string(const char *s) {
     return new_string_explicit(s, new__len__field(strlen(s)));
 }
+
+bool string_equals(const Object *a, const Object *b) {
+    if (a == NULL && b == NULL) return true;
+    if (a == NULL || b == NULL) return false;
+    if (not(a->type == b->type)) return false;
+    if (not(a->type == String)) return false;
+    return strcmp(a->data, b->data) == 0;
+}

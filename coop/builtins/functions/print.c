@@ -42,6 +42,10 @@ void print_object(Object *obj) {
         printf(", data=");
         print_object(obj->data);
         printf(")");
+    } else if (obj->type == Union) {
+        printf("Union(");
+        print_object(obj->data);
+        printf(")");
     }
 }
 

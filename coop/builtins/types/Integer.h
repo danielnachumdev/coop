@@ -9,6 +9,8 @@
 
 void __init_integer(void);
 
-Object *new_integer(unsigned long n);
+Object *new_integer(long long int n);
+
+bool integer_equals(const Object *a, const Object *b);
 
 #endif //LOCAL_PLAYGROUND_INTEGER_H

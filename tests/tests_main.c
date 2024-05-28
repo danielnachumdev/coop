@@ -16,6 +16,24 @@ void test_global_constants(void) {
     ASSERT_OBJECT_EQUALS(getattr(__global__field__len__field__name__, NAME), new_string(LEN));
 }
 
+void test_integer(void) {
+    ASSERT_TRUE(isinstance(new_integer(1), Integer));
+    ASSERT_TRUE(isinstance(new_integer(1), Number));
+    ASSERT_TRUE(isinstance(new_integer(1), Type));
+    ASSERT_OBJECT_EQUALS(new_integer(1), new_integer(1));
+    ASSERT_OBJECT_EQUALS(new_integer(0), new_integer(0));
+    ASSERT_OBJECT_EQUALS(new_integer(-1), new_integer(-1));
+}
+
+void test_union(void) {
+    ASSERT_OBJECT_EQUALS(new_union(2, Field, Function), new_union(2, Function, Field));
+}
+
+void test_primitives(void) {
+    test_integer();
+    test_union();
+}
+
 void test_isinstance(void) {
     ASSERT_TRUE(isinstance(Integer, Number));
     ASSERT_TRUE(isinstance(Number, Type));
@@ -25,11 +43,15 @@ void test_isinstance(void) {
     ASSERT_TRUE(isinstance(Function, Attr));
     ASSERT_TRUE(isinstance(__global__field__name__field__name__, Field));
     ASSERT_TRUE(isinstance(__global__field__name__field__name__, Attr));
+    ASSERT_TRUE(isinstance(new_string(""), String));
+    ASSERT_TRUE(isinstance(new_integer(1), Integer));
+    ASSERT_FALSE(isinstance(new_integer(1), String));
 }
 
 void _main(void) {
     test_global_constants();
     test_isinstance();
+    test_primitives();
 }
 
 int main(void) {

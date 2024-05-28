@@ -61,9 +61,30 @@ Object *array_get(const Object *arr, unsigned int index) {
     return cast(arr->data, Object**)[index];
 }
 
-void array_set(Object *arr, unsigned int index, const Object *value) {
+void array_set(Object *arr, unsigned int index, Object *value) {
     if (arr == NULL) return;
     Object *length = getattr(arr, LEN);
     if (*cast(length, unsigned int *) <= index) return;
     cast(arr->data, Object**)[index] = value;
+}
+
+bool array_contains(const Object *arr, const Object *obj) {
+    if (arr == NULL || obj == NULL) return false;
+    Object *len = getattr(arr, LEN);
+    for (unsigned int i = 0; i < *cast(len->data, unsigned int *); ++i) {
+        if (object_equals(obj, array_get(arr, i))) return true;
+    }
+    return false;
+}
+
+bool array_equals(const Object *a, const Object *b) {
+    if (a == NULL && b == NULL) return true;
+    if (a == NULL || b == NULL) return false;
+    if (not(a->type == b->type)) return false;
+    if (not(a->type == Array)) return false;
+    Object *len;
+    if (not(object_equals(len = getattr(a, LEN), getattr(b, LEN)))) return false;
+    for (unsigned int i = 0; i < *cast(len->data, unsigned int *); ++i)
+        if (not(object_equals(array_get(a, i), array_get(b, i)))) return false;
+    return true;
 }

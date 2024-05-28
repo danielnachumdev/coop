@@ -13,8 +13,10 @@ Object *new_array(unsigned int num_objects, Object *items_type);
 
 Object *array_get(const Object *arr, unsigned int index);
 
-void array_set(Object *arr, unsigned int index, const Object
+void array_set(Object *arr, unsigned int index, Object *value);
 
-*value);
+bool array_contains(const Object *arr, const Object *obj);
+
+bool array_equals(const Object *a, const Object *b);
 
 #endif //COOP_ARRAY_H

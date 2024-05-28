@@ -29,7 +29,7 @@ extern int passed_tests;
     num_tests+=1;                              \
 )
 #define ASSERT_TRUE(x) ASSERT_OBJECT_EQUALS(new_boolean(x), new_boolean(true))
-#define ASSERT_FALSE(x) ASSERT_TRUE(!(x))
+#define ASSERT_FALSE(x) ASSERT_TRUE(not(x))
 #define ASSERT_NULL(x) ASSERT_TRUE((x) == NULL)
 #define ASSERT_NOT_NULL(x) ASSERT_TRUE((x) != NULL)
 #endif //COOP_TEST_H
