@@ -3,11 +3,7 @@
 //
 
 #include <string.h>
-#include "setattr.h"
-#include "getattr.h"
-#include "../../types/Field.h"
-#include "../../types/String.h"
-#include "../../types/Integer.h"
+#include "../../../globals.h"
 
 void setattr(Object *obj, const char *name, Object *value) {
     Object *existing = getattr(obj, name);

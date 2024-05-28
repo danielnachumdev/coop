@@ -35,3 +35,6 @@ implemented som form of garbage collection which all of the allocations are bein
 with `acquire`, `release`, `clear`
 
 Note that because of all of the required initialization, In addition to the real entry point which is `main`, from there I'm calling the "real" entry point `_main`.
+
+
+See Documentation [here](./Documentation.md)
