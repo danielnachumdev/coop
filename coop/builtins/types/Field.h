@@ -10,5 +10,5 @@
 void init_field(void);
 
 Object *new_field(Object *name_field, Object *value);
-
+void append_field(Object *obj, Object *field);
 #endif //LOCAL_PLAYGROUND_FIELD_H

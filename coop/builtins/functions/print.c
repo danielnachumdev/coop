@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include "print.h"
-#include "../../macros.h"
 #include "attr/getattr.h"
 
 void print_object(const Object *obj) {
@@ -15,21 +14,22 @@ void print_object(const Object *obj) {
     }
     if (obj->type == Integer) {
 //        printf("Integer(%d)%s", *((const int *) obj->data), end);
-        printf("%d", *((const int *) obj->data));
+        printf("%lu", *((const unsigned long *) obj->data));
     } else if (obj->type == String) {
 //        printf("String(\"%s\")%s", ((const char *) obj->data), end);
         printf("\"%s\"", ((const char *) obj->data));
     } else if (obj->type == Field) {
         printf("Field(name=");
-        print(getattr(obj, NAME));
+        print_object(getattr(obj, NAME));
         printf(", data=");
-        print(obj->data);
+        print_object(obj->data);
         printf(")");
     }
 }
 
 
 void print_imp(const char *sep, const char *end, unsigned int n, ...) {
+    if (sep == NULL || end == NULL) return;
     va_list valist;
     va_start(valist, n);
     for (unsigned int i = 0; i < n; ++i) {

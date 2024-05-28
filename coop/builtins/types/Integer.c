@@ -13,9 +13,9 @@ void init_integer(void) {
 }
 
 
-Object *new_integer(int n) {
+Object *new_integer(unsigned long n) {
     Object *res = new_object(Integer);
-    res->data = acquire(sizeof(int));
-    *((int *) res->data) = n;
+    res->data = acquire(sizeof(unsigned long));
+    *((unsigned long *) res->data) = n;
     return res;
 }

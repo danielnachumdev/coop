@@ -10,9 +10,7 @@
 #include "types/Number.h"
 #include "types/Function.h"
 #include "types/Field.h"
-#include "../macros.h"
 #include "functions/print.h"
-#include "functions/attr/append_attr.h"
 
 void init_builtins(void) {
     init_type();
@@ -22,7 +20,7 @@ void init_builtins(void) {
     init_function();
     init_field();
 
-//  create diagrams/flow1.png
+//  diagrams/flow1.png
     Object *string__len__ = new_string(LEN, NULL);
     Object *string__len__value__len__ = new_integer(strlen(LEN));
     Object *string__name__ = new_string(NAME, NULL);
@@ -33,10 +31,10 @@ void init_builtins(void) {
     Object *field__len__field__name__ = new_field(NULL, string__len__);
     Object *field__name__field__name__ = new_field(NULL, string__name__);
 
-    append_attr(string__name__field__len__, field__len__field__name__);
-    append_attr(string__len__field__len__, field__len__field__name__);
-    append_attr(field__len__field__name__, field__name__field__name__);
-    append_attr(field__name__field__name__, field__name__field__name__);
+    append_field(string__name__field__len__, field__len__field__name__);
+    append_field(string__len__field__len__, field__len__field__name__);
+    append_field(field__len__field__name__, field__name__field__name__);
+    append_field(field__name__field__name__, field__name__field__name__);
 
     println(string__len__);
     println(string__len__value__len__);

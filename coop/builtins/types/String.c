@@ -5,7 +5,7 @@
 #include <string.h>
 #include "String.h"
 #include "../../memory/allocator.h"
-#include "../functions/attr/append_attr.h"
+#include "Field.h"
 
 Object *String = NULL;
 
@@ -16,7 +16,7 @@ void init_string(void) {
 
 Object *new_string(const char *s, Object *length_field) {
     Object *res = new_object(String);
-    append_attr(res, length_field);
+    append_field(res, length_field);
     res->data = acquire(strlen(s) + 1);
     strcpy(res->data, s);
     return res;

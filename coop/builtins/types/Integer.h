@@ -9,6 +9,6 @@
 
 void init_integer(void);
 
-Object *new_integer(int n);
+Object *new_integer(unsigned long n);
 
 #endif //LOCAL_PLAYGROUND_INTEGER_H

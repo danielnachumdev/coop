@@ -7,5 +7,6 @@
 
 #include "../../../object.h"
 
-void setattr(Object *obj, const char *name, const Object *value);
+void setattr(Object *obj, const char *name, Object *value);
+
 #endif //COOP_SETATTR_H

@@ -3,7 +3,6 @@
 //
 
 #include "Function.h"
-#include "../../object.h"
 #include "../../memory/allocator.h"
 
 Object *Function = NULL;
@@ -11,4 +10,14 @@ Object *Function = NULL;
 void init_function(void) {
     Function = acquire(sizeof(Object));
     *Function = init_object(Type);
+}
+
+Object *new_function(const char *name, void *(*impl)()) {
+    if (name == NULL || impl == NULL) return NULL;
+    Object *res = new_object(Function);
+    if (res == NULL) return NULL;
+
+
+    res->data = impl;
+    return res;
 }
