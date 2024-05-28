@@ -11,7 +11,7 @@ int main() {
     init_builtins();
     _main();
     _DEBUG("Finished main\n");
-    get_allocator()->clean();
+    get_allocator()->clear();
     return 0;
 }
 

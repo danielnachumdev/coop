@@ -12,7 +12,7 @@ typedef struct Allocator {
 
     void (*release)(void *);
 
-    void (*clean)(void);
+    void (*clear)(void);
 } Allocator;
 
 Allocator *get_allocator(void);

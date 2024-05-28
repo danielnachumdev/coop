@@ -21,7 +21,7 @@ void default_release(void *p) {
     linkedlist_remove(get_allocator()->structure, p);
 }
 
-void default_clean(void) {
+void default_clear(void) {
     LinkedList *ll = get_allocator()->structure;
     linkedlist_free(&ll);
     builtin_free(global_allocator);
@@ -37,7 +37,7 @@ Allocator *init_allocator(void) {
     }
     res->acquire = default_acquire;
     res->release = default_release;
-    res->clean = default_clean;
+    res->clear = default_clear;
     return res;
 }
 
