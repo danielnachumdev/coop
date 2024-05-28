@@ -21,4 +21,7 @@
 #include "builtins/functions/attr/setattr.h"
 #include "builtins/functions/attr/hasattr.h"
 
+extern Object *__global__field__name__field__name__;
+
+
 #endif //COOP_GLOBALS_H

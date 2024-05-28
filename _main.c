@@ -7,6 +7,6 @@
 
 
 void _main(void) {
-    Object *function_new_string = new_function("__init__", cast(new_string, void*(*)()));
-    setattr(String, "__init__", function_new_string);
+//    Object *function_new_string = new_function("__init__", cast(new_string, void*(*)()));
+//    setattr(String, "__init__", function_new_string);
 }

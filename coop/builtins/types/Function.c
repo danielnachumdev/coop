@@ -2,8 +2,9 @@
 // Created by t-danachum on 27/05/2024.
 //
 
+#include <string.h>
 #include "Function.h"
-#include "../../memory/allocator.h"
+#include "../../globals.h"
 
 Object *Function = NULL;
 
@@ -16,6 +17,10 @@ Object *new_function(const char *name, void *(*impl)()) {
     if (name == NULL || impl == NULL) return NULL;
     Object *res = new_object(Function);
     if (res == NULL) return NULL;
+
+//    new_field()
+
+
 
 
     res->data = impl;

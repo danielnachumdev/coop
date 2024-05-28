@@ -12,6 +12,8 @@
 #include "types/Field.h"
 #include "functions/print.h"
 
+Object *__global__field__name__field__name__ = NULL;
+
 void init_builtins(void) {
     init_type();
     init_number();
@@ -29,12 +31,12 @@ void init_builtins(void) {
     Object *string__name__field__len__ = new_field(NULL, string__name__value__len__);
     Object *string__len__field__len__ = new_field(NULL, string__len__value__len__);
     Object *field__len__field__name__ = new_field(NULL, string__len__);
-    Object *field__name__field__name__ = new_field(NULL, string__name__);
+    __global__field__name__field__name__ = new_field(NULL, string__name__);
 
     append_field(string__name__field__len__, field__len__field__name__);
     append_field(string__len__field__len__, field__len__field__name__);
-    append_field(field__len__field__name__, field__name__field__name__);
-    append_field(field__name__field__name__, field__name__field__name__);
+    append_field(field__len__field__name__, __global__field__name__field__name__);
+    append_field(__global__field__name__field__name__, __global__field__name__field__name__);
 
     println(string__len__);
     println(string__len__value__len__);
@@ -44,5 +46,5 @@ void init_builtins(void) {
     println(string__name__field__len__);
     println(string__len__field__len__);
     println(field__len__field__name__);
-    println(field__name__field__name__);
+    println(__global__field__name__field__name__);
 }
