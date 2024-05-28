@@ -4,8 +4,7 @@
 
 #include <string.h>
 #include "String.h"
-#include "../../memory/allocator.h"
-#include "Field.h"
+#include "../../globals.h"
 
 Object *String = NULL;
 

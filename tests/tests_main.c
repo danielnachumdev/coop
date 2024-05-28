@@ -10,7 +10,7 @@ int num_tests = 0;
 int passed_tests = 0;
 
 
-void _main(void) {
+void test_global_constants(void) {
     Object *a = getattr(__global__field__name__field__name__, NAME);
     ASSERT_NOT_NULL(a);
     Object *b = new_string(NAME);
@@ -23,6 +23,21 @@ void _main(void) {
     Object *d = new_string(LEN);
     ASSERT_NOT_NULL(d);
     ASSERT_OBJECT_EQUALS(c, d);
+}
+
+void test_isinstance(void) {
+    ASSERT_TRUE(isinstance(Integer, Number));
+    ASSERT_TRUE(isinstance(Number, Type));
+    Object *Attr = new_union(2, Field, Function);
+    ASSERT_TRUE(isinstance(Field, Attr));
+    ASSERT_TRUE(isinstance(Function, Attr));
+    ASSERT_TRUE(isinstance(__global__field__name__field__name__, Field));
+    ASSERT_TRUE(isinstance(__global__field__name__field__name__, Attr));
+}
+
+void _main(void) {
+    test_global_constants();
+    test_isinstance();
 }
 
 int main(void) {

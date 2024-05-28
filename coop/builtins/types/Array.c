@@ -43,5 +43,27 @@ Object *new_array(unsigned int num_objects, Object *items_type) {
         release(type_field);
         return NULL;
     }
+    res->data = acquire(sizeof(Object *) * num_objects);
+    if (res->data == NULL) {
+        release(res);
+        release(len_field);
+        release(name_field);
+        release(type_field);
+        return NULL;
+    }
     return res;
+}
+
+Object *array_get(Object *arr, unsigned int index) {
+    if (arr == NULL) return NULL;
+    Object *length = getattr(arr, LEN);
+    if (*cast(length, unsigned int *) <= index) return NULL;
+    return cast(arr->data, Object**)[index];
+}
+
+void array_set(Object *arr, unsigned int index, Object *value) {
+    if (arr == NULL) return;
+    Object *length = getattr(arr, LEN);
+    if (*cast(length, unsigned int *) <= index) return;
+    cast(arr->data, Object**)[index] = value;
 }

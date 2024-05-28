@@ -23,8 +23,11 @@ extern Object *Function;
 extern Object *Field;
 extern Object *Array;
 extern Object *Boolean;
+extern Object *Union;
 
 
 Object *new_object(Object *type);
-bool object_equals(const Object * a, const Object * b);
+
+bool object_equals(const Object *a, const Object *b);
+
 #endif //LOCAL_PLAYGROUND_OBJECT_H

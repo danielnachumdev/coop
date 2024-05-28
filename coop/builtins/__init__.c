@@ -9,8 +9,8 @@
 Object *__global__field__name__field__name__ = NULL;
 Object *__global__field__len__field__name__ = NULL;
 
-void init_builtins(void) {
-//    THE ORDER MATTERS!
+void init(void) {
+    //    THE ORDER MATTERS!
     __init_type();
     __init_number();
     __init_string();
@@ -19,8 +19,11 @@ void init_builtins(void) {
     __init_field();
     __init_array();
     __init_boolean();
+    __init_union();
+}
 
-//  diagrams/flow1.png
+void flow1(void) {
+    //  diagrams/flow1.png
     Object *string__len__ = new_string_explicit(LEN, NULL);
     Object *string__len__value__len__ = new_integer(strlen(LEN));
     Object *string__name__ = new_string_explicit(NAME, NULL);
@@ -36,11 +39,18 @@ void init_builtins(void) {
     append_attr(__global__field__len__field__name__, __global__field__name__field__name__);
     append_attr(__global__field__name__field__name__, __global__field__name__field__name__);
 //    end diagrams/flow1.png
+}
 
+void init_builtins(void) {
+    init();
+    flow1();
     append_attr(Type, new__name__field("Type"));
     append_attr(String, new__name__field("String"));
-    append_attr(Integer, new__name__field("Integer"));
     append_attr(Number, new__name__field("Number"));
-    append_attr(Boolean, new__name__field("Boolean"));
+    append_attr(Integer, new__name__field("Integer"));
+    append_attr(Function, new__name__field("Function"));
+    append_attr(Field, new__name__field("Field"));
     append_attr(Array, new__name__field("Array"));
+    append_attr(Boolean, new__name__field("Boolean"));
+    append_attr(Union, new__name__field("Union"));
 }

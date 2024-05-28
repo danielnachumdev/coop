@@ -17,6 +17,7 @@
 #include "builtins/types/Number.h"
 #include "builtins/types/Array.h"
 #include "builtins/types/Boolean.h"
+#include "builtins/types/Union.h"
 #include "builtins/functions/print.h"
 #include "builtins/functions/throw.h"
 #include "builtins/functions/attr/getattr.h"
@@ -38,6 +39,8 @@ extern Object *__global__field__name__field__name__;
 extern Object *__global__field__len__field__name__;
 
 bool isinstance(const Object *obj, const Object *T);
+Object * dir(const Object * obj);
+
 
 bool append_attr(Object *obj, Object *attr);
 

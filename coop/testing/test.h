@@ -13,7 +13,9 @@ extern int passed_tests;
     passed_tests+=res;                   \
     if(not(res))                      \
         println(                         \
-            new_string(__FILE__ " at line"),          \
+            new_string(__FILE__ " at function"),   \
+            new_string(__func__),              \
+            new_string("at line"),\
             new_integer(__LINE__),       \
             new_string("| FAILED\n\tExpected:"),           \
             new_string(#obj1 " =="),        \

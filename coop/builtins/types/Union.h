@@ -5,4 +5,10 @@
 #ifndef COOP_UNION_H
 #define COOP_UNION_H
 
+#include "../../object.h"
+
+void __init_union(void);
+
+Object *new_union(unsigned long int num_types, ...);
+
 #endif //COOP_UNION_H
