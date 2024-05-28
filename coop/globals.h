@@ -25,16 +25,21 @@
 #define NAME "__name__"
 #define INIT "__init__"
 #define LEN "__len__"
+#define TYPE "__type__"
+#define ARGS "__args__"
+#define CALL "__call__"
 #define RETURN_TYPE "__return_type__"
 #define COPY "__copy__"
 #define cast(obj, T) ((T)obj)
-
+#define not(exp) !(exp)
+#define Optional(x) x
 
 extern Object *__global__field__name__field__name__;
 extern Object *__global__field__len__field__name__;
 
-bool isinstance(const Object* obj, const Object * T);
+bool isinstance(const Object *obj, const Object *T);
 
+bool append_attr(Object *obj, Object *attr);
 
 
 #endif //COOP_GLOBALS_H

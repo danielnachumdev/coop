@@ -9,6 +9,8 @@
 
 void __init_function(void);
 
-Object *new_function(const char *name, void *(*impl)());
+Object *new_function(const char *name, void *(*impl)(), Object *return_type, Object *arguments_array);
+
+Object *new_runnable(const char *name, void (*impl)(void));
 
 #endif //LOCAL_PLAYGROUND_FUNCTION_H

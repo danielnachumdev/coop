@@ -9,6 +9,6 @@
 
 void __init_array(void);
 
-Object *new_array(void);
+Object *new_array(unsigned int num_objects, Object *items_type);
 
 #endif //COOP_ARRAY_H

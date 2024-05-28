@@ -13,40 +13,34 @@ void __init_field(void) {
 
 Object *new_field_explicit(Object *name_field, Object *value) {
     Object *res = new_object(Field);
-    append_field(res, name_field);
+    if (not(append_attr(res, name_field)))
+        return NULL;
     res->data = value;
     return res;
 }
 
 Object *new__name__field(const char *name) {
     if (__global__field__name__field__name__ == NULL) return NULL;
-    Object *res = new_field_explicit(
-            __global__field__name__field__name__,
-            new_string_explicit(
-                    name,
-                    new__len__field(strlen(name))
-            )
-    );
+    Object *len_field = new__len__field(strlen(name));
+    if (len_field == NULL) return NULL;
+    Object *name_object = new_string_explicit(name, len_field);
+    if (name_object == NULL) {
+        release(len_field);
+        return NULL;
+    }
+    Object *res = new_field_explicit(__global__field__name__field__name__, name_object);
+    if (res == NULL) {
+        release(len_field);
+        release(name_object);
+    }
     return res;
 }
 
 Object *new__len__field(unsigned long n) {
     if (__global__field__len__field__name__ == NULL) return NULL;
-    Object *res = new_field_explicit(
-            __global__field__len__field__name__,
-            new_integer(n)
-    );
+    Object *value = new_integer(n);
+    if (value == NULL) return NULL;
+    Object *res = new_field_explicit(__global__field__len__field__name__, value);
     return res;
 }
 
-void append_field(Object *obj, Object *field) {
-    if (obj == NULL || field == NULL) return;
-    Object **new_attrs = acquire(sizeof(Object *) * (obj->num_attributes + 1));
-    if (obj->attributes != NULL) {
-        memcpy(new_attrs, obj->attributes, sizeof(Object *) * obj->num_attributes);
-        release(obj->attributes);
-    }
-    obj->attributes = new_attrs;
-    obj->attributes[obj->num_attributes] = field;
-    obj->num_attributes += 1;
-}

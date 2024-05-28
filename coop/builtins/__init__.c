@@ -30,18 +30,18 @@ void init_builtins(void) {
     __global__field__len__field__name__ = new_field_explicit(NULL, string__len__);
     __global__field__name__field__name__ = new_field_explicit(NULL, string__name__);
 
-    append_field(string__name__field__len__, __global__field__len__field__name__);
-    append_field(string__len__field__len__, __global__field__len__field__name__);
-    append_field(__global__field__len__field__name__, __global__field__name__field__name__);
-    append_field(__global__field__name__field__name__, __global__field__name__field__name__);
+    append_attr(string__name__field__len__, __global__field__len__field__name__);
+    append_attr(string__len__field__len__, __global__field__len__field__name__);
+    append_attr(__global__field__len__field__name__, __global__field__name__field__name__);
+    append_attr(__global__field__name__field__name__, __global__field__name__field__name__);
 
-    println(string__len__);
-    println(string__len__value__len__);
-    println(string__name__);
-    println(string__name__value__len__);
-
-    println(string__name__field__len__);
-    println(string__len__field__len__);
-    println(__global__field__len__field__name__);
-    println(__global__field__name__field__name__);
+//    println(string__len__);
+//    println(string__len__value__len__);
+//    println(string__name__);
+//    println(string__name__value__len__);
+//
+//    println(string__name__field__len__);
+//    println(string__len__field__len__);
+//    println(__global__field__len__field__name__);
+//    println(__global__field__name__field__name__);
 }

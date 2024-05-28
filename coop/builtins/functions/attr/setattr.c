@@ -15,7 +15,7 @@ void setattr(Object *obj, const char *name, Object *value) {
         Object *name_field_length = new_integer(strlen(name));
         Object *name_field = new_string_explicit(name, name_field_length);
         Object *f = new_field_explicit(name_field, value);
-        append_field(obj, f);
+        append_attr(obj, f);
     } else {
 
     }

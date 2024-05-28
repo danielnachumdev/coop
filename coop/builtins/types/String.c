@@ -16,7 +16,7 @@ void __init_string(void) {
 Object *new_string_explicit(const char *s, Object *length_field) {
     Object *res = new_object(String);
     if (res == NULL) return NULL;
-    append_field(res, length_field);
+    append_attr(res, length_field);
     if (s != NULL) {
         res->data = acquire(strlen(s) + 1);
         strcpy(res->data, s);

@@ -14,7 +14,12 @@ void __init_integer(void) {
 
 Object *new_integer(unsigned long n) {
     Object *res = new_object(Integer);
+    if (res == NULL) return NULL;
     res->data = acquire(sizeof(unsigned long));
+    if (res->data == NULL) {
+        release(res);
+        return NULL;
+    }
     *((unsigned long *) res->data) = n;
     return res;
 }

@@ -16,7 +16,7 @@
 
 Object *new_object(Object *type) {
     Object *res = acquire(sizeof(Object));
-    if (res == NULL) return NULL;
-    *res = init_object(type);
+    if (res != NULL)
+        *res = init_object(type);
     return res;
 }
