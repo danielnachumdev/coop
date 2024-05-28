@@ -7,9 +7,8 @@
 
 Object *Integer = NULL;
 
-void init_integer(void) {
-    Integer = acquire(sizeof(Object));
-    *Integer = init_object(Number);
+void __init_integer(void) {
+    Integer = new_object(Number);
 }
 
 

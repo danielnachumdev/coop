@@ -7,7 +7,7 @@
 
 #include "../../object.h"
 
-void init_integer(void);
+void __init_integer(void);
 
 Object *new_integer(unsigned long n);
 

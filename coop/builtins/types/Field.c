@@ -3,20 +3,39 @@
 //
 
 #include <memory.h>
-#include "Field.h"
-#include "../../memory/allocator.h"
+#include "../../globals.h"
 
 Object *Field = NULL;
 
-void init_field(void) {
-    Field = acquire(sizeof(Object));
-    *Field = init_object(Type);
+void __init_field(void) {
+    Field = new_object(Type);
 }
 
-Object *new_field(Object *name_field, Object *value) {
+Object *new_field_explicit(Object *name_field, Object *value) {
     Object *res = new_object(Field);
     append_field(res, name_field);
     res->data = value;
+    return res;
+}
+
+Object *new__name__field(const char *name) {
+    if (__global__field__name__field__name__ == NULL) return NULL;
+    Object *res = new_field_explicit(
+            __global__field__name__field__name__,
+            new_string_explicit(
+                    name,
+                    new__len__field(strlen(name))
+            )
+    );
+    return res;
+}
+
+Object *new__len__field(unsigned long n) {
+    if (__global__field__len__field__name__ == NULL) return NULL;
+    Object *res = new_field_explicit(
+            __global__field__len__field__name__,
+            new_integer(n)
+    );
     return res;
 }
 

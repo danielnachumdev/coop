@@ -7,6 +7,12 @@
 #include "memory/allocator.h"
 
 
+#define init_object(type_) (Object){ \
+    .type=type_,                     \
+    .num_attributes=0,               \
+    .attributes=NULL,                \
+    .data=NULL                       \
+}
 
 Object *new_object(Object *type) {
     Object *res = acquire(sizeof(Object));

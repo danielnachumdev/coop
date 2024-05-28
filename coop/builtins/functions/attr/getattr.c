@@ -3,8 +3,7 @@
 //
 
 #include <string.h>
-#include "getattr.h"
-#include "../../../macros.h"
+#include "../../../globals.h"
 
 Object *getattr(const Object *obj, const char *name) {
     if (obj == NULL || name == NULL) return NULL;

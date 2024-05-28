@@ -7,6 +7,10 @@
 
 #include "../../object.h"
 
-void init_string(void);
-Object *new_string(const char *s, Object *length_field);
+void __init_string(void);
+
+Object *new_string_explicit(const char *s, Object *length_field);
+
+Object *new_string(const char *s);
+
 #endif //LOCAL_PLAYGROUND_STRING_H

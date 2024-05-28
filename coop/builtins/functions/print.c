@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include "print.h"
-#include "attr/getattr.h"
+#include "../../globals.h"
 
 void print_object(const Object *obj) {
     if (obj == NULL) {

@@ -9,15 +9,21 @@
 
 Object *String = NULL;
 
-void init_string(void) {
-    String = acquire(sizeof(Object));
-    *String = init_object(Type);
+void __init_string(void) {
+    String = new_object(Type);
 }
 
-Object *new_string(const char *s, Object *length_field) {
+Object *new_string_explicit(const char *s, Object *length_field) {
     Object *res = new_object(String);
+    if (res == NULL) return NULL;
     append_field(res, length_field);
-    res->data = acquire(strlen(s) + 1);
-    strcpy(res->data, s);
+    if (s != NULL) {
+        res->data = acquire(strlen(s) + 1);
+        strcpy(res->data, s);
+    }
     return res;
+}
+
+Object *new_string(const char *s) {
+    return new_string_explicit(s, new__len__field(strlen(s)));
 }

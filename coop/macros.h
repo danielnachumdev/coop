@@ -10,12 +10,7 @@
 #define builtin_new(x) malloc(x)
 #define builtin_free(x) free(x)
 
-#define NAME "__name__"
-#define INIT "__init__"
-#define LEN "__len__"
-#define COPY "__copy__"
 
-#define cast(obj, T) ((T)obj)
 
 
 #define EXPAND(x) x

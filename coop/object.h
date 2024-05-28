@@ -21,13 +21,8 @@ extern Object *Number;
 extern Object *Integer;
 extern Object *Function;
 extern Object *Field;
+extern Object *Array;
 
-#define init_object(type_) (Object){ \
-    .type=type_,                     \
-    .num_attributes=0,               \
-    .attributes=NULL,                \
-    .data=NULL                       \
-}
 
 Object *new_object(Object *type);
 

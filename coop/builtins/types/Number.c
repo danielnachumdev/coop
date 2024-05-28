@@ -8,7 +8,6 @@
 
 Object *Number = NULL;
 
-void init_number(void) {
-    Number = acquire(sizeof(Object));
-    *Number = init_object(Type);
+void __init_number(void) {
+    Number = new_object(Type);
 }

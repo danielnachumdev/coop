@@ -7,7 +7,7 @@
 
 #include "../../object.h"
 
-void init_function(void);
+void __init_function(void);
 
 Object *new_function(const char *name, void *(*impl)());
 

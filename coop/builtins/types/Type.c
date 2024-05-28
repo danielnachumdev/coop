@@ -8,7 +8,7 @@
 
 Object *Type = NULL;
 
-void init_type(void) {
-    Type = acquire(sizeof(Object));
-    *Type = init_object(Type);
+void __init_type(void) {
+    Type = new_object(NULL);
+    Type->type = Type;
 }

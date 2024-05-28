@@ -2,15 +2,13 @@
 // Created by t-danachum on 27/05/2024.
 //
 
-#include <string.h>
 #include "Function.h"
 #include "../../globals.h"
 
 Object *Function = NULL;
 
-void init_function(void) {
-    Function = acquire(sizeof(Object));
-    *Function = init_object(Type);
+void __init_function(void) {
+    Function = new_object(Type);
 }
 
 Object *new_function(const char *name, void *(*impl)()) {
@@ -18,9 +16,10 @@ Object *new_function(const char *name, void *(*impl)()) {
     Object *res = new_object(Function);
     if (res == NULL) return NULL;
 
-//    new_field()
+//    diagrams/flow2.png
 
-
+    Object *name_field = new__name__field(name);
+    append_field(res, name_field);
 
 
     res->data = impl;
