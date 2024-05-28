@@ -16,6 +16,7 @@
 #include "builtins/types/String.h"
 #include "builtins/types/Number.h"
 #include "builtins/types/Array.h"
+#include "builtins/types/Boolean.h"
 #include "builtins/functions/print.h"
 #include "builtins/functions/throw.h"
 #include "builtins/functions/attr/getattr.h"
@@ -32,7 +33,6 @@
 #define COPY "__copy__"
 #define cast(obj, T) ((T)obj)
 #define not(exp) !(exp)
-#define Optional(x) x
 
 extern Object *__global__field__name__field__name__;
 extern Object *__global__field__len__field__name__;

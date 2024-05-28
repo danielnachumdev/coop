@@ -19,6 +19,6 @@ void _main(void) {
 //            new_field_explicit(new_string(CALL),)
 //    );
     append_attr(String, function_new_string);
-    bool status = getattr(String, "__init__")->data == new_string_explicit;
-    println(new_string(status ? "True" : "False"));
+//    bool status = getattr(String, "__init__")->data == new_string_explicit;
+//    println(new_string(status ? "True" : "False"));
 }

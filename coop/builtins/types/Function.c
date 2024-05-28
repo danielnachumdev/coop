@@ -18,8 +18,8 @@ Object *new_function(const char *name, void *(*impl)(), Object *return_type, Obj
 
 //    diagrams/flow2.png
     append_attr(res, new__name__field(name));
-    append_attr(res, new_field_explicit(new__name__field(RETURN_TYPE), return_type));
-    append_attr(res, new_field_explicit(new__name__field(ARGS), arguments_array));
+    append_attr(res, new_field(RETURN_TYPE, return_type));
+    append_attr(res, new_field(ARGS, arguments_array));
 
     res->data = impl;
     return res;

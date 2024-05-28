@@ -12,13 +12,23 @@ void print_object(const Object *obj) {
         printf("NULL");
         return;
     }
-    if (obj->type == Integer) {
-//        printf("Integer(%d)%s", *((const int *) obj->data), end);
-        printf("%lu", *((const unsigned long *) obj->data));
-    } else if (obj->type == String) {
-//        printf("String(\"%s\")%s", ((const char *) obj->data), end);
-        printf("\"%s\"", ((const char *) obj->data));
-    } else if (obj->type == Field) {
+    if (obj->type == Type){
+        printf("Type(name=");
+        print_object(getattr(obj, NAME));
+        printf(")");
+    }
+    else if (obj->type == Number){
+        printf("Type(Subtype=Number, name=");
+        print_object(getattr(obj, NAME));
+        printf(")");
+    }
+    else if (obj->type == Boolean)
+        printf("%s", *cast(obj->data, bool *) ? "true" : "false");
+    else if (obj->type == Integer)
+        printf("%lu", *cast(obj->data, unsigned long *));
+    else if (obj->type == String)
+        printf("%s", cast(obj->data, char *));
+    else if (obj->type == Field) {
         printf("Field(name=");
         print_object(getattr(obj, NAME));
         printf(", data=");

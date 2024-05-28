@@ -7,12 +7,14 @@
 #include "../macros.h"
 #include "../data_structures/linked_list.h"
 
+unsigned long int allocated_bytes = 0;
 static Allocator *global_allocator = NULL;
 
 void *default_acquire(unsigned long n) {
     void *p = builtin_new(n);
     if (p == NULL) return NULL;
     linkedlist_add(get_allocator()->structure, p);
+    allocated_bytes += n;
     return p;
 }
 

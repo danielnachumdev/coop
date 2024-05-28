@@ -11,8 +11,6 @@
 #define builtin_free(x) free(x)
 
 
-
-
 #define EXPAND(x) x
 #define PASTE2(a, b) a ## b
 #define PASTE3(a, b, c) a ## b ## c
@@ -38,6 +36,17 @@
             name[i] = va_arg(valist, T);\
     )                                                                        \
 
+
+
+#define DEFER_FREE(name, allocated, body) EXPR( \
+    Object * name=allocated;                  \
+    {                                         \
+    body\
+    }                                         \
+    release(name);\
+)
+
+#define BREAKABLE(body) EXPR(body)
 
 
 #endif //LOCAL_PLAYGROUND_MACROS_H

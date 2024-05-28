@@ -13,8 +13,10 @@ void __init_field(void) {
 
 Object *new_field_explicit(Object *name_field, Object *value) {
     Object *res = new_object(Field);
-    if (not(append_attr(res, name_field)))
+    if (res == NULL)
         return NULL;
+//    explicitly do not validate append_attr succeeds because this is an explicit call
+    append_attr(res, name_field);
     res->data = value;
     return res;
 }
@@ -44,3 +46,9 @@ Object *new__len__field(unsigned long n) {
     return res;
 }
 
+Object *new_field(const char *name, Object *value) {
+    Object *name_field = new__name__field(name);
+    if (name_field == NULL) return NULL;
+    Object *res = new_field_explicit(name_field, value);
+    return res;
+}

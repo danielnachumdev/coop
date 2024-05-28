@@ -15,6 +15,8 @@ typedef struct Allocator {
     void (*clear)(void);
 } Allocator;
 
+extern unsigned long int allocated_bytes;
+
 Allocator *get_allocator(void);
 
 #define acquire(n) get_allocator()->acquire(n)
