@@ -2,7 +2,7 @@
 // Created by t-danachum on 27/05/2024.
 //
 
-#include <memory.h>
+#include <string.h>
 #include "../../globals.h"
 
 Object *Field = NULL;
