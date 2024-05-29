@@ -24,4 +24,16 @@ Node *linkedlist_add(LinkedList *ll, void *p);
 
 void linkedlist_remove(LinkedList *ll, void *p);
 
+#define LINKEDLIST_FOREACH(cur_name,ll,body) EXPR( \
+    Node * cur_name = ll->head;                    \
+    while(cur_name != NULL){                      \
+        Node * next = cur_name->next;              \
+        {                                          \
+        body                                           \
+        }                                          \
+        cur_name=next;                                               \
+    }\
+)
+
+
 #endif //LOCAL_PLAYGROUND_LINKED_LIST_H

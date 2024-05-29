@@ -26,6 +26,7 @@
         default: false                  \
     )
 #define EXPR(expr) do{ expr } while(0)
+#define PASS EXPR(int _ =0;)
 #define RETURN_DO_IF(condition, scoped_actions) EXPR( if (condition){ {scoped_actions} return;})
 #define RETURN_VALUE_DO_IF(condition, scoped_actions, value) EXPR( if (condition){ {scoped_actions} return value;})
 #define COUNTER() __COUNTER__
