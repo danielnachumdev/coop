@@ -1,4 +1,6 @@
 import os, re
+import sys
+
 from danielutils import TemporaryFile
 
 
@@ -6,9 +8,9 @@ def cm(cmd):
     return os.system(cmd)
 
 
-LINE_REGEX = re.compile("Name = (\w+) dir = (.+)")
-ATTRS_REGEX = re.compile("(\w+\(.+?\))")
-ATTR_TYPE_REGEX = re.compile("(\w+)")
+LINE_REGEX = re.compile("Name = (\\w+) dir = (.+)")
+ATTRS_REGEX = re.compile("(\\w+\\(.+?\\))")
+ATTR_TYPE_REGEX = re.compile("(\\w+)")
 
 
 def parse_attr(attr: str) -> str:
@@ -27,10 +29,16 @@ def parse_line(line: str) -> str:
     return res + "\n"
 
 
-def main() -> None:
+def main(target_system: str) -> None:
+    cwd = os.getcwd()
     file_name = "./build_documentation.txt"
+
+    cmd = f"powershell.exe -c \"cd {cwd}/cmake-build-debug; {cwd}/cmake-build-debug/build_documentation.exe\" > {file_name}"
     with TemporaryFile(file_name) as f:
-        cm(f"wsl.exe --distribution Ubuntu --exec /bin/bash -c \"cd /mnt/c/Users/danie/Desktop/Programming/VCS/C/coop/cmake-build-debug && /mnt/c/Users/danie/Desktop/Programming/VCS/C/coop/cmake-build-debug/create_documentation\" > {file_name}")
+        if (target_system == "wsl"):
+            cwd = cwd.replace("\\", "/").replace("C:", "/mnt/c")
+            cmd = f"wsl.exe --distribution Ubuntu --exec /bin/bash -c \"cd {cwd}/cmake-build-debug && {cwd}/cmake-build-debug/build_documentation\" > {file_name}"
+        cm(cmd)
         lines = [l.strip() for l in f.read()]
     with open("Documentation.md", "w", encoding="utf8") as f:
         f.write("# COOP Documentation\n")
@@ -40,4 +48,4 @@ def main() -> None:
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1])
