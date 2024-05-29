@@ -48,4 +48,7 @@ def main(target_system: str) -> None:
 
 
 if __name__ == '__main__':
-    main(sys.argv[1])
+    if not (len(sys.args[1:]) == 1):
+        print("Expecting an argument: Literal[wsl, windows]")
+    else:
+        main(sys.argv[1])
