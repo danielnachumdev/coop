@@ -30,14 +30,13 @@ def parse_line(line: str) -> str:
 
 
 def main(target_system: str) -> None:
-    cwd = os.getcwd()
     file_name = "./build_documentation.txt"
-
+    cwd = os.getcwd()
     cmd = f"powershell.exe -c \"cd {cwd}/cmake-build-debug; {cwd}/cmake-build-debug/build_documentation.exe\" > {file_name}"
+    if target_system == "wsl":
+        cwd = cwd.replace("\\", "/").replace("C:", "/mnt/c")
+        cmd = f"wsl.exe --distribution Ubuntu --exec /bin/bash -c \"cd {cwd}/cmake-build-debug && {cwd}/cmake-build-debug/build_documentation\" > {file_name}"
     with TemporaryFile(file_name) as f:
-        if (target_system == "wsl"):
-            cwd = cwd.replace("\\", "/").replace("C:", "/mnt/c")
-            cmd = f"wsl.exe --distribution Ubuntu --exec /bin/bash -c \"cd {cwd}/cmake-build-debug && {cwd}/cmake-build-debug/build_documentation\" > {file_name}"
         cm(cmd)
         lines = [l.strip() for l in f.read()]
     with open("Documentation.md", "w", encoding="utf8") as f:
