@@ -5,34 +5,36 @@
 #include <stddef.h>
 #include "allocator.h"
 #include "../macros.h"
-#include "../data_structures/linked_list.h"
+#include "../data_structures/hashmap.h"
 
 unsigned long int allocated_bytes = 0;
+unsigned long int freed_bytes = 0;
 static Allocator *global_allocator = NULL;
 
 void *default_acquire(unsigned long n) {
     void *p = builtin_new(n);
     if (p == NULL) return NULL;
-    linkedlist_add(get_allocator()->structure, p);
+    hashmap_insert(get_allocator()->structure, p);
     allocated_bytes += n;
     return p;
 }
 
-void default_release(void *p) {
+void default_release(void *p, unsigned int size_in_bytes) {
     if (p == NULL) return;
-    linkedlist_remove(get_allocator()->structure, p);
+    hashmap_remove(get_allocator()->structure, p);
+    freed_bytes += size_in_bytes;
 }
 
 void default_clear(void) {
-    LinkedList *ll = get_allocator()->structure;
-    linkedlist_free(&ll);
+    Hashmap *h = get_allocator()->structure;
+    hashmap_free(&h);
     builtin_free(global_allocator);
 }
 
 Allocator *init_allocator(void) {
     Allocator *res = builtin_new(sizeof(Allocator));
     if (res == NULL) return NULL;
-    res->structure = linkedlist_new();
+    res->structure = hashmap_new();
     if (res->structure == NULL) {
         builtin_free(res);
         return NULL;

@@ -8,17 +8,18 @@
 typedef struct Allocator {
     void *structure;
 
-    void *(*acquire)(unsigned long);
+    void *(*acquire)(unsigned long n);
 
-    void (*release)(void *);
+    void (*release)(void *p, unsigned int size_in_bytes);
 
     void (*clear)(void);
 } Allocator;
 
 extern unsigned long int allocated_bytes;
+extern unsigned long int freed_bytes;
 
 Allocator *get_allocator(void);
 
 #define acquire(n) get_allocator()->acquire(n)
-#define release(p) get_allocator()->release(p)
+#define release(p) get_allocator()->release(p, p != NULL ? sizeof(*p) : 0)
 #endif //LOCAL_PLAYGROUND_ALLOCATOR_H
