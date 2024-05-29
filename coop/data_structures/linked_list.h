@@ -5,6 +5,7 @@
 #ifndef LOCAL_PLAYGROUND_LINKED_LIST_H
 #define LOCAL_PLAYGROUND_LINKED_LIST_H
 
+#include <stdbool.h>
 #include "node.h"
 
 typedef struct DoublyLinkedList {
@@ -17,9 +18,7 @@ LinkedList *linkedlist_new();
 
 void linkedlist_free(LinkedList **ll);
 
-void naive_free(void *p);
-
-void *naive_dup(void *p);
+bool linkedlist_contains(const LinkedList *ll, const void *p, bool(*comparer)(const void *p1, const void *p2));
 
 Node *linkedlist_add(LinkedList *ll, void *p);
 

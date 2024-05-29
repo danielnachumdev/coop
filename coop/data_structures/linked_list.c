@@ -16,12 +16,23 @@ void linkedlist_free(LinkedList **ll) {
     if (ll == NULL || *ll == NULL) return;
     Node *cur = (*ll)->head;
     while (cur != NULL) {
-        Node * next = cur->next;
+        Node *next = cur->next;
         node_free(&cur);
         cur = next;
     }
     builtin_free(*ll);
-    *ll=NULL;
+    *ll = NULL;
+}
+
+bool linkedlist_contains(const LinkedList *ll, const void *p, bool(*comparer)(const void *p1, const void *p2)) {
+    if (ll == NULL || p == NULL) return false;
+
+    Node *cur = ll->head;
+    while (cur != NULL) {
+        if (comparer(cur->data, p)) return true;
+        cur = cur->next;
+    }
+    return false;
 }
 
 void naive_free(void *p) {
