@@ -7,8 +7,8 @@
 #include "../globals/__init__.h"
 
 
-#define DEFAULT_COUNT 0
-#define DEFAULT_LENGTH 2
+#define DEFAULT_START_COUNT 0
+#define DEFAULT_START_LENGTH 2
 #define DEFAULT_LOWER_BOUND 0.25
 #define DEFAULT_UPPER_BOUND 0.75
 #define DEFAULT_MULTIPLIER 2.0
@@ -16,7 +16,9 @@
 const HashmapStrategy default_hashmap_strategy = (HashmapStrategy) {
         .lower_bound=DEFAULT_LOWER_BOUND,
         .upper_bound = DEFAULT_UPPER_BOUND,
-        .multiplier = DEFAULT_MULTIPLIER
+        .multiplier = DEFAULT_MULTIPLIER,
+        .start_count=DEFAULT_START_COUNT,
+        .start_length=DEFAULT_START_LENGTH
 };
 
 unsigned long default_hash(const void *p) {
@@ -27,17 +29,39 @@ unsigned long default_hash(const void *p) {
     return (unsigned long) x;
 }
 
-Hashmap *hashmap_new(void) {
+
+Hashmap *hashmap_new(Duplicator(data_dup), Consumer(data_free), const HashmapStrategy *strategy, HashT(hash)) {
+    if (data_dup == NULL || data_free == NULL || strategy == NULL || hash == NULL) return NULL;
     Hashmap *res = builtin_new(sizeof(Hashmap));
     if (res == NULL) return NULL;
-    res->count = DEFAULT_COUNT;
-    res->length = DEFAULT_LENGTH;
-    res->arr = builtin_new(sizeof(LinkedList *) * DEFAULT_LENGTH);
-    for (int i = 0; i < DEFAULT_LENGTH; ++i)
-        res->arr[i] = linkedlist_new();
-    res->hash = default_hash;
-    res->strategy = acquire(sizeof(HashmapStrategy));
-    *(res->strategy) = default_hashmap_strategy;
+    res->hash = hash;
+    res->data_dup = data_dup;
+    res->data_free = data_free;
+    res->strategy = builtin_new(sizeof(HashmapStrategy));
+    if (res->strategy == NULL) {
+        builtin_free(res);
+        return NULL;
+    }
+    *(res->strategy) = *strategy;
+    res->count = res->strategy->start_count;
+    res->length = res->strategy->start_length;
+    res->arr = builtin_new(sizeof(LinkedList *) * res->length);
+    if (res->arr == NULL) {
+        builtin_free(res->strategy);
+        builtin_free(res);
+        return NULL;
+    }
+    for (int i = 0; i < DEFAULT_START_LENGTH; ++i) {
+        res->arr[i] = linkedlist_new(res->data_dup, res->data_free);
+        if (res->arr[i] == NULL) {
+            for (int j = 0; j < i; ++j) {
+                builtin_free(res->arr[i]);
+            }
+            builtin_free(res->strategy);
+            builtin_free(res);
+            return NULL;
+        }
+    }
     return res;
 }
 
@@ -62,13 +86,13 @@ bool hashmap_resize(Hashmap *h) {
     if (h->strategy->lower_bound * h->length < h->count && h->count < h->strategy->upper_bound * h->length) return true;
     unsigned int new_length = cast(h->length * h->strategy->multiplier, unsigned int); //RESIZE UP
     if (h->count <= h->strategy->lower_bound * h->length) {
-        if (h->length == DEFAULT_LENGTH) return true;
+        if (h->length == DEFAULT_START_LENGTH) return true;
         new_length = cast(h->length / h->strategy->multiplier, unsigned int); //RESIZE DOWN
     }
     LinkedList **new_arr = builtin_new(sizeof(LinkedList *) * new_length);
     if (new_arr == NULL) return false;
     for (unsigned int i = 0; i < new_length; ++i) {
-        new_arr[i] = linkedlist_new();
+        new_arr[i] = linkedlist_new(h->data_dup, h->data_free);
         if (new_arr[i] == NULL) {
             for (int j = 0; j < i; ++j) {
                 LinkedList *ll = new_arr[i];

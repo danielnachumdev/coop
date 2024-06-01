@@ -7,8 +7,8 @@
 
 #include <malloc.h>
 
-#define builtin_new(x) malloc(x)
-#define builtin_free(x) free(x)
+#define builtin_new malloc
+#define builtin_free free
 
 
 #define EXPAND(x) x

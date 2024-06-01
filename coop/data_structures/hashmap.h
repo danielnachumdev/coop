@@ -8,25 +8,35 @@
 #include <stdbool.h>
 #include "linked_list.h"
 
+#define HashT(name) __FUNCTION_POINTER_BUILDER(name,unsigned long,const void *p)
+
 typedef struct HashmapStrategy {
     double lower_bound;
     double upper_bound;
     double multiplier;
+    unsigned int start_count;
+    unsigned int start_length;
 } HashmapStrategy;
 
 extern const HashmapStrategy default_hashmap_strategy;
 
 typedef struct Hashmap {
-    unsigned long (*hash)(const void *p);
+    HashT(hash);
 
     HashmapStrategy *strategy;
     unsigned int count;
     unsigned int length;
     LinkedList **arr;
+
+    Duplicator(data_dup);
+
+    Consumer(data_free);
 } Hashmap;
 
 
-Hashmap *hashmap_new(void);
+Hashmap *hashmap_new(Duplicator(data_dup), Consumer(data_free), const HashmapStrategy *strategy, HashT(hash));
+
+unsigned long default_hash(const void *p);
 
 void hashmap_free(Hashmap **h);
 

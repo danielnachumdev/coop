@@ -8,11 +8,11 @@
 #include "../../coop/data_structures/node.h"
 
 
-void int_free(void * data) {
+void int_free(void *data) {
     free(data);
 }
 
-void * int_dup(void * data) {
+void *int_dup(const void *data) {
     int *new_int = (int *) malloc(sizeof(int));
     if (new_int) {
         *new_int = *(int *) data;
@@ -23,7 +23,7 @@ void * int_dup(void * data) {
 void test_node_creation_and_free() {
     int data = 42;
 
-    Node *node = node_new(&data, int_free, int_dup);
+    Node *node = node_new(&data, int_dup, int_free);
     assert(node != NULL);
     assert(*(int *) (node->data) == 42);
 
@@ -34,11 +34,11 @@ void test_node_creation_and_free() {
 void test_node_duplication() {
     int data = 24;
 
-    Node *node = node_new(&data, int_free, int_dup);
+    Node *node = node_new(&data, int_dup, int_free);
     assert(node != NULL);
     assert(*(int *) (node->data) == 24);
 
-    void * dup_data = node->dup_func(node->data);
+    void *dup_data = node->data_dup(node->data);
     assert(*(int *) dup_data == 24);
 
     free(dup_data);

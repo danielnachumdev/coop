@@ -31,10 +31,18 @@ void default_clear(void) {
     builtin_free(global_allocator);
 }
 
+void naive_free__(void *p) {
+    builtin_free(p);
+}
+
+void *naive_dup__(const void *p) {
+    return (void *) p;
+}
+
 Allocator *init_allocator(void) {
     Allocator *res = builtin_new(sizeof(Allocator));
     if (res == NULL) return NULL;
-    res->structure = hashmap_new();
+    res->structure = hashmap_new(naive_dup__, naive_free__, &default_hashmap_strategy, default_hash);
     if (res->structure == NULL) {
         builtin_free(res);
         return NULL;

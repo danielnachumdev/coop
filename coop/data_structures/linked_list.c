@@ -4,11 +4,13 @@
 #include "../globals/macros.h"
 #include "linked_list.h"
 
-LinkedList *linkedlist_new() {
+LinkedList *linkedlist_new(Duplicator(data_dup), Consumer(data_free)) {
     LinkedList *res = builtin_new(sizeof(LinkedList));
     if (res == NULL) return NULL;
     res->head = NULL;
     res->tail = NULL;
+    res->data_dup = data_dup;
+    res->data_free = data_free;
     return res;
 }
 
@@ -32,17 +34,10 @@ bool linkedlist_contains(const LinkedList *ll, const void *p, bool(*comparer)(co
     return false;
 }
 
-void naive_free(void *p) {
-    builtin_free(p);
-}
-
-void *naive_dup(void *p) {
-    return p;
-}
 
 Node *linkedlist_add(LinkedList *ll, void *p) {
     if (ll == NULL || p == NULL) return NULL;
-    Node *res = node_new(p, naive_free, naive_dup);
+    Node *res = node_new(p, ll->data_dup, ll->data_free);
     if (res == NULL) return NULL;
     if (ll->head == NULL) {
         ll->head = res;

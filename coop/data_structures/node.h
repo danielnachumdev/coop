@@ -5,22 +5,19 @@
 #ifndef LOCAL_PLAYGROUND_NODE_H
 #define LOCAL_PLAYGROUND_NODE_H
 
-
-typedef void(*NodeFreeFunc)(void *);
-
-typedef void *(*NodeDupFunc)(void *);
+#include "../globals/macros.h"
 
 typedef struct Node {
     void *data;
     struct Node *next;
     struct Node *prev;
 
-    NodeFreeFunc free_func;
+    Duplicator(data_dup);
 
-    NodeDupFunc dup_func;
+    Consumer(data_free);
 } Node;
 
-Node *node_new(void *data, NodeFreeFunc free_func, NodeDupFunc dup_func);
+Node *node_new(void *data, Duplicator(data_dup), Consumer(data_free));
 
 void node_free(Node **n);
 
