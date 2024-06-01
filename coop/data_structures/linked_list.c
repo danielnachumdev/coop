@@ -58,20 +58,22 @@ void linkedlist_remove(LinkedList *ll, void *p) {
     Node *cur = ll->head;
     while (cur != NULL) {
         Node *next = cur->next;
-        if (cur->data == p) {
+        if (ll->data_comparer(cur->data, p)) {
             if (cur == ll->head) {
                 if (cur == ll->tail)
                     ll->tail = NULL;
-                ll->head = cur->next;
+                ll->head->prev = NULL;
+                ll->head = ll->head->next;
             } else if (cur == ll->tail) {
-                ll->tail = cur->prev;
+                ll->tail->prev->next = NULL;
+                ll->tail = ll->tail->prev;
             } else {
                 cur->prev->next = cur->next;
                 cur->next->prev = cur->prev;
             }
+            node_free(&cur);
             break;
         }
         cur = next;
     }
-    node_free(&cur);
 }
