@@ -28,19 +28,19 @@ typedef struct Hashmap {
     unsigned int length;
     LinkedList **arr;
 
-    Duplicator(data_dup);
+    DuplicatorT(data_dup);
 
-    Consumer(data_free);
+    ConsumerT(data_free);
 } Hashmap;
 
 
-Hashmap *hashmap_new(Duplicator(data_dup), Consumer(data_free), const HashmapStrategy *strategy, HashT(hash));
+Hashmap *hashmap_new(DuplicatorT(data_dup), ConsumerT(data_free), const HashmapStrategy *strategy, HashT(hash));
 
 unsigned long default_hash(const void *p);
 
 void hashmap_free(Hashmap **h);
 
-bool hashmap_contains(const Hashmap *h, const void *p, bool(*comparer)(const void *p1, const void *p2));
+bool hashmap_contains(const Hashmap *h, const void *p);
 
 bool hashmap_insert(Hashmap *h, void *p);
 

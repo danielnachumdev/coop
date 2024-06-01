@@ -7,7 +7,7 @@
 #include "../globals/macros.h"
 
 
-Node *node_new(void *data, Duplicator(data_dup), Consumer(data_free)) {
+Node *node_new(void *data, DuplicatorT(data_dup), ConsumerT(data_free)) {
     if (data == NULL || data_dup == NULL || data_free == NULL) return NULL;
     Node *res = builtin_new(sizeof(Node));
     if (res == NULL) return NULL;

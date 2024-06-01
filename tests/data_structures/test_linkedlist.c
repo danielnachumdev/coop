@@ -21,7 +21,7 @@ void *naive_dup(const void *p) {
 }
 
 void test_linkedlist_creation_and_free() {
-    LinkedList *ll = linkedlist_new(naive_dup, naive_free);
+    LinkedList *ll = linkedlist_new(naive_dup, naive_free, int_comparer);
     assert(ll != NULL);
     assert(ll->head == NULL);
     assert(ll->tail == NULL);
@@ -31,26 +31,26 @@ void test_linkedlist_creation_and_free() {
 }
 
 void test_linkedlist_add_and_contains() {
-    LinkedList *ll = linkedlist_new(naive_dup, naive_free);
+    LinkedList *ll = linkedlist_new(naive_dup, naive_free, int_comparer);
     assert(ll != NULL);
 
     int *data1 = (int *) malloc(sizeof(int));
     *data1 = 10;
     Node *node1 = linkedlist_add(ll, data1);
     assert(node1 != NULL);
-    assert(linkedlist_contains(ll, data1, int_comparer));
+    assert(linkedlist_contains(ll, data1));
 
     int *data2 = (int *) malloc(sizeof(int));
     *data2 = 20;
     Node *node2 = linkedlist_add(ll, data2);
     assert(node2 != NULL);
-    assert(linkedlist_contains(ll, data2, int_comparer));
+    assert(linkedlist_contains(ll, data2));
 
     linkedlist_free(&ll);
 }
 
 void test_linkedlist_remove() {
-    LinkedList *ll = linkedlist_new(naive_dup, naive_free);
+    LinkedList *ll = linkedlist_new(naive_dup, naive_free, int_comparer);
     assert(ll != NULL);
 
     int *data1 = (int *) malloc(sizeof(int));
@@ -62,11 +62,11 @@ void test_linkedlist_remove() {
     linkedlist_add(ll, data2);
 
     linkedlist_remove(ll, data1);
-    assert(!linkedlist_contains(ll, data1, int_comparer));
-    assert(linkedlist_contains(ll, data2, int_comparer));
+    assert(!linkedlist_contains(ll, data1));
+    assert(linkedlist_contains(ll, data2));
 
     linkedlist_remove(ll, data2);
-    assert(!linkedlist_contains(ll, data2, int_comparer));
+    assert(!linkedlist_contains(ll, data2));
 
     linkedlist_free(&ll);
 }

@@ -12,12 +12,12 @@ typedef struct Node {
     struct Node *next;
     struct Node *prev;
 
-    Duplicator(data_dup);
+    DuplicatorT(data_dup);
 
-    Consumer(data_free);
+    ConsumerT(data_free);
 } Node;
 
-Node *node_new(void *data, Duplicator(data_dup), Consumer(data_free));
+Node *node_new(void *data, DuplicatorT(data_dup), ConsumerT(data_free));
 
 void node_free(Node **n);
 

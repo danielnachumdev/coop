@@ -5,7 +5,7 @@
 #include "stack.h"
 #include "../globals/__init__.h"
 
-Stack *stack_new(Duplicator(node_dup), Consumer(node_free)) {
+Stack *stack_new(DuplicatorT(node_dup), ConsumerT(node_free)) {
     Stack *stack = (Stack *) malloc(sizeof(Stack));
     if (stack == NULL) return NULL;
     stack->top = NULL;

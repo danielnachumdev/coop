@@ -9,14 +9,14 @@
 #include "node.h"
 
 typedef struct Stack {
-    Duplicator(node_dup);
+    DuplicatorT(node_dup);
 
-    Consumer(node_free);
+    ConsumerT(node_free);
 
     Node *top;
 } Stack;
 
-Stack *stack_new(Duplicator(node_dup), Consumer(node_free));
+Stack *stack_new(DuplicatorT(node_dup), ConsumerT(node_free));
 
 void stack_free(Stack **s);
 

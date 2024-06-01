@@ -4,13 +4,15 @@
 #include "../globals/macros.h"
 #include "linked_list.h"
 
-LinkedList *linkedlist_new(Duplicator(data_dup), Consumer(data_free)) {
+LinkedList *linkedlist_new(DuplicatorT(data_dup), ConsumerT(data_free), ComparerT(data_comparer)) {
+    if (data_dup == NULL || data_free == NULL || data_comparer == NULL) return NULL;
     LinkedList *res = builtin_new(sizeof(LinkedList));
     if (res == NULL) return NULL;
     res->head = NULL;
     res->tail = NULL;
     res->data_dup = data_dup;
     res->data_free = data_free;
+    res->data_comparer = data_comparer;
     return res;
 }
 
@@ -26,10 +28,10 @@ void linkedlist_free(LinkedList **ll) {
     *ll = NULL;
 }
 
-bool linkedlist_contains(const LinkedList *ll, const void *p, bool(*comparer)(const void *p1, const void *p2)) {
+bool linkedlist_contains(const LinkedList *ll, const void *p) {
     if (ll == NULL || p == NULL) return false;
     LINKEDLIST_FOREACH(cur, ll, {
-        if (comparer(cur->data, p)) return true;
+        if (ll->data_comparer(cur->data, p)) return true;
     });
     return false;
 }

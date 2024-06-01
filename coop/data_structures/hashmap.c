@@ -29,8 +29,11 @@ unsigned long default_hash(const void *p) {
     return (unsigned long) x;
 }
 
+bool pointer_comparer(const void *a, const void *b) {
+    return a == b;
+}
 
-Hashmap *hashmap_new(Duplicator(data_dup), Consumer(data_free), const HashmapStrategy *strategy, HashT(hash)) {
+Hashmap *hashmap_new(DuplicatorT(data_dup), ConsumerT(data_free), const HashmapStrategy *strategy, HashT(hash)) {
     if (data_dup == NULL || data_free == NULL || strategy == NULL || hash == NULL) return NULL;
     Hashmap *res = builtin_new(sizeof(Hashmap));
     if (res == NULL) return NULL;
@@ -52,7 +55,7 @@ Hashmap *hashmap_new(Duplicator(data_dup), Consumer(data_free), const HashmapStr
         return NULL;
     }
     for (int i = 0; i < DEFAULT_START_LENGTH; ++i) {
-        res->arr[i] = linkedlist_new(res->data_dup, res->data_free);
+        res->arr[i] = linkedlist_new(res->data_dup, res->data_free, pointer_comparer);
         if (res->arr[i] == NULL) {
             for (int j = 0; j < i; ++j) {
                 builtin_free(res->arr[i]);
@@ -75,10 +78,10 @@ void hashmap_free(Hashmap **h) {
     *h = NULL;
 }
 
-bool hashmap_contains(const Hashmap *h, const void *p, bool(*comparer)(const void *p1, const void *p2)) {
+bool hashmap_contains(const Hashmap *h, const void *p) {
     if (h == NULL || p == NULL) return false;
     unsigned long index = h->hash(p) % h->length;
-    return linkedlist_contains(h->arr[index], p, comparer);
+    return linkedlist_contains(h->arr[index], p);
 }
 
 bool hashmap_resize(Hashmap *h) {
@@ -92,7 +95,7 @@ bool hashmap_resize(Hashmap *h) {
     LinkedList **new_arr = builtin_new(sizeof(LinkedList *) * new_length);
     if (new_arr == NULL) return false;
     for (unsigned int i = 0; i < new_length; ++i) {
-        new_arr[i] = linkedlist_new(h->data_dup, h->data_free);
+        new_arr[i] = linkedlist_new(h->data_dup, h->data_free, pointer_comparer);
         if (new_arr[i] == NULL) {
             for (int j = 0; j < i; ++j) {
                 LinkedList *ll = new_arr[i];
