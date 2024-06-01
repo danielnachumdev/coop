@@ -53,8 +53,8 @@ Node *linkedlist_add(LinkedList *ll, void *p) {
     return res;
 }
 
-void linkedlist_remove(LinkedList *ll, void *p) {
-    if (ll == NULL || p == NULL) return;
+bool linkedlist_remove(LinkedList *ll, void *p) {
+    if (ll == NULL || p == NULL) return false;
     Node *cur = ll->head;
     while (cur != NULL) {
         Node *next = cur->next;
@@ -72,8 +72,9 @@ void linkedlist_remove(LinkedList *ll, void *p) {
                 cur->next->prev = cur->prev;
             }
             node_free(&cur);
-            break;
+            return true;
         }
         cur = next;
     }
+    return false;
 }

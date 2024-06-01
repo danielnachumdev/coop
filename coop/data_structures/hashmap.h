@@ -14,7 +14,6 @@ typedef struct HashmapStrategy {
     double lower_bound;
     double upper_bound;
     double multiplier;
-    unsigned int start_count;
     unsigned int start_length;
 } HashmapStrategy;
 
