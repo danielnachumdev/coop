@@ -31,10 +31,15 @@ typedef struct Hashmap {
     DuplicatorT(data_dup);
 
     ConsumerT(data_free);
+
+    ComparerT(data_comparer);
 } Hashmap;
 
+bool default_hashmap_pointer_comparer(const void *a, const void *b);
 
-Hashmap *hashmap_new(DuplicatorT(data_dup), ConsumerT(data_free), const HashmapStrategy *strategy, HashT(hash));
+Hashmap *
+hashmap_new(DuplicatorT(data_dup), ConsumerT(data_free), ComparerT(data_comparer), const HashmapStrategy *strategy,
+            HashT(hash));
 
 unsigned long default_hash(const void *p);
 

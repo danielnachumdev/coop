@@ -42,7 +42,8 @@ void *naive_dup__(const void *p) {
 Allocator *init_allocator(void) {
     Allocator *res = builtin_new(sizeof(Allocator));
     if (res == NULL) return NULL;
-    res->structure = hashmap_new(naive_dup__, naive_free__, &default_hashmap_strategy, default_hash);
+    res->structure = hashmap_new(naive_dup__, naive_free__, default_hashmap_pointer_comparer, &default_hashmap_strategy,
+                                 default_hash);
     if (res->structure == NULL) {
         builtin_free(res);
         return NULL;

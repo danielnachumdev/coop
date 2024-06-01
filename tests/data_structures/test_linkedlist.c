@@ -8,20 +8,20 @@
 #include "test_linkedlist.h"
 #include "../../coop/data_structures/linked_list.h"
 
-bool int_comparer(const void *p1, const void *p2) {
+bool linkedlist_int_comparer(const void *p1, const void *p2) {
     return *(int *) p1 == *(int *) p2;
 }
 
-void naive_free(void *p) {
+void linkedlist_naive_free(void *p) {
     builtin_free(p);
 }
 
-void *naive_dup(const void *p) {
+void *linkedlist_naive_dup(const void *p) {
     return (void *) p;
 }
 
 void test_linkedlist_creation_and_free() {
-    LinkedList *ll = linkedlist_new(naive_dup, naive_free, int_comparer);
+    LinkedList *ll = linkedlist_new(linkedlist_naive_dup, linkedlist_naive_free, linkedlist_int_comparer);
     assert(ll != NULL);
     assert(ll->head == NULL);
     assert(ll->tail == NULL);
@@ -31,7 +31,7 @@ void test_linkedlist_creation_and_free() {
 }
 
 void test_linkedlist_add_and_contains() {
-    LinkedList *ll = linkedlist_new(naive_dup, naive_free, int_comparer);
+    LinkedList *ll = linkedlist_new(linkedlist_naive_dup, linkedlist_naive_free, linkedlist_int_comparer);
     assert(ll != NULL);
 
     int *data1 = (int *) malloc(sizeof(int));
@@ -50,7 +50,7 @@ void test_linkedlist_add_and_contains() {
 }
 
 void test_linkedlist_remove() {
-    LinkedList *ll = linkedlist_new(naive_dup, naive_free, int_comparer);
+    LinkedList *ll = linkedlist_new(linkedlist_naive_dup, linkedlist_naive_free, linkedlist_int_comparer);
     assert(ll != NULL);
 
     int *data1 = (int *) malloc(sizeof(int));
@@ -72,7 +72,7 @@ void test_linkedlist_remove() {
 }
 
 void test_linkedlist(void) {
-    printf("Testing Node");
+    printf("Testing LinkedList");
     test_linkedlist_creation_and_free();
     test_linkedlist_add_and_contains();
     test_linkedlist_remove();

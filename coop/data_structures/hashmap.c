@@ -29,17 +29,20 @@ unsigned long default_hash(const void *p) {
     return (unsigned long) x;
 }
 
-bool pointer_comparer(const void *a, const void *b) {
+bool default_hashmap_pointer_comparer(const void *a, const void *b) {
     return a == b;
 }
 
-Hashmap *hashmap_new(DuplicatorT(data_dup), ConsumerT(data_free), const HashmapStrategy *strategy, HashT(hash)) {
-    if (data_dup == NULL || data_free == NULL || strategy == NULL || hash == NULL) return NULL;
+Hashmap *
+hashmap_new(DuplicatorT(data_dup), ConsumerT(data_free), ComparerT(data_comparer), const HashmapStrategy *strategy,
+            HashT(hash)) {
+    if (data_dup == NULL || data_free == NULL || strategy == NULL || hash == NULL || data_comparer == NULL) return NULL;
     Hashmap *res = builtin_new(sizeof(Hashmap));
     if (res == NULL) return NULL;
     res->hash = hash;
     res->data_dup = data_dup;
     res->data_free = data_free;
+    res->data_comparer = data_comparer;
     res->strategy = builtin_new(sizeof(HashmapStrategy));
     if (res->strategy == NULL) {
         builtin_free(res);
@@ -55,7 +58,7 @@ Hashmap *hashmap_new(DuplicatorT(data_dup), ConsumerT(data_free), const HashmapS
         return NULL;
     }
     for (int i = 0; i < DEFAULT_START_LENGTH; ++i) {
-        res->arr[i] = linkedlist_new(res->data_dup, res->data_free, pointer_comparer);
+        res->arr[i] = linkedlist_new(res->data_dup, res->data_free, res->data_comparer);
         if (res->arr[i] == NULL) {
             for (int j = 0; j < i; ++j) {
                 builtin_free(res->arr[i]);
@@ -95,7 +98,7 @@ bool hashmap_resize(Hashmap *h) {
     LinkedList **new_arr = builtin_new(sizeof(LinkedList *) * new_length);
     if (new_arr == NULL) return false;
     for (unsigned int i = 0; i < new_length; ++i) {
-        new_arr[i] = linkedlist_new(h->data_dup, h->data_free, pointer_comparer);
+        new_arr[i] = linkedlist_new(h->data_dup, h->data_free, h->data_comparer);
         if (new_arr[i] == NULL) {
             for (int j = 0; j < i; ++j) {
                 LinkedList *ll = new_arr[i];
