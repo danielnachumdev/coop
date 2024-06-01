@@ -4,14 +4,14 @@
 
 #ifndef LOCAL_PLAYGROUND_NODE_H
 #define LOCAL_PLAYGROUND_NODE_H
-typedef void *NodeData;
 
-typedef void(*NodeFreeFunc)(NodeData);
 
-typedef NodeData(*NodeDupFunc)(NodeData);
+typedef void(*NodeFreeFunc)(void *);
+
+typedef void *(*NodeDupFunc)(void *);
 
 typedef struct Node {
-    NodeData data;
+    void *data;
     struct Node *next;
     struct Node *prev;
 
@@ -20,7 +20,7 @@ typedef struct Node {
     NodeDupFunc dup_func;
 } Node;
 
-Node *node_new(NodeData data, NodeFreeFunc free_func, NodeDupFunc dup_func);
+Node *node_new(void *data, NodeFreeFunc free_func, NodeDupFunc dup_func);
 
 void node_free(Node **n);
 

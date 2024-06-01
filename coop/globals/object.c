@@ -5,7 +5,7 @@
 
 #include <string.h>
 #include "object.h"
-#include "globals.h"
+#include "__init__.h"
 
 
 #define init_object(type_) (Object){ \

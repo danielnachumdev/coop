@@ -4,5 +4,7 @@
 
 #ifndef LOCAL_PLAYGROUND_NUMBER_H
 #define LOCAL_PLAYGROUND_NUMBER_H
+
 void __init_number(void);
+
 #endif //LOCAL_PLAYGROUND_NUMBER_H

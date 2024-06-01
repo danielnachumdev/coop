@@ -8,9 +8,18 @@
 #include <stdbool.h>
 #include "linked_list.h"
 
+typedef struct HashmapStrategy {
+    double lower_bound;
+    double upper_bound;
+    double multiplier;
+} HashmapStrategy;
+
+extern const HashmapStrategy default_hashmap_strategy;
+
 typedef struct Hashmap {
     unsigned long (*hash)(const void *p);
 
+    HashmapStrategy *strategy;
     unsigned int count;
     unsigned int length;
     LinkedList **arr;

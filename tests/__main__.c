@@ -2,9 +2,12 @@
 // Created by danie on 28/05/2024.
 //
 #include <string.h>
-#include "../coop/globals.h"
+#include "../coop/globals/__init__.h"
 #include "../coop/builtins/__init__.h"
 #include "../coop/testing/test.h"
+#include "../coop/data_structures/hashmap.h"
+#include "../coop/__init__.h"
+#include "data_structures/test_data_strucures.h"
 
 int num_tests = 0;
 int passed_tests = 0;
@@ -54,8 +57,9 @@ void _main(void) {
     test_primitives();
 }
 
-int main(void) {
-    init_builtins();
+
+void test_coop(void) {
+    init_coop();
     println(new_string("====================================================="));
     println(new_string("Testing started."));
     println(new_string("====================================================="));
@@ -67,5 +71,10 @@ int main(void) {
     println(new_string("====================================================="));
     println(new_string("Passed "), new_integer(passed_tests), new_string("/"), new_integer(num_tests));
     get_allocator()->clear();
+}
+
+int main(void) {
+    test_data_structures();
+//    test_coop();
     return 0;
 }

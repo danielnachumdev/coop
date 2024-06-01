@@ -4,12 +4,12 @@
 
 #include <string.h>
 #include "__init__.h"
-#include "../globals.h"
+#include "../globals/__init__.h"
 
 Object *__global__field__name__field__name__ = NULL;
 Object *__global__field__len__field__name__ = NULL;
 
-void init(void) {
+void init_types(void) {
     //    THE ORDER MATTERS!
     __init_type();
     __init_number();
@@ -42,7 +42,7 @@ void flow1(void) {
 }
 
 void init_builtins(void) {
-    init();
+    init_types();
     flow1();
     append_attr(Type, new__name__field("Type"));
     append_attr(String, new__name__field("String"));

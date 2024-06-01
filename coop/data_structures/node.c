@@ -4,16 +4,10 @@
 
 #include <stddef.h>
 #include "node.h"
-#include "../macros.h"
-
-typedef void *NodeData;
-
-typedef void(*NodeFreeFunc)(NodeData);
-
-typedef NodeData(*NodeDupFunc)(NodeData);
+#include "../globals/macros.h"
 
 
-Node *node_new(NodeData data, NodeFreeFunc free_func, NodeDupFunc dup_func) {
+Node *node_new(void *data, NodeFreeFunc free_func, NodeDupFunc dup_func) {
     if (data == NULL || free_func == NULL || dup_func == NULL) return NULL;
     Node *res = builtin_new(sizeof(Node));
     if (res == NULL) return NULL;

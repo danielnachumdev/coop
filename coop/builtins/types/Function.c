@@ -3,7 +3,7 @@
 //
 
 #include "Function.h"
-#include "../../globals.h"
+#include "../../globals/__init__.h"
 
 Object *Function = NULL;
 

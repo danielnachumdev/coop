@@ -5,7 +5,7 @@
 #ifndef LOCAL_PLAYGROUND_INTEGER_H
 #define LOCAL_PLAYGROUND_INTEGER_H
 
-#include "../../object.h"
+#include "../../globals/object.h"
 
 void __init_integer(void);
 

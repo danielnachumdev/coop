@@ -5,7 +5,8 @@
 #ifndef COOP_BOOLEAN_H
 #define COOP_BOOLEAN_H
 
-#include "../../globals.h"
+
+#include "../../globals/object.h"
 
 void __init_boolean(void);
 

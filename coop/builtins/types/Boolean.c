@@ -3,6 +3,8 @@
 //
 
 #include "Boolean.h"
+#include "../../memory/allocator.h"
+#include "../../globals/macros.h"
 
 Object *Boolean = NULL;
 

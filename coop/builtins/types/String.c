@@ -4,7 +4,7 @@
 
 #include <string.h>
 #include "String.h"
-#include "../../globals.h"
+#include "../../globals/__init__.h"
 
 Object *String = NULL;
 

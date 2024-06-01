@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include "print.h"
-#include "../../globals.h"
+#include "../../globals/__init__.h"
 
 void print_object(Object *obj) {
     if (obj == NULL) {

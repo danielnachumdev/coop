@@ -50,4 +50,17 @@
 #define BREAKABLE(body) EXPR(body)
 
 
+#define cast(obj, T) ((T)obj)
+#define not(exp) !(exp)
+#define __FUNCTION_POINTER_BUILDER(name, ret, get, ...) ret(*name)(get,##__VA_ARGS__)
+#define Runnable(name) __FUNCTION_POINTER_BUILDER(name,void,void)
+#define Supplier(name) __FUNCTION_POINTER_BUILDER(name,void*,void)
+#define Supplier_CONST(name) __FUNCTION_POINTER_BUILDER(name,const void*,void)
+#define Consumer(name) __FUNCTION_POINTER_BUILDER(name,void,void*)
+#define Consumer_CONST(name) __FUNCTION_POINTER_BUILDER(name,void,const void*)
+#define Transformation(name) __FUNCTION_POINTER_BUILDER(name,void*,void*)
+#define Transformation_CONST(name) __FUNCTION_POINTER_BUILDER(name,void*,const void*)
+#define Duplicator(name) Transformation_CONST(name)
+
+
 #endif //LOCAL_PLAYGROUND_MACROS_H

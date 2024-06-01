@@ -3,7 +3,7 @@
 //
 
 #include "_main.h"
-#include "coop/globals.h"
+#include "coop/__init__.h"
 
 
 void _main(void) {

@@ -3,7 +3,7 @@
 //
 
 #include "Type.h"
-#include "../../object.h"
+#include "../../globals/object.h"
 #include "../../memory/allocator.h"
 
 Object *Type = NULL;

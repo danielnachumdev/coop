@@ -5,7 +5,7 @@
 #ifndef LOCAL_PLAYGROUND_STRING_H
 #define LOCAL_PLAYGROUND_STRING_H
 
-#include "../../object.h"
+#include "../../globals/object.h"
 
 void __init_string(void);
 

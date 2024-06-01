@@ -4,7 +4,7 @@
 
 #include <stddef.h>
 #include "allocator.h"
-#include "../macros.h"
+#include "../globals/macros.h"
 #include "../data_structures/hashmap.h"
 
 unsigned long int allocated_bytes = 0;

@@ -3,7 +3,7 @@
 //
 
 #include <string.h>
-#include "../../../globals.h"
+#include "../../../globals/__init__.h"
 
 void setattr(Object *obj, const char *name, Object *value) {
     Object *existing = getattr(obj, name);

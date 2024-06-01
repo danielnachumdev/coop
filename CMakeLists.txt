@@ -33,6 +33,6 @@ string(REGEX MATCHALL "[^;]+" MY_LIST "${TESTS_HEADER_FILES}")
 foreach (element IN LISTS MY_LIST)
     message(STATUS "\t${element}")
 endforeach ()
-add_executable(tests tests/tests_main.c ${TESTS_SOURCE_FILES} ${TESTS_HEADER_FILES} ${SOURCE_FILES} ${HEADER_FILES})
+add_executable(tests tests/__main__.c ${TESTS_SOURCE_FILES} ${TESTS_HEADER_FILES} ${SOURCE_FILES} ${HEADER_FILES})
 
 add_executable(build_documentation build_documentation.c ${SOURCE_FILES} ${HEADER_FILES})

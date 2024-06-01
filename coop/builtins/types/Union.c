@@ -4,7 +4,7 @@
 
 #include <stdarg.h>
 #include "Union.h"
-#include "../../globals.h"
+#include "../../globals/__init__.h"
 
 Object *Union = NULL;
 

@@ -1,7 +1,7 @@
 //
 // Created by t-danachum on 21/05/2024.
 //
-#include "../macros.h"
+#include "../globals/macros.h"
 #include "linked_list.h"
 
 LinkedList *linkedlist_new() {
@@ -58,22 +58,23 @@ Node *linkedlist_add(LinkedList *ll, void *p) {
 
 void linkedlist_remove(LinkedList *ll, void *p) {
     if (ll == NULL || p == NULL) return;
-    LINKEDLIST_FOREACH(cur, ll, {
+    Node *cur = ll->head;
+    while (cur != NULL) {
+        Node *next = cur->next;
         if (cur->data == p) {
             if (cur == ll->head) {
-                if (cur == ll->tail) {
-                    ll->head = NULL;
+                if (cur == ll->tail)
                     ll->tail = NULL;
-                }
-                ll->head = ll->head->next;
+                ll->head = cur->next;
             } else if (cur == ll->tail) {
-                ll->tail = ll->tail->prev;
+                ll->tail = cur->prev;
             } else {
                 cur->prev->next = cur->next;
                 cur->next->prev = cur->prev;
             }
-            node_free(&cur);
-            return;
+            break;
         }
-    });
+        cur = next;
+    }
+    node_free(&cur);
 }

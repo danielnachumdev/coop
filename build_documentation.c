@@ -1,8 +1,9 @@
 //
 // Created by danie on 29/05/2024.
 //
-#include "coop/globals.h"
+#include "coop/globals/__init__.h"
 #include "coop/builtins/__init__.h"
+#include "coop/__init__.h"
 
 void _main(void) {
     Object *types[] = {Type, String, Integer, Number, Function, Field, Array, Boolean, Union};
@@ -12,7 +13,7 @@ void _main(void) {
 }
 
 int main() {
-    init_builtins();
+    init_coop();
     _main();
     get_allocator()->clear();
     return 0;

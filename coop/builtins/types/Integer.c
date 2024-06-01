@@ -3,7 +3,7 @@
 //
 
 #include "Integer.h"
-#include "../../globals.h"
+#include "../../globals/__init__.h"
 
 Object *Integer = NULL;
 
