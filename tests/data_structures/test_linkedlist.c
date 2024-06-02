@@ -5,6 +5,7 @@
 #include <assert.h>
 #include <stddef.h>
 #include <malloc.h>
+#include <stdio.h>
 #include "test_linkedlist.h"
 #include "../../coop/data_structures/linked_list.h"
 
