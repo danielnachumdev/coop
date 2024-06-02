@@ -141,7 +141,7 @@ void test_hashset_resize_up() {
     assert(map != NULL);
 
     // Insert elements to trigger resize up
-    for (int i = 0; i <4; ++i) {
+    for (int i = 0; i < 4; ++i) {
         int *data = malloc(sizeof(int));
         *data = i;
         assert(hashset_add(map, data));
@@ -178,6 +178,17 @@ void test_hashset_resize_down() {
     hashset_free(&map);
 }
 
+void my_test(void) {
+    HashSet *h = hashset_new(hashmap_int_dup, hashmap_naive_free, hashmap_int_comparer, &default_hashset_strategy,
+                             integer_hash);
+    assert(h != NULL);
+    for (int i = 0; i < 1000; ++i) {
+        hashset_add(h, &i);
+    }
+
+    hashset_free(&h);
+}
+
 void test_hashset(void) {
     printf("Testing HashSet - STARTED\n");
     test_hashset_creation();
@@ -187,5 +198,6 @@ void test_hashset(void) {
     test_hashset_remove_nonexistent();
     test_hashset_resize_up();
     test_hashset_resize_down();
+    my_test();
     printf("Testing HashSet - PASSED\n");
 }
