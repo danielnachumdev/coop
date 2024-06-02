@@ -5,7 +5,7 @@
 #include "../coop/globals/__init__.h"
 #include "../coop/builtins/__init__.h"
 #include "../coop/testing/test.h"
-#include "../coop/data_structures/hashmap.h"
+#include "../coop/data_structures/hashset.h"
 #include "../coop/__init__.h"
 #include "data_structures/test_data_strucures.h"
 

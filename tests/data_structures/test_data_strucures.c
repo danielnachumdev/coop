@@ -5,10 +5,10 @@
 #include "test_data_strucures.h"
 #include "test_node.h"
 #include "test_linkedlist.h"
-#include "test_hashmap.h"
+#include "test_hashset.h"
 
 void test_data_structures(void) {
     test_node();
     test_linkedlist();
-    test_hashmap();
+    test_hashset();
 }

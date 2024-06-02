@@ -8,7 +8,7 @@
 #include "node.h"
 #include "linked_list.h"
 #include "stack.h"
-#include "hashmap.h"
+#include "hashset.h"
 
 
 #endif //COOP_DATA_STRUCTURES____INIT___H
