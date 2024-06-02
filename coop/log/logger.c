@@ -35,13 +35,13 @@ void default_consume_error(const char *logger_name, const LogMessage *msg) {
 Logger *init_logger(void) {
     Logger *res = acquire(sizeof(Logger));
     if (res == NULL) return NULL;
-    res->name = "GlobalLogger";
-    res->log = default_log;
-    res->consumers = acquire(sizeof(LogConsumer) * 2);
+    res->consumers = acquire(sizeof(LogConsumer) * 2); //TODO: why does this assignment change the all of the structs' values?
     if (res->consumers == NULL) {
         release(res);
         return NULL;
     }
+    res->name = "GlobalLogger";
+    res->log = default_log;
     res->consumers[0] = (LogConsumer) {
             ERROR_LOG_SEVERITY,
             default_consume_error

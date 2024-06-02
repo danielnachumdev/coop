@@ -46,7 +46,7 @@ void hashset_free(HashSet **h);
 
 bool hashset_contains(const HashSet *h, const void *p);
 
-bool hashset_insert(HashSet *h, void *p);
+bool hashset_add(HashSet *h, void *p);
 
 void hashset_remove(HashSet *h, void *p);
 

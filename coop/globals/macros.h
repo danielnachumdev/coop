@@ -6,10 +6,8 @@
 #define LOCAL_PLAYGROUND_MACROS_H
 
 #include <malloc.h>
-
-#define builtin_new malloc
-#define builtin_free free
-
+#include <stdio.h>
+#include "wrappers.h"
 
 #define EXPAND(x) x
 #define PASTE2(a, b) a ## b
@@ -62,5 +60,8 @@
 #define Transformation_CONST(name) __FUNCTION_POINTER_BUILDER(name,void*,const void*)
 #define DuplicatorT(name) Transformation_CONST(name)
 
+
+#define builtin_new(n) builtin_new_wrapper_impl(n,__FILE_NAME__,__LINE__)
+#define builtin_free(p) printf("%-15s at line %4u: Pointer = %p\n",__FILE_NAME__,__LINE__,p); fflush(stdout); free(p)
 
 #endif //LOCAL_PLAYGROUND_MACROS_H

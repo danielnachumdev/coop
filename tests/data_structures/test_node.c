@@ -47,8 +47,8 @@ void test_node_duplication() {
 }
 
 void test_node(void) {
-    printf("Testing Node");
+    printf("Testing Node - STARTED\n");
     test_node_creation_and_free();
     test_node_duplication();
-    printf(" PASSED\n");
+    printf("Testing Node - PASSED\n");
 }

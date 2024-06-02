@@ -28,11 +28,11 @@ typedef struct LogConsumer {
 
 typedef struct Logger {
     const char *name;
+    unsigned int num_consumers;
 
     void (*log)(const LogMessage *msg);
 
     LogConsumer *consumers;
-    unsigned int num_consumers;
 
 } Logger;
 

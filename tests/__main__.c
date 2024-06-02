@@ -75,6 +75,6 @@ void test_coop(void) {
 
 int main(void) {
     test_data_structures();
-//    test_coop();
+    test_coop();
     return 0;
 }

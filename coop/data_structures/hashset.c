@@ -8,9 +8,9 @@
 
 
 #define DEFAULT_START_COUNT 0
-#define DEFAULT_START_LENGTH 2
-#define DEFAULT_LOWER_BOUND 0.25
-#define DEFAULT_UPPER_BOUND 0.75
+#define DEFAULT_START_LENGTH 16
+#define DEFAULT_LOWER_BOUND 0.10
+#define DEFAULT_UPPER_BOUND 0.90
 #define DEFAULT_MULTIPLIER 2.0
 
 const HashSetStrategy default_hashset_strategy = (HashSetStrategy) {
@@ -123,10 +123,10 @@ bool hashmap_resize(HashSet *h) {
     return true;
 }
 
-bool hashset_insert(HashSet *h, void *p) {
+bool hashset_add(HashSet *h, void *p) {
     if (h == NULL || p == NULL) return false;
     unsigned long index = h->hash(p) % h->length;
-    if (linkedlist_remove(h->arr[index], p)) h->count -= 1;
+    if (linkedlist_contains(h->arr[index], p)) return true;
     if (linkedlist_add(h->arr[index], p) == NULL)
         return false;
     h->count += 1;

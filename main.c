@@ -5,7 +5,7 @@
 #include "coop/__init__.h"
 
 int main() {
-    _DEBUG("Starting main\n");
+    _LOG("Starting main\n", DEBUG_LOG_SEVERITY);
     init_coop();
     _main();
     _DEBUG("Finished main\n");

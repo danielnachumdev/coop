@@ -50,8 +50,8 @@ void test_hashset_insertion_and_removal() {
     int data2 = 123;
 
     // Insertion
-    assert(hashset_insert(map, &data1));
-    assert(hashset_insert(map, &data2));
+    assert(hashset_add(map, &data1));
+    assert(hashset_add(map, &data2));
 
     // Check contains
     assert(hashset_contains(map, &data1));
@@ -79,8 +79,8 @@ void test_hashset_contains() {
     int data2 = 123;
 
     // Insertion
-    assert(hashset_insert(map, &data1));
-    assert(hashset_insert(map, &data2));
+    assert(hashset_add(map, &data1));
+    assert(hashset_add(map, &data2));
 
     // Check contains
     assert(hashset_contains(map, &data1));
@@ -103,10 +103,10 @@ void test_hashset_insert_duplicate() {
     int data1 = 42;
 
     // Insertion
-    assert(hashset_insert(map, &data1));
+    assert(hashset_add(map, &data1));
 
     // Attempt to insert duplicate
-    assert(hashset_insert(map, &data1));
+    assert(hashset_add(map, &data1));
 
     hashset_free(&map);
     assert(map == NULL);
@@ -121,7 +121,7 @@ void test_hashset_remove_nonexistent() {
     int data1 = 42;
 
     // Insertion
-    assert(hashset_insert(map, &data1));
+    assert(hashset_add(map, &data1));
 
     // Attempt to remove non-existent element
     int data2 = 123;
@@ -144,7 +144,7 @@ void test_hashset_resize_up() {
     for (int i = 0; i <4; ++i) {
         int *data = malloc(sizeof(int));
         *data = i;
-        assert(hashset_insert(map, data));
+        assert(hashset_add(map, data));
     }
 
     // Verify length increased after resize up
@@ -163,7 +163,7 @@ void test_hashset_resize_down() {
     for (int i = 0; i < 15; ++i) {
         int *data = malloc(sizeof(int));
         *data = i;
-        assert(hashset_insert(map, data));
+        assert(hashset_add(map, data));
     }
 
     for (int i = 0; i < 10; ++i) {
@@ -179,7 +179,7 @@ void test_hashset_resize_down() {
 }
 
 void test_hashset(void) {
-    printf("Testing HashSet");
+    printf("Testing HashSet - STARTED\n");
     test_hashset_creation();
     test_hashset_insertion_and_removal();
     test_hashset_insert_duplicate();
@@ -187,5 +187,5 @@ void test_hashset(void) {
     test_hashset_remove_nonexistent();
     test_hashset_resize_up();
     test_hashset_resize_down();
-    printf(" PASSED\n");
+    printf("Testing HashSet - PASSED\n");
 }

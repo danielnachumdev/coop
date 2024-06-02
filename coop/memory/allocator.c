@@ -3,6 +3,7 @@
 //
 
 #include <stddef.h>
+#include <stdio.h>
 #include "allocator.h"
 #include "../globals/macros.h"
 #include "../data_structures/hashset.h"
@@ -14,7 +15,7 @@ static Allocator *global_allocator = NULL;
 void *default_acquire(unsigned long n) {
     void *p = builtin_new(n);
     if (p == NULL) return NULL;
-    hashset_insert(get_allocator()->structure, p);
+    hashset_add(get_allocator()->structure, p);
     allocated_bytes += n;
     return p;
 }

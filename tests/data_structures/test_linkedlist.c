@@ -73,9 +73,9 @@ void test_linkedlist_remove() {
 }
 
 void test_linkedlist(void) {
-    printf("Testing LinkedList");
+    printf("Testing LinkedList - STARTED\n");
     test_linkedlist_creation_and_free();
     test_linkedlist_add_and_contains();
     test_linkedlist_remove();
-    printf(" PASSED\n");
+    printf("Testing LinkedList - PASSED\n");
 }
