@@ -5,7 +5,7 @@
 #include <stddef.h>
 #include "allocator.h"
 #include "../globals/macros.h"
-#include "../data_structures/hashmap.h"
+#include "../data_structures/hashset.h"
 
 unsigned long int allocated_bytes = 0;
 unsigned long int freed_bytes = 0;
@@ -14,20 +14,20 @@ static Allocator *global_allocator = NULL;
 void *default_acquire(unsigned long n) {
     void *p = builtin_new(n);
     if (p == NULL) return NULL;
-    hashmap_insert(get_allocator()->structure, p);
+    hashset_insert(get_allocator()->structure, p);
     allocated_bytes += n;
     return p;
 }
 
 void default_release(void *p, unsigned int size_in_bytes) {
     if (p == NULL) return;
-    hashmap_remove(get_allocator()->structure, p);
+    hashset_remove(get_allocator()->structure, p);
     freed_bytes += size_in_bytes;
 }
 
 void default_clear(void) {
-    Hashmap *h = get_allocator()->structure;
-    hashmap_free(&h);
+    HashSet *h = get_allocator()->structure;
+    hashset_free(&h);
     builtin_free(global_allocator);
 }
 
@@ -42,8 +42,8 @@ void *naive_dup__(const void *p) {
 Allocator *init_allocator(void) {
     Allocator *res = builtin_new(sizeof(Allocator));
     if (res == NULL) return NULL;
-    res->structure = hashmap_new(naive_dup__, naive_free__, default_hashmap_pointer_comparer, &default_hashmap_strategy,
-                                 default_hash);
+    res->structure = hashset_new(naive_dup__, naive_free__, default_hashset_pointer_comparer, &default_hashset_strategy,
+                                 default_hashset_hash);
     if (res->structure == NULL) {
         builtin_free(res);
         return NULL;

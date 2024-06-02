@@ -2,7 +2,7 @@
 // Created by danie on 29/05/2024.
 //
 
-#include "hashmap.h"
+#include "hashset.h"
 #include "../globals/macros.h"
 #include "../globals/__init__.h"
 
@@ -12,19 +12,15 @@
 #define DEFAULT_LOWER_BOUND 0.25
 #define DEFAULT_UPPER_BOUND 0.75
 #define DEFAULT_MULTIPLIER 2.0
-typedef struct KVPair {
-    void *key;
-    void *value;
-} KVPair;
 
-const HashmapStrategy default_hashmap_strategy = (HashmapStrategy) {
+const HashSetStrategy default_hashset_strategy = (HashSetStrategy) {
         .lower_bound=DEFAULT_LOWER_BOUND,
         .upper_bound = DEFAULT_UPPER_BOUND,
         .multiplier = DEFAULT_MULTIPLIER,
         .start_length=DEFAULT_START_LENGTH
 };
 
-unsigned long default_hash(const void *p) {
+unsigned long default_hashset_hash(const void *p) {
     unsigned long int x = (unsigned long int) p;
     x = ((x >> 16) ^ x) * 0x45d9f3b;
     x = ((x >> 16) ^ x) * 0x45d9f3b;
@@ -32,22 +28,22 @@ unsigned long default_hash(const void *p) {
     return (unsigned long) x;
 }
 
-bool default_hashmap_pointer_comparer(const void *a, const void *b) {
+bool default_hashset_pointer_comparer(const void *a, const void *b) {
     return a == b;
 }
 
-Hashmap *
-hashmap_new(DuplicatorT(data_dup), ConsumerT(data_free), ComparerT(data_comparer), const HashmapStrategy *strategy,
+HashSet *
+hashset_new(DuplicatorT(data_dup), ConsumerT(data_free), ComparerT(data_comparer), const HashSetStrategy *strategy,
             HashT(hash)) {
     if (data_dup == NULL || data_free == NULL || strategy == NULL || hash == NULL || data_comparer == NULL) return NULL;
     if (not(strategy->lower_bound < strategy->upper_bound || strategy->start_length > 0)) return NULL;
-    Hashmap *res = builtin_new(sizeof(Hashmap));
+    HashSet *res = builtin_new(sizeof(HashSet));
     if (res == NULL) return NULL;
     res->hash = hash;
     res->data_dup = data_dup;
     res->data_free = data_free;
     res->data_comparer = data_comparer;
-    res->strategy = builtin_new(sizeof(HashmapStrategy));
+    res->strategy = builtin_new(sizeof(HashSetStrategy));
     if (res->strategy == NULL) {
         builtin_free(res);
         return NULL;
@@ -75,7 +71,7 @@ hashmap_new(DuplicatorT(data_dup), ConsumerT(data_free), ComparerT(data_comparer
     return res;
 }
 
-void hashmap_free(Hashmap **h) {
+void hashset_free(HashSet **h) {
     if (h == NULL) return;
     if (*h == NULL) return;
     for (int i = 0; i < (*h)->length; ++i)
@@ -85,13 +81,13 @@ void hashmap_free(Hashmap **h) {
     *h = NULL;
 }
 
-bool hashmap_contains(const Hashmap *h, const void *p) {
+bool hashset_contains(const HashSet *h, const void *p) {
     if (h == NULL || p == NULL) return false;
     unsigned long index = h->hash(p) % h->length;
     return linkedlist_contains(h->arr[index], p);
 }
 
-bool hashmap_resize(Hashmap *h) {
+bool hashmap_resize(HashSet *h) {
     if (h == NULL) return false;
     if (h->length * h->strategy->lower_bound <= h->count && h->count <= h->length * h->strategy->upper_bound)
         return true;
@@ -127,7 +123,7 @@ bool hashmap_resize(Hashmap *h) {
     return true;
 }
 
-bool hashmap_insert(Hashmap *h, void *p) {
+bool hashset_insert(HashSet *h, void *p) {
     if (h == NULL || p == NULL) return false;
     unsigned long index = h->hash(p) % h->length;
     if (linkedlist_remove(h->arr[index], p)) h->count -= 1;
@@ -137,7 +133,7 @@ bool hashmap_insert(Hashmap *h, void *p) {
     return hashmap_resize(h);
 }
 
-void hashmap_remove(Hashmap *h, void *p) {
+void hashset_remove(HashSet *h, void *p) {
     if (h == NULL || p == NULL) return;
     unsigned long index = h->hash(p) % h->length;
     linkedlist_remove(h->arr[index], p);
