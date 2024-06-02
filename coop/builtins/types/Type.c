@@ -9,6 +9,6 @@
 Object *Type = NULL;
 
 void __init_type(void) {
-    Type = new_object(NULL);
+    Type = new_object(NULL, true);
     Type->type = Type;
 }

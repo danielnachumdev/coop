@@ -27,6 +27,7 @@ typedef struct HashSet {
     unsigned int count;
     unsigned int length;
     LinkedList **arr;
+    LinkedList *constants;
 
     DuplicatorT(data_dup);
 
@@ -47,7 +48,9 @@ void hashset_free(HashSet **h);
 
 bool hashset_contains(const HashSet *h, const void *p);
 
-bool hashset_add(HashSet *h, void *p);
+bool hashset_add_impl(HashSet *h, void *p, ...);
+
+#define hashset_add(h, p, ...) hashset_add_impl(h,p,## __VA_ARGS__,false)
 
 void hashset_remove(HashSet *h, void *p);
 

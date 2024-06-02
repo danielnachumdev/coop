@@ -60,8 +60,13 @@
 #define Transformation_CONST(name) __FUNCTION_POINTER_BUILDER(name,void*,const void*)
 #define DuplicatorT(name) Transformation_CONST(name)
 
+//builtin_new_wrapper_impl(n,__FILE__,__LINE__)
+#define builtin_new(n) malloc(n)
+//printf("%-15s at line %4u: Pointer = %p\n",__FILE__,__LINE__,p); fflush(stdout); free(p)
+#define builtin_free(p) free(p)
 
-#define builtin_new(n) builtin_new_wrapper_impl(n,__FILE__,__LINE__)
-#define builtin_free(p) printf("%-15s at line %4u: Pointer = %p\n",__FILE__,__LINE__,p); fflush(stdout); free(p)
+
+#define VA_ARGS_LIST_1_ARG(name, type) va_list valist; va_start(valist, 1); /*the last named argument warning is safe to ignore in this context*/ type name = va_arg(valist, type*); va_end(valist)
+
 
 #endif //LOCAL_PLAYGROUND_MACROS_H

@@ -8,7 +8,7 @@
 Object *Integer = NULL;
 
 void __init_integer(void) {
-    Integer = new_object(Number);
+    Integer = new_object(Number, true);
 }
 
 

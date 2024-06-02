@@ -8,7 +8,7 @@
 Object *Field = NULL;
 
 void __init_field(void) {
-    Field = new_object(Type);
+    Field = new_object(Type, true);
 }
 
 Object *new_field_explicit(Object *name_field, Object *value) {

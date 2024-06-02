@@ -10,7 +10,7 @@
 Object *Array = NULL;
 
 void __init_array(void) {
-    Array = new_object(Type);
+    Array = new_object(Type, true);
 }
 
 Object *new_array(unsigned int num_objects, Object *items_type) {

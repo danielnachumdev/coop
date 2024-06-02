@@ -4,6 +4,7 @@
 
 
 #include <string.h>
+#include <stdarg.h>
 #include "object.h"
 #include "__init__.h"
 
@@ -15,8 +16,9 @@
     .data=NULL                       \
 }
 
-Object *new_object(Object *type) {
-    Object *res = acquire(sizeof(Object));
+Object *new_object_impl(Object *type, ...) {
+    VA_ARGS_LIST_1_ARG(keep_allocated_address_constant, bool);
+    Object *res = acquire(sizeof(Object), keep_allocated_address_constant);
     if (res != NULL)
         *res = init_object(type);
     return res;

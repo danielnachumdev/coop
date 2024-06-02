@@ -2,6 +2,7 @@
 // Created by danie on 29/05/2024.
 //
 
+#include <stdarg.h>
 #include "hashset.h"
 #include "../globals/macros.h"
 #include "../globals/__init__.h"
@@ -58,6 +59,13 @@ hashset_new(DuplicatorT(data_dup), ConsumerT(data_free), ComparerT(data_comparer
         builtin_free(res);
         return NULL;
     }
+    res->constants = linkedlist_new(res->data_dup, res->data_free, res->data_comparer);
+    if (res->constants == NULL) {
+        builtin_free(res->strategy);
+        builtin_free(res->arr);
+        builtin_free(res);
+        return NULL;
+    }
     for (int i = 0; i < res->length; ++i) {
         res->arr[i] = linkedlist_new(res->data_dup, res->data_free, res->data_comparer);
         if (res->arr[i] == NULL) {
@@ -65,6 +73,8 @@ hashset_new(DuplicatorT(data_dup), ConsumerT(data_free), ComparerT(data_comparer
                 builtin_free(res->arr[i]);
             }
             builtin_free(res->strategy);
+            builtin_free(res->constants);
+            builtin_free(res->arr);
             builtin_free(res);
             return NULL;
         }
@@ -79,6 +89,7 @@ void hashset_free(HashSet **h) {
         linkedlist_free((*h)->arr + i);
     builtin_free((*h)->strategy);
     builtin_free((*h)->arr);
+    builtin_free((*h)->constants);
     builtin_free(*h);
     *h = NULL;
 }
@@ -86,7 +97,7 @@ void hashset_free(HashSet **h) {
 bool hashset_contains(const HashSet *h, const void *p) {
     if (h == NULL || p == NULL) return false;
     unsigned long index = h->hash(p) % h->length;
-    return linkedlist_contains(h->arr[index], p);
+    return linkedlist_contains(h->arr[index], p) || linkedlist_contains(h->constants, p);
 }
 
 bool hashmap_resize(HashSet *h) {
@@ -111,11 +122,10 @@ bool hashmap_resize(HashSet *h) {
     }
     for (int i = 0; i < h->length; ++i) {
         Node *cur = h->arr[i]->head;
-        while (cur != ((void *) 0)) {
-            Node *next = cur->next;
+        while (cur != NULL) {
             unsigned int index = h->hash(cur->data) % new_length;
             linkedlist_add(new_arr[index], cur->data);
-            cur = next;
+            cur = cur->next;
         }
         linkedlist_free(&h->arr[i]);
     }
@@ -125,8 +135,13 @@ bool hashmap_resize(HashSet *h) {
     return true;
 }
 
-bool hashset_add(HashSet *h, void *p) {
+bool hashset_add_impl(HashSet *h, void *p, ...) {
     if (h == NULL || p == NULL) return false;
+
+    VA_ARGS_LIST_1_ARG(keep_allocated_address_constant, bool);
+    if (keep_allocated_address_constant)
+        return linkedlist_add(h->constants, p) != NULL;
+
     unsigned long index = h->hash(p) % h->length;
     if (linkedlist_contains(h->arr[index], p)) return true;
     if (linkedlist_add(h->arr[index], p) == NULL)

@@ -4,6 +4,7 @@
 
 #include <stddef.h>
 #include <stdio.h>
+#include <stdarg.h>
 #include "allocator.h"
 #include "../globals/macros.h"
 #include "../data_structures/hashset.h"
@@ -12,18 +13,18 @@ unsigned long int allocated_bytes = 0;
 unsigned long int freed_bytes = 0;
 static Allocator *global_allocator = NULL;
 
-void *default_acquire(unsigned long n) {
+void *default_acquire(unsigned long n, ...) {
+    VA_ARGS_LIST_1_ARG(keep_allocated_address_constant, bool);
     void *p = builtin_new(n);
     if (p == NULL) return NULL;
-    hashset_add(get_allocator()->structure, p);
+    hashset_add(get_allocator()->structure, p, keep_allocated_address_constant);
     allocated_bytes += n;
     return p;
 }
 
-void default_release(void *p, unsigned int size_in_bytes) {
+void default_release(void *p) {
     if (p == NULL) return;
     hashset_remove(get_allocator()->structure, p);
-    freed_bytes += size_in_bytes;
 }
 
 void default_clear(void) {

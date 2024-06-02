@@ -9,7 +9,7 @@
 Object *String = NULL;
 
 void __init_string(void) {
-    String = new_object(Type);
+    String = new_object(Type, true);
 }
 
 Object *new_string_explicit(const char *s, Object *length_field) {
