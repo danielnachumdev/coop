@@ -5,32 +5,37 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdarg.h>
+#include <stdlib.h>
 #include "allocator.h"
 #include "../globals/macros.h"
 #include "../data_structures/hashset.h"
 
 unsigned long int allocated_bytes = 0;
 unsigned long int freed_bytes = 0;
-static Allocator *global_allocator = NULL;
+Allocator *__coop_allocator__ = NULL;
+Allocator *__user_allocator__ = NULL;
+Allocator *__global_allocator__ = NULL;
 
 void *default_acquire(unsigned long n, ...) {
     VA_ARGS_LIST_1_ARG(keep_allocated_address_constant, bool);
     void *p = builtin_new(n);
     if (p == NULL) return NULL;
-    hashset_add(get_allocator()->structure, p, keep_allocated_address_constant);
+
+    Allocator *a = get_allocator();
+    a->__impl_acquire(a->structure, p, keep_allocated_address_constant);
     allocated_bytes += n;
     return p;
 }
 
 void default_release(void *p) {
     if (p == NULL) return;
-    hashset_remove(get_allocator()->structure, p);
+    get_allocator()->__impl_release(get_allocator()->structure, p);
 }
 
-void default_clear(void) {
-    HashSet *h = get_allocator()->structure;
-    hashset_free(&h);
-    builtin_free(global_allocator);
+void default_clear(Allocator *allocator) {
+    if (allocator == NULL) return;
+    allocator->__impl_clear(&allocator->structure);
+    builtin_free(allocator);
 }
 
 void naive_free__(void *p) {
@@ -41,23 +46,52 @@ void *naive_dup__(const void *p) {
     return (void *) p;
 }
 
-Allocator *init_allocator(void) {
+Allocator *allocator_new_hashset(void) {
     Allocator *res = builtin_new(sizeof(Allocator));
     if (res == NULL) return NULL;
+    res->allocator_type = AllocatorHashSet;
     res->structure = hashset_new(naive_dup__, naive_free__, default_hashset_pointer_comparer, &default_hashset_strategy,
                                  default_hashset_hash);
     if (res->structure == NULL) {
         builtin_free(res);
         return NULL;
     }
+    res->__impl_acquire = cast(hashset_add_impl, void *(*)(void *, void *, ...));
+    res->__impl_release = cast(hashset_remove, bool(*)(void*, void*));
+    res->__impl_clear = cast(hashset_free, void(*)(void**));
     res->acquire = default_acquire;
     res->release = default_release;
     res->clear = default_clear;
     return res;
 }
 
+Allocator *allocator_new_linkedlist(void) {
+    Allocator *res = builtin_new(sizeof(Allocator));
+    if (res == NULL) return NULL;
+    res->structure = linkedlist_new(naive_dup__, naive_free__, default_hashset_pointer_comparer);
+    res->allocator_type = AllocatorLinkedList;
+    if (res->structure == NULL) {
+        builtin_free(res);
+        return NULL;
+    }
+    res->__impl_acquire = cast(linkedlist_add, void *(*)(void *, void *, ...));
+    res->__impl_release = cast(linkedlist_remove, bool(*)(void*, void*));
+    res->__impl_clear = cast(linkedlist_free, void(*)(void**));
+    res->acquire = default_acquire;
+    res->release = default_release;
+    res->clear = default_clear;
+    return res;
+}
+
+void shutdown(void) {
+    __user_allocator__->clear(__user_allocator__);
+    __coop_allocator__->clear(__coop_allocator__);
+}
+
 Allocator *get_allocator(void) {
-    if (global_allocator != NULL) return global_allocator;
-    global_allocator = init_allocator();
-    return global_allocator;
+    if (__global_allocator__ == NULL) {
+        fprintf(stderr, "You must use first init_coop() before doing anything.\n");
+        exit(1);
+    }
+    return __global_allocator__;
 }

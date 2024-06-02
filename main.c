@@ -5,11 +5,11 @@
 #include "coop/__init__.h"
 
 int main() {
-    _LOG("Starting main\n", DEBUG_LOG_SEVERITY);
     init_coop();
+    _LOG("Starting main\n", DEBUG_LOG_SEVERITY);
     _main();
     _DEBUG("Finished main\n");
-    get_allocator()->clear();
+    get_allocator()->clear(get_allocator());
     return 0;
 }
 

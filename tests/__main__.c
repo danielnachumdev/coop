@@ -70,13 +70,11 @@ void test_coop(void) {
     println(new_string("Testing finished successfully."));
     println(new_string("====================================================="));
     println(new_string("Passed "), new_integer(passed_tests), new_string("/"), new_integer(num_tests));
-    get_allocator()->clear();
+    shutdown();
 }
 
 int main(void) {
-//    test_data_structures();
-    init_coop();
-    get_allocator()->clear();
-//    test_coop();
+    test_data_structures();
+    test_coop();
     return 0;
 }

@@ -27,6 +27,6 @@ void print_stack(const Exception *e) {
 void throw_impl(const Exception *e) {
     if (e != NULL)
         print_stack(e);
-    get_allocator()->clear();
+    get_allocator()->clear(get_allocator());
     exit(e != NULL ? e->exit_code : 1);
 }
