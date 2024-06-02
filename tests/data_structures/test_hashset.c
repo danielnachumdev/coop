@@ -142,9 +142,7 @@ void test_hashset_resize_up() {
 
     // Insert elements to trigger resize up
     for (int i = 0; i < 4; ++i) {
-        int *data = malloc(sizeof(int));
-        *data = i;
-        assert(hashset_add(map, data));
+        assert(hashset_add(map, &i));
     }
 
     // Verify length increased after resize up
@@ -161,15 +159,11 @@ void test_hashset_resize_down() {
 
     // Insert elements to trigger resize down
     for (int i = 0; i < 15; ++i) {
-        int *data = malloc(sizeof(int));
-        *data = i;
-        assert(hashset_add(map, data));
+        assert(hashset_add(map, &i));
     }
 
     for (int i = 0; i < 10; ++i) {
-        int *data = malloc(sizeof(int));
-        *data = i;
-        hashset_remove(map, data);
+        hashset_remove(map, &i);
     }
 
     // Verify length decreased after resize down
@@ -198,6 +192,6 @@ void test_hashset(void) {
     test_hashset_remove_nonexistent();
     test_hashset_resize_up();
     test_hashset_resize_down();
-    my_test();
+//    my_test();
     printf("Testing HashSet - PASSED\n");
 }

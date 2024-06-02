@@ -76,6 +76,7 @@ void hashset_free(HashSet **h) {
     if (*h == NULL) return;
     for (int i = 0; i < (*h)->length; ++i)
         linkedlist_free((*h)->arr + i);
+    builtin_free((*h)->strategy);
     builtin_free((*h)->arr);
     builtin_free(*h);
     *h = NULL;
