@@ -74,7 +74,18 @@ void test_coop(void) {
 }
 
 int main(void) {
-    test_data_structures();
+//    test_data_structures();
+    get_allocator();
+    __init_type();
+    __init_number();
+    __init_string();
+    __init_integer();
+    __init_function();
+    __init_field();
+    __init_array();
+    __init_boolean();
+//    __init_union();
+    get_allocator()->clear();
 //    test_coop();
     return 0;
 }

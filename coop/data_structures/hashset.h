@@ -15,6 +15,7 @@ typedef struct HashSetStrategy {
     double upper_bound;
     double multiplier;
     unsigned int start_length;
+    unsigned int minimum_length;
 } HashSetStrategy;
 
 extern const HashSetStrategy default_hashset_strategy;

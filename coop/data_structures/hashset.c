@@ -7,17 +7,18 @@
 #include "../globals/__init__.h"
 
 
-#define DEFAULT_START_COUNT 0
 #define DEFAULT_START_LENGTH 8
-#define DEFAULT_LOWER_BOUND 0.10
-#define DEFAULT_UPPER_BOUND 0.90
+#define DEFAULT_MINIMUM_LENGTH DEFAULT_START_LENGTH
+#define DEFAULT_LOWER_BOUND 0.25
+#define DEFAULT_UPPER_BOUND 0.75
 #define DEFAULT_MULTIPLIER 2.0
 
 const HashSetStrategy default_hashset_strategy = (HashSetStrategy) {
         .lower_bound=DEFAULT_LOWER_BOUND,
         .upper_bound = DEFAULT_UPPER_BOUND,
         .multiplier = DEFAULT_MULTIPLIER,
-        .start_length=DEFAULT_START_LENGTH
+        .start_length=DEFAULT_START_LENGTH,
+        .minimum_length=DEFAULT_MINIMUM_LENGTH
 };
 
 unsigned long default_hashset_hash(const void *p) {
@@ -92,6 +93,7 @@ bool hashmap_resize(HashSet *h) {
     if (h == NULL) return false;
     if (h->length * h->strategy->lower_bound <= h->count && h->count <= h->length * h->strategy->upper_bound)
         return true;
+    if (h->count < h->strategy->minimum_length) return true;
     unsigned int new_length = cast(h->length * h->strategy->multiplier, unsigned int);
     if (h->length * h->strategy->lower_bound > h->count)
         new_length = cast(h->length / h->strategy->multiplier, unsigned int);
@@ -115,9 +117,8 @@ bool hashmap_resize(HashSet *h) {
             linkedlist_add(new_arr[index], cur->data);
             cur = next;
         }
-    }
-    for (int i = 0; i < h->length; ++i)
         linkedlist_free(&h->arr[i]);
+    }
     builtin_free(h->arr);
     h->arr = new_arr;
     h->length = new_length;
