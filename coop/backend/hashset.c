@@ -4,8 +4,7 @@
 
 #include <stdarg.h>
 #include "hashset.h"
-#include "../globals/macros.h"
-#include "../globals/__init__.h"
+#include "../builtins/macros.h"
 
 
 #define DEFAULT_START_LENGTH 8

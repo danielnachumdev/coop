@@ -5,7 +5,7 @@
 #ifndef LOCAL_PLAYGROUND_NODE_H
 #define LOCAL_PLAYGROUND_NODE_H
 
-#include "../globals/macros.h"
+#include "../builtins/macros.h"
 
 typedef struct Node {
     void *data;

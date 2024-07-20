@@ -4,7 +4,6 @@
 
 #include <string.h>
 #include "__init__.h"
-#include "../globals/__init__.h"
 
 Object *__global__field__name__field__name__ = NULL;
 Object *__global__field__len__field__name__ = NULL;

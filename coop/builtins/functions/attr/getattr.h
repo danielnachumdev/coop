@@ -5,7 +5,7 @@
 #ifndef COOP_GETATTR_H
 #define COOP_GETATTR_H
 
-#include "../../../globals/object.h"
+#include "../../object.h"
 
 Object *getattr(const Object *obj, const char *name);
 #endif //COOP_GETATTR_H

@@ -3,7 +3,7 @@
 //
 
 #include "Number.h"
-#include "../../globals/object.h"
+#include "../object.h"
 #include "../../memory/allocator.h"
 
 Object *Number = NULL;

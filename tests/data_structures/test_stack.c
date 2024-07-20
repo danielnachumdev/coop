@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "test_stack.h"
-#include "../../coop/data_structures/stack.h"
+#include "../../coop/backend/stack.h"
 
 void *int_duplicator(const void *item) {
     int *ptr = (int *) malloc(sizeof(int));

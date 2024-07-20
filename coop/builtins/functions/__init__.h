@@ -8,5 +8,7 @@
 #include "attr/__init__.h"
 #include "print.h"
 #include "throw.h"
+#include "dir.h"
+#include "isinstance.h"
 
 #endif //COOP_BUILTINS_FUNCTIONS___INIT___H

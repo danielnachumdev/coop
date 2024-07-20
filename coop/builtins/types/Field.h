@@ -5,7 +5,7 @@
 #ifndef LOCAL_PLAYGROUND_FIELD_H
 #define LOCAL_PLAYGROUND_FIELD_H
 
-#include "../../globals/object.h"
+#include "../object.h"
 void __init_field(void);
 
 Object *new_field_explicit(Object *name_field, Object *value);

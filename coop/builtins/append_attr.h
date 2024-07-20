@@ -5,7 +5,7 @@
 #ifndef COOP_APPEND_ATTR_H
 #define COOP_APPEND_ATTR_H
 
-#include "../object.h"
+#include "object.h"
 
 bool append_attr(Object *obj, Object *attr);
 

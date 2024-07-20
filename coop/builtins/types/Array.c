@@ -2,10 +2,14 @@
 // Created by danie on 28/05/2024.
 //
 
-#include "Array.h"
-#include "Field.h"
+
+#include "../object.h"
 #include "../../memory/allocator.h"
-#include "../../globals/__init__.h"
+#include "../append_attr.h"
+#include "../macros.h"
+#include "Field.h"
+#include "../constants.h"
+#include "../functions/attr/getattr.h"
 
 Object *Array = NULL;
 

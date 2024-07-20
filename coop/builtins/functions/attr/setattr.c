@@ -3,7 +3,10 @@
 //
 
 #include <string.h>
-#include "../../../globals/__init__.h"
+#include "../../object.h"
+#include "getattr.h"
+#include "../../types/__init__.h"
+#include "../../append_attr.h"
 
 void setattr(Object *obj, const char *name, Object *value) {
     Object *existing = getattr(obj, name);

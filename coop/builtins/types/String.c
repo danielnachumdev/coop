@@ -4,7 +4,10 @@
 
 #include <string.h>
 #include "String.h"
-#include "../../globals/__init__.h"
+#include "../append_attr.h"
+#include "../../memory/__init__.h"
+#include "../macros.h"
+#include "__init__.h"
 
 Object *String = NULL;
 

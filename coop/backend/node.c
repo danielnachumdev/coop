@@ -4,7 +4,7 @@
 
 #include <stddef.h>
 #include "node.h"
-#include "../globals/macros.h"
+#include "../builtins/macros.h"
 
 
 Node *node_new(void *data, DuplicatorT(data_dup), ConsumerT(data_free)) {

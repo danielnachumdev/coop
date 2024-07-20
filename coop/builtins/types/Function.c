@@ -3,7 +3,10 @@
 //
 
 #include "Function.h"
-#include "../../globals/__init__.h"
+#include "../append_attr.h"
+#include "__init__.h"
+#include "../constants.h"
+#include "../macros.h"
 
 Object *Function = NULL;
 

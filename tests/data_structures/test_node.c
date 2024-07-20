@@ -5,7 +5,7 @@
 #include <malloc.h>
 #include <assert.h>
 #include "test_node.h"
-#include "../../coop/data_structures/node.h"
+#include "../../coop/backend/node.h"
 
 
 void int_free(void *data) {

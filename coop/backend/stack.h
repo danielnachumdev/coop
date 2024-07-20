@@ -5,7 +5,7 @@
 #ifndef COOP_STACK_H
 #define COOP_STACK_H
 
-#include "../globals/macros.h"
+#include "../builtins/macros.h"
 #include "node.h"
 
 typedef struct Stack {

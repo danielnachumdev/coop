@@ -5,7 +5,11 @@
 #ifndef COOP___INIT___H
 #define COOP___INIT___H
 
-#include "globals/__init__.h"
+#include "backend/__init__.h"
+#include "builtins/__init__.h"
+#include "log/__init__.h"
+#include "memory/__init__.h"
+#include "testing//__init__.h"
 
 void init_coop(void);
 

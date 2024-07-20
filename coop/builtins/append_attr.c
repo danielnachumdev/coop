@@ -5,7 +5,7 @@
 #include <memory.h>
 #include <stdbool.h>
 #include "append_attr.h"
-#include "../../memory/__init__.h"
+#include "../memory/__init__.h"
 
 bool append_attr(Object *obj, Object *attr) {
     if (obj == NULL || attr == NULL) return false;

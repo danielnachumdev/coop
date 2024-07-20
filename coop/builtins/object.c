@@ -6,7 +6,11 @@
 #include <string.h>
 #include <stdarg.h>
 #include "object.h"
-#include "__init__.h"
+#include "../memory/allocator.h"
+#include "macros.h"
+#include "functions/attr/getattr.h"
+#include "constants.h"
+#include "types/__init__.h"
 
 
 #define init_object(type_) (Object){ \

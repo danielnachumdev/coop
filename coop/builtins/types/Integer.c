@@ -3,7 +3,8 @@
 //
 
 #include "Integer.h"
-#include "../../globals/__init__.h"
+#include "../../memory/allocator.h"
+#include "../macros.h"
 
 Object *Integer = NULL;
 

@@ -4,8 +4,11 @@
 
 #include <stdio.h>
 #include <stdarg.h>
-#include "print.h"
-#include "../../globals/__init__.h"
+#include "../object.h"
+#include "attr/getattr.h"
+#include "../constants.h"
+#include "../types/Array.h"
+#include "../macros.h"
 
 void print_object(Object *obj) {
     if (obj == NULL) {

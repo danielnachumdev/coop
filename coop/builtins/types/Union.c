@@ -4,7 +4,11 @@
 
 #include <stdarg.h>
 #include "Union.h"
-#include "../../globals/__init__.h"
+#include "__init__.h"
+#include "../functions/isinstance.h"
+#include "../macros.h"
+#include "../functions/attr/getattr.h"
+#include "../constants.h"
 
 Object *Union = NULL;
 

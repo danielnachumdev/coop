@@ -2,10 +2,9 @@
 // Created by danie on 28/05/2024.
 //
 #include <string.h>
-#include "../coop/globals/__init__.h"
 #include "../coop/builtins/__init__.h"
 #include "../coop/testing/test.h"
-#include "../coop/data_structures/hashset.h"
+#include "../coop/backend/hashset.h"
 #include "../coop/__init__.h"
 #include "data_structures/test_data_strucures.h"
 
@@ -14,7 +13,7 @@ int passed_tests = 0;
 
 
 void test_global_constants(void) {
-    dir(__global__field__name__field__name__);
+    getattr(__global__field__name__field__name__, LEN);
     ASSERT_OBJECT_EQUALS(getattr(__global__field__name__field__name__, NAME), new_string(NAME));
     ASSERT_OBJECT_EQUALS(getattr(__global__field__name__field__name__, LEN), new_integer(strlen(NAME)));
     ASSERT_OBJECT_EQUALS(getattr(__global__field__len__field__name__, NAME), new_string(LEN));

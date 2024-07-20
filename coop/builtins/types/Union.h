@@ -5,7 +5,7 @@
 #ifndef COOP_UNION_H
 #define COOP_UNION_H
 
-#include "../../globals/object.h"
+#include "../object.h"
 
 void __init_union(void);
 

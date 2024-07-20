@@ -5,7 +5,7 @@
 #include <assert.h>
 #include <memory.h>
 #include "test_hashset.h"
-#include "../../coop/data_structures/hashset.h"
+#include "../../coop/backend/hashset.h"
 
 void hashmap_naive_free(void *p) {
     builtin_free(p);

@@ -6,7 +6,7 @@
 #define COOP_ARRAY_H
 
 
-#include "../../globals/object.h"
+#include "../object.h"
 
 void __init_array(void);
 

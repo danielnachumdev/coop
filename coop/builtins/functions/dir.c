@@ -4,10 +4,10 @@
 //
 
 #include "dir.h"
-#include "../../builtins/types/__init__.h"
+#include "../types/__init__.h"
 #include "../constants.h"
-#include "../../builtins/functions/attr/getattr.h"
-#include "../../builtins/functions/print.h"
+#include "attr/getattr.h"
+#include "print.h"
 
 void dir(const Object *obj) {
     if (obj == NULL) return;

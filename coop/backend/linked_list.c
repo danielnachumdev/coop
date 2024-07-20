@@ -1,7 +1,7 @@
 //
 // Created by t-danachum on 21/05/2024.
 //
-#include "../globals/macros.h"
+#include "../builtins/macros.h"
 #include "linked_list.h"
 
 LinkedList *linkedlist_new(DuplicatorT(data_dup), ConsumerT(data_free), ComparerT(data_comparer)) {

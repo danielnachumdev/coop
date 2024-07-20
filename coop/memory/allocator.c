@@ -7,8 +7,8 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include "allocator.h"
-#include "../globals/macros.h"
-#include "../data_structures/hashset.h"
+#include "../builtins/macros.h"
+#include "../backend/hashset.h"
 
 unsigned long int allocated_bytes = 0;
 unsigned long int freed_bytes = 0;

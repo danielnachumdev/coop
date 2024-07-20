@@ -3,7 +3,7 @@
 //
 
 #include "stack.h"
-#include "../globals/__init__.h"
+#include "../memory/__init__.h"
 
 Stack *stack_new(DuplicatorT(node_dup), ConsumerT(node_free)) {
     Stack *stack = (Stack *) malloc(sizeof(Stack));

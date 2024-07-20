@@ -7,7 +7,7 @@
 #include <malloc.h>
 #include <stdio.h>
 #include "test_linkedlist.h"
-#include "../../coop/data_structures/linked_list.h"
+#include "../../coop/backend/linked_list.h"
 
 bool linkedlist_int_comparer(const void *p1, const void *p2) {
     return *(int *) p1 == *(int *) p2;

@@ -3,7 +3,12 @@
 //
 
 #include <string.h>
-#include "../../globals/__init__.h"
+#include "../object.h"
+#include "../append_attr.h"
+#include "String.h"
+#include "../../memory/allocator.h"
+#include "Integer.h"
+#include "../__init__.h"
 
 Object *Field = NULL;
 
@@ -23,7 +28,7 @@ Object *new_field_explicit(Object *name_field, Object *value) {
 
 Object *new__name__field(const char *name) {
     if (__global__field__name__field__name__ == NULL) return NULL;
-    Object *len_field = new__len__field(strlen(name));
+    Object *len_field = new__name__field(strlen(name));
     if (len_field == NULL) return NULL;
     Object *name_object = new_string_explicit(name, len_field);
     if (name_object == NULL) {

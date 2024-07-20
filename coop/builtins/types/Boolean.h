@@ -6,7 +6,7 @@
 #define COOP_BOOLEAN_H
 
 
-#include "../../globals/object.h"
+#include "../object.h"
 
 void __init_boolean(void);
 
