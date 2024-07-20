@@ -1,0 +1,10 @@
+//
+// Created by danie on 21/07/2024.
+//
+
+#ifndef COOP_TESTS_TEST_BUILTINS_TEST_TYPES_INIT___H
+#define COOP_TESTS_TEST_BUILTINS_TEST_TYPES_INIT___H
+
+void test_types(void);
+
+#endif //COOP_TESTS_TEST_BUILTINS_TEST_TYPES_INIT___H

@@ -2,8 +2,8 @@
 // Created by danie on 02/06/2024.
 //
 
-#ifndef COOP_DATA_STRUCTURES____INIT___H
-#define COOP_DATA_STRUCTURES____INIT___H
+#ifndef COOP_BACKEND____INIT___H
+#define COOP_BACKEND____INIT___H
 
 #include "node.h"
 #include "linked_list.h"
@@ -11,4 +11,4 @@
 #include "hashset.h"
 
 
-#endif //COOP_DATA_STRUCTURES____INIT___H
+#endif //COOP_BACKEND____INIT___H

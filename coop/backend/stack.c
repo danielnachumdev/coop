@@ -22,13 +22,13 @@ void stack_free(Stack **s) {
         node_free(&temp);
         current = current->next;
     }
-    free(*s);
+    builtin_free(*s);
     *s = NULL;
 }
 
 void stack_push(Stack *s, const void *item) {
     if (s == NULL || item == NULL) return;
-    Node *new_node = acquire(sizeof(Node));
+    Node *new_node = builtin_new(sizeof(Node));
     if (new_node == NULL) return;
     new_node->data = s->node_dup(item);
     new_node->next = s->top;
