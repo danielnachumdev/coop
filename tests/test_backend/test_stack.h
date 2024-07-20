@@ -6,4 +6,5 @@
 #define COOP_TEST_STACK_H
 
 void test_stack(void);
+
 #endif //COOP_TEST_STACK_H

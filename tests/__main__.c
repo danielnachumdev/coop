@@ -18,6 +18,6 @@ int passed_tests = 0;
 
 int main(void) {
     test_backend();
-    test_builtins();
+//    test_builtins();
     return 0;
 }

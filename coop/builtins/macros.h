@@ -56,7 +56,7 @@
 #define ConsumerT(name) __FUNCTION_POINTER_BUILDER(name,void,void*)
 #define Consumer_CONST(name) __FUNCTION_POINTER_BUILDER(name,void,const void*)
 #define Transformation(name) __FUNCTION_POINTER_BUILDER(name,void*,void*)
-#define Transformation_CONST(name) __FUNCTION_POINTER_BUILDER(name,void*,const void*)
+#define Transformation_CONST(name) __FUNCTION_POINTER_BUILDER(name, void*, const void*)
 #define DuplicatorT(name) Transformation_CONST(name)
 
 //builtin_new_wrapper_impl(n,__FILE__,__LINE__)

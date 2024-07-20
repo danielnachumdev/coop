@@ -9,9 +9,9 @@
 #include "node.h"
 
 typedef struct Stack {
-    DuplicatorT(node_dup);
+    DuplicatorT(data_dup);
 
-    ConsumerT(node_free);
+    ConsumerT(data_free);
 
     Node *top;
 } Stack;

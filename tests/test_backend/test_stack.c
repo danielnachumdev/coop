@@ -21,6 +21,7 @@ void *int_duplicator(const void *item) {
 
 // Test function for stack operations
 void test_stack(void) {
+    printf("Testing Stack - STARTED\n");
     // Create a new stack
     Stack *stack = stack_new(int_duplicator, free);
 
@@ -49,4 +50,5 @@ void test_stack(void) {
 
     // Test empty stack after free
     assert(stack == NULL);
+    printf("Testing Stack - PASSED\n");
 }
