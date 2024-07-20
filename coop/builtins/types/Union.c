@@ -9,7 +9,7 @@
 Object *Union = NULL;
 
 void __init_union(void) {
-    Union = new_object(Type, true);
+    Union = new_object(Type);
 }
 
 Object *new_union(unsigned long int num_types, ...) {

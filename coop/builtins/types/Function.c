@@ -8,7 +8,7 @@
 Object *Function = NULL;
 
 void __init_function(void) {
-    Function = new_object(Type, true);
+    Function = new_object(Type);
 }
 
 Object *new_function(const char *name, void *(*impl)(), Object *return_type, Object *arguments_array) {

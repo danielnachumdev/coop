@@ -7,6 +7,6 @@
 
 #include "../object.h"
 
-Object *dir(const Object *obj);
+void dir(const Object *obj);
 
 #endif //COOP_DIR_H

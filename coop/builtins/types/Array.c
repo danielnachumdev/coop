@@ -10,7 +10,7 @@
 Object *Array = NULL;
 
 void __init_array(void) {
-    Array = new_object(Type, true);
+    Array = new_object(Type);
 }
 
 Object *new_array(unsigned int num_objects, Object *items_type) {
@@ -75,7 +75,7 @@ bool array_contains(const Object *arr, const Object *obj) {
     if (arr == NULL || obj == NULL) return false;
     Object *len = getattr(arr, LEN);
     for (unsigned int i = 0; i < *cast(len->data, unsigned int *);
-    ++i) {
+         ++i) {
         if (object_equals(obj, array_get(arr, i))) return true;
     }
     return false;
@@ -88,8 +88,7 @@ bool array_equals(const Object *a, const Object *b) {
     if (not(a->type == Array)) return false;
     Object *len;
     if (not(object_equals(len = getattr(a, LEN), getattr(b, LEN)))) return false;
-    for (unsigned int i = 0; i < *cast(len->data, unsigned int *);
-    ++i)
-    if (not(object_equals(array_get(a, i), array_get(b, i)))) return false;
+    for (unsigned int i = 0; i < *cast(len->data, unsigned int *); ++i)
+        if (not(object_equals(array_get(a, i), array_get(b, i)))) return false;
     return true;
 }

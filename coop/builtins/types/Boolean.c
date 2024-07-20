@@ -9,7 +9,7 @@
 Object *Boolean = NULL;
 
 void __init_boolean(void) {
-    Boolean = new_object(Type, true);
+    Boolean = new_object(Type);
 }
 
 Object *new_boolean(bool v) {

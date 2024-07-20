@@ -16,13 +16,12 @@ Allocator *__coop_allocator__ = NULL;
 Allocator *__user_allocator__ = NULL;
 Allocator *__global_allocator__ = NULL;
 
-void *default_acquire(unsigned long n, ...) {
-    VA_ARGS_LIST_1_ARG(keep_allocated_address_constant, bool);
+void *default_acquire(unsigned long n) {
     void *p = builtin_new(n);
     if (p == NULL) return NULL;
 
     Allocator *a = get_allocator();
-    a->__impl_acquire(a->structure, p, keep_allocated_address_constant);
+    a->__impl_acquire(a->structure, p);
     allocated_bytes += n;
     return p;
 }
@@ -56,7 +55,7 @@ Allocator *allocator_new_hashset(void) {
         builtin_free(res);
         return NULL;
     }
-    res->__impl_acquire = cast(hashset_add_impl, void *(*)(void *, void *, ...));
+    res->__impl_acquire = cast(hashset_add_impl, void *(*)(void *, void *));
     res->__impl_release = cast(hashset_remove, bool(*)(void*, void*));
     res->__impl_clear = cast(hashset_free, void(*)(void**));
     res->acquire = default_acquire;
@@ -74,7 +73,7 @@ Allocator *allocator_new_linkedlist(void) {
         builtin_free(res);
         return NULL;
     }
-    res->__impl_acquire = cast(linkedlist_add, void *(*)(void *, void *, ...));
+    res->__impl_acquire = cast(linkedlist_add, void *(*)(void *, void *));
     res->__impl_release = cast(linkedlist_remove, bool(*)(void*, void*));
     res->__impl_clear = cast(linkedlist_free, void(*)(void**));
     res->acquire = default_acquire;

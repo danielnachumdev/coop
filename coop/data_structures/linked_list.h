@@ -29,7 +29,7 @@ void linkedlist_free(LinkedList **ll);
 
 bool linkedlist_contains(const LinkedList *ll, const void *p);
 
-Node *linkedlist_add(LinkedList *ll, void *p, ...);
+Node *linkedlist_add(LinkedList *ll, void *p);
 
 bool linkedlist_remove(LinkedList *ll, void *p);
 

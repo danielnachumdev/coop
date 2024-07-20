@@ -40,7 +40,7 @@ bool linkedlist_contains(const LinkedList *ll, const void *p) {
     return false;
 }
 
-Node *linkedlist_add(LinkedList *ll, void *p, ...) {
+Node *linkedlist_add(LinkedList *ll, void *p) {
     if (ll == NULL || p == NULL) return NULL;
     Node *res = node_new(p, ll->data_dup, ll->data_free);
     if (res == NULL) return NULL;

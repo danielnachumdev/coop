@@ -26,9 +26,9 @@ extern Object *Boolean;
 extern Object *Union;
 
 
-Object *new_object_impl(Object *type, ... /*bool keep_allocated_address_constant*/);
+Object *new_object_impl(Object *type);
 
-#define new_object(type, ...) new_object_impl(type, ## __VA_ARGS__ , false)
+#define new_object(type) new_object_impl(type)
 
 bool object_equals(const Object *a, const Object *b);
 

@@ -9,5 +9,5 @@
 Object *Number = NULL;
 
 void __init_number(void) {
-    Number = new_object(Type, true);
+    Number = new_object(Type);
 }

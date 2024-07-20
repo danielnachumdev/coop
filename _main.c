@@ -13,7 +13,7 @@ void _main(void) {
             String,
             new_array(1, String)
     );
-    println(dir(function_new_string));
+    dir(function_new_string);
 ////    append_attr(
 ////            function_new_string,
 ////            new_field_explicit(new_string(CALL),)

@@ -16,9 +16,9 @@ typedef struct Allocator {
     AllocatorType allocator_type;
     void *structure;
 
-    void *(*acquire)(unsigned long n, ... /*bool keep_allocated_address_constant*/);
+    void *(*acquire)(unsigned long n);
 
-    void *(*__impl_acquire)(void *structure, void *p, ... /*bool keep_allocated_address_constant*/);
+    void *(*__impl_acquire)(void *structure, void *p);
 
     void (*release)(void *p);
 
@@ -44,6 +44,6 @@ Allocator *allocator_new_linkedlist(void);
 
 void shutdown(void);
 
-#define acquire(n, ...) get_allocator()->acquire(n, ## __VA_ARGS__ , false)
+#define acquire(n) get_allocator()->acquire(n)
 #define release(p) get_allocator()->release(p)
 #endif //LOCAL_PLAYGROUND_ALLOCATOR_H
