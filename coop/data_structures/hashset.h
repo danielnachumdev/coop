@@ -14,7 +14,7 @@ typedef struct HashSetStrategy {
     double lower_bound;
     double upper_bound;
     double multiplier;
-    unsigned int start_length;
+    unsigned int initial_length;
     unsigned int minimum_length;
 } HashSetStrategy;
 
@@ -23,17 +23,16 @@ extern const HashSetStrategy default_hashset_strategy;
 typedef struct HashSet {
     HashT(hash);
 
-    HashSetStrategy *strategy;
-    unsigned int count;
-    unsigned int length;
-    LinkedList **arr;
-    LinkedList *constants;
-
     DuplicatorT(data_dup);
 
     ConsumerT(data_free);
 
     ComparerT(data_comparer);
+
+    HashSetStrategy *strategy;
+    unsigned int count;
+    unsigned int length;
+    LinkedList **arr;
 } HashSet;
 
 bool default_hashset_pointer_comparer(const void *a, const void *b);
@@ -42,7 +41,7 @@ HashSet *
 hashset_new(DuplicatorT(data_dup), ConsumerT(data_free), ComparerT(data_comparer), const HashSetStrategy *strategy,
             HashT(hash));
 
-unsigned long default_hashset_hash(const void *p);
+unsigned long pointer_hash(const void *p);
 
 void hashset_free(HashSet **h);
 

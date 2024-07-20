@@ -14,21 +14,22 @@
 #define DEFAULT_UPPER_BOUND 0.75
 #define DEFAULT_MULTIPLIER 2.0
 
-const HashSetStrategy default_hashset_strategy = (HashSetStrategy) {
+const HashSetStrategy default_hashset_strategy = (const HashSetStrategy) {
         .lower_bound=DEFAULT_LOWER_BOUND,
         .upper_bound = DEFAULT_UPPER_BOUND,
         .multiplier = DEFAULT_MULTIPLIER,
-        .start_length=DEFAULT_START_LENGTH,
+        .initial_length=DEFAULT_START_LENGTH,
         .minimum_length=DEFAULT_MINIMUM_LENGTH
 };
 
-unsigned long default_hashset_hash(const void *p) {
+unsigned long pointer_hash(const void *p) {
     unsigned long int x = (unsigned long int) p;
     x = ((x >> 16) ^ x) * 0x45d9f3b;
     x = ((x >> 16) ^ x) * 0x45d9f3b;
     x = (x >> 16) ^ x;
     return (unsigned long) x;
 }
+
 
 bool default_hashset_pointer_comparer(const void *a, const void *b) {
     return a == b;
@@ -38,7 +39,7 @@ HashSet *
 hashset_new(DuplicatorT(data_dup), ConsumerT(data_free), ComparerT(data_comparer), const HashSetStrategy *strategy,
             HashT(hash)) {
     if (data_dup == NULL || data_free == NULL || strategy == NULL || hash == NULL || data_comparer == NULL) return NULL;
-    if (not(strategy->lower_bound < strategy->upper_bound || strategy->start_length > 0)) return NULL;
+    if (not(strategy->lower_bound < strategy->upper_bound || strategy->initial_length > 0)) return NULL;
     HashSet *res = builtin_new(sizeof(HashSet));
     if (res == NULL) return NULL;
     res->hash = hash;
@@ -52,28 +53,19 @@ hashset_new(DuplicatorT(data_dup), ConsumerT(data_free), ComparerT(data_comparer
     }
     *(res->strategy) = *strategy;
     res->count = 0;
-    res->length = res->strategy->start_length;
+    res->length = res->strategy->initial_length;
     res->arr = builtin_new(sizeof(LinkedList *) * res->length);
     if (res->arr == NULL) {
         builtin_free(res->strategy);
         builtin_free(res);
         return NULL;
     }
-    res->constants = linkedlist_new(res->data_dup, res->data_free, res->data_comparer);
-    if (res->constants == NULL) {
-        builtin_free(res->strategy);
-        builtin_free(res->arr);
-        builtin_free(res);
-        return NULL;
-    }
     for (int i = 0; i < res->length; ++i) {
         res->arr[i] = linkedlist_new(res->data_dup, res->data_free, res->data_comparer);
         if (res->arr[i] == NULL) {
-            for (int j = 0; j < i; ++j) {
+            for (int j = 0; j < i; ++j)
                 builtin_free(res->arr[i]);
-            }
             builtin_free(res->strategy);
-            builtin_free(res->constants);
             builtin_free(res->arr);
             builtin_free(res);
             return NULL;
@@ -83,13 +75,11 @@ hashset_new(DuplicatorT(data_dup), ConsumerT(data_free), ComparerT(data_comparer
 }
 
 void hashset_free(HashSet **h) {
-    if (h == NULL) return;
-    if (*h == NULL) return;
+    if (h == NULL || *h == NULL) return;
     for (int i = 0; i < (*h)->length; ++i)
         linkedlist_free((*h)->arr + i);
     builtin_free((*h)->strategy);
     builtin_free((*h)->arr);
-    builtin_free((*h)->constants);
     builtin_free(*h);
     *h = NULL;
 }
@@ -97,7 +87,7 @@ void hashset_free(HashSet **h) {
 bool hashset_contains(const HashSet *h, const void *p) {
     if (h == NULL || p == NULL) return false;
     unsigned long index = h->hash(p) % h->length;
-    return linkedlist_contains(h->arr[index], p) || linkedlist_contains(h->constants, p);
+    return linkedlist_contains(h->arr[index], p);
 }
 
 bool hashmap_resize(HashSet *h) {
@@ -137,11 +127,6 @@ bool hashmap_resize(HashSet *h) {
 
 bool hashset_add_impl(HashSet *h, void *p, ...) {
     if (h == NULL || p == NULL) return false;
-
-    VA_ARGS_LIST_1_ARG(keep_allocated_address_constant, bool);
-    if (keep_allocated_address_constant)
-        return linkedlist_add(h->constants, p) != NULL;
-
     unsigned long index = h->hash(p) % h->length;
     if (linkedlist_contains(h->arr[index], p)) return true;
     if (linkedlist_add(h->arr[index], p) == NULL)

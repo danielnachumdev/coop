@@ -30,9 +30,13 @@ void linkedlist_free(LinkedList **ll) {
 
 bool linkedlist_contains(const LinkedList *ll, const void *p) {
     if (ll == NULL || p == NULL) return false;
-    LINKEDLIST_FOREACH(cur, ll, {
-        if (ll->data_comparer(cur->data, p)) return true;
-    });
+    Node *cur = ll->head;
+    while (cur != NULL) {
+        Node *next = cur->next;
+        if (ll->data_comparer(cur->data, p))
+            return true;
+        cur = next;
+    }
     return false;
 }
 
@@ -61,7 +65,8 @@ bool linkedlist_remove(LinkedList *ll, void *p) {
             if (cur == ll->head) {
                 if (cur == ll->tail)
                     ll->tail = NULL;
-                ll->head->prev = NULL;
+                else
+                    ll->head->next->prev = NULL;
                 ll->head = ll->head->next;
             } else if (cur == ll->tail) {
                 ll->tail->prev->next = NULL;

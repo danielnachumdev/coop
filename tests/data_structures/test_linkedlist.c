@@ -61,11 +61,11 @@ void test_linkedlist_remove() {
     linkedlist_add(ll, &data2);
 
     linkedlist_remove(ll, &data1);
-    assert(!linkedlist_contains(ll, &data1));
+    assert(not(linkedlist_contains(ll, &data1)));
     assert(linkedlist_contains(ll, &data2));
 
     linkedlist_remove(ll, &data2);
-    assert(!linkedlist_contains(ll, &data2));
+    assert(not(linkedlist_contains(ll, &data2)));
 
     linkedlist_free(&ll);
 }

@@ -51,7 +51,7 @@ Allocator *allocator_new_hashset(void) {
     if (res == NULL) return NULL;
     res->allocator_type = AllocatorHashSet;
     res->structure = hashset_new(naive_dup__, naive_free__, default_hashset_pointer_comparer, &default_hashset_strategy,
-                                 default_hashset_hash);
+                                 pointer_hash);
     if (res->structure == NULL) {
         builtin_free(res);
         return NULL;
@@ -84,8 +84,9 @@ Allocator *allocator_new_linkedlist(void) {
 }
 
 void shutdown(void) {
-    __user_allocator__->clear(__user_allocator__);
-    __coop_allocator__->clear(__coop_allocator__);
+    __global_allocator__->clear(__global_allocator__);
+//    __user_allocator__->clear(__user_allocator__);
+//    __coop_allocator__->clear(__coop_allocator__);
 }
 
 Allocator *get_allocator(void) {
