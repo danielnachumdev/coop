@@ -4,7 +4,6 @@
 
 #include <string.h>
 #include "../object.h"
-#include "../append_attr.h"
 #include "String.h"
 #include "../../memory/allocator.h"
 #include "Integer.h"
@@ -28,8 +27,8 @@ Object *new_field_explicit(Object *name_field, Object *value) {
     Object *res = new_object(Field);
     if (res == NULL)
         return NULL;
-//    explicitly do not validate append_attr succeeds because this is an explicit call
-    append_attr(res, name_field);
+//    explicitly do not validate __append_attr succeeds because this is an explicit call
+    __append_attr(res, name_field);
     res->data = value;
     return res;
 }

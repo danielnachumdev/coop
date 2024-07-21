@@ -26,12 +26,13 @@ void test_getattr(void) {
     ASSERT_NULL(getattr(__global__field__name__field__name__, "asfjhbaslkjgfbalskbgag"));
     ASSERT_NULL(getattr(__global__field__name__field__name__, "asfjhbaslkjgfbalskbgag", NULL));
     ASSERT_NOT_NULL(getattr(__global__field__name__field__name__, "asfjhbaslkjgfbalskbgag", new_boolean(true)));
-    ASSERT_OBJECT_EQUALS(getattr(__global__field__name__field__name__, "asfjhbaslkjgfbalskbgag", new_string("hashdjbasjhdjbasd")),
-                         new_string("hashdjbasjhdjbasd"));
-    ASSERT_NOT_NULL(getattr(__global__field__name__field__name__, NAME));
-    ASSERT_NOT_NULL(getattr(__global__field__name__field__name__, LEN));
-    ASSERT_NOT_NULL(getattr(__global__field__len__field__name__, NAME));
-    ASSERT_NOT_NULL(getattr(__global__field__len__field__name__, LEN));
+    ASSERT_OBJECT_EQUALS(
+            getattr(__global__field__name__field__name__, "asfjhbaslkjgfbalskbgag", new_string("hashdjbasjhdjbasd")),
+            new_string("hashdjbasjhdjbasd"));
+    ASSERT_TRUE(hasattr(__global__field__name__field__name__, NAME));
+    ASSERT_TRUE(hasattr(__global__field__name__field__name__, LEN));
+    ASSERT_TRUE(hasattr(__global__field__len__field__name__, NAME));
+    ASSERT_TRUE(hasattr(__global__field__len__field__name__, LEN));
     ASSERT_TRUE(__global__field__name__field__name__->type == Field);
     ASSERT_OBJECT_EQUALS(getattr(__global__field__name__field__name__, NAME),
                          __global__field__name__field__name__);

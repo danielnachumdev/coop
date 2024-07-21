@@ -13,11 +13,11 @@ void _main(void) {
             new_array(1, String)
     );
     dir(function_new_string);
-////    append_attr(
+////    __append_attr(
 ////            function_new_string,
 ////            new_field_explicit(new_string(CALL),)
 ////    );
-//    append_attr(String, function_new_string);
+//    __append_attr(String, function_new_string);
 ////    bool status = getattr(String, "__init__")->data == new_string_explicit;
 ////    println(new_string(status ? "True" : "False"));
 }

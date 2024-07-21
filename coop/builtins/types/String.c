@@ -4,10 +4,10 @@
 
 #include <string.h>
 #include "String.h"
-#include "../append_attr.h"
 #include "../../memory/__init__.h"
 #include "../macros.h"
 #include "__init__.h"
+#include "../functions/attr/setattr.h"
 
 Object *String = NULL;
 
@@ -18,7 +18,7 @@ void __init_string(void) {
 Object *new_string_explicit(const char *s, Object *length_field) {
     Object *res = new_object(String);
     if (res == NULL) return NULL;
-    append_attr(res, length_field);
+    __append_attr(res, length_field);
     if (s != NULL) {
         res->data = acquire(strlen(s) + 1);
         strcpy(res->data, s);

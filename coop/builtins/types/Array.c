@@ -5,12 +5,12 @@
 
 #include "../object.h"
 #include "../../memory/allocator.h"
-#include "../append_attr.h"
 #include "../macros.h"
 #include "Field.h"
 #include "../constants.h"
 #include "../functions/attr/getattr.h"
 #include "../functions/print.h"
+#include "../functions/attr/setattr.h"
 
 Object *Array = NULL;
 
@@ -26,7 +26,7 @@ Object *new_array(unsigned int num_objects, Object *items_type) {
         release(res);
         return NULL;
     }
-    if (not(append_attr(res, len_field))) {
+    if (not(__append_attr(res, len_field))) {
         release(res);
         release(len_field);
         return NULL;
@@ -44,7 +44,7 @@ Object *new_array(unsigned int num_objects, Object *items_type) {
         release(name_field);
         return NULL;
     }
-    if (not(append_attr(res, type_field))) {
+    if (not(__append_attr(res, type_field))) {
         release(res);
         release(len_field);
         release(name_field);

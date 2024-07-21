@@ -6,7 +6,6 @@
 #include <stdarg.h>
 #include "../../object.h"
 #include "../../macros.h"
-#include "../../constants.h"
 
 Object *_getattr(const Object *obj, const char *key, unsigned int num_args, ...) {
     Object *default_return_value = NULL;
@@ -19,7 +18,6 @@ Object *_getattr(const Object *obj, const char *key, unsigned int num_args, ...)
         va_end(valist);
     }
     if (obj == NULL || key == NULL) return default_return_value;
-    if (strcmp(key, TYPE) == 0) return (Object *) obj->type;
     for (unsigned long i = 0; i < obj->num_attributes; ++i) {
         Object *attr = obj->attributes[i];
         if (not(attr->type == Field)) continue;

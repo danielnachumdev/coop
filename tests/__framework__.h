@@ -81,8 +81,40 @@ extern int passed_tests;
         );                               \
     num_tests+=1;                              \
 )
-#define ASSERT_NULL(x) ASSERT_TRUE((x) == NULL)
-#define ASSERT_NOT_NULL(x) ASSERT_TRUE((x) != NULL)
+#define ASSERT_NULL(x) EXPR( \
+    bool res=(x)==NULL;        \
+    passed_tests+=res;                   \
+    if(not(res))                      \
+        println(                         \
+            new_string(__FILE__ " at function"),   \
+            new_string(__func__),              \
+            new_string("at line"),\
+            new_integer(__LINE__),       \
+            new_string("| FAILED\n\tInput     :"),           \
+            new_string(#x),                           \
+            new_string("\n\tEvaluation:"),    \
+            x,  \
+            new_string("== NULL  => FALSE\n\tExpected  : TRUE")\
+        );                               \
+    num_tests+=1;                              \
+)
+#define ASSERT_NOT_NULL(x) EXPR( \
+    bool res=(x)!=NULL;        \
+    passed_tests+=res;                   \
+    if(not(res))                      \
+        println(                         \
+            new_string(__FILE__ " at function"),   \
+            new_string(__func__),              \
+            new_string("at line"),\
+            new_integer(__LINE__),       \
+            new_string("| FAILED\n\tInput     :"),           \
+            new_string(#x),                           \
+            new_string("\n\tEvaluation:"),    \
+            x,  \
+            new_string("!= NULL  => FALSE\n\tExpected  : TRUE")\
+        );                               \
+    num_tests+=1;                              \
+)
 #define TEST_START(segment) printf("============== TEST '%s' STARTED ==============\n", segment)
 #define TEST_END(segment) printf("============== TEST '%s' FINISHED ==============\n", segment)
 

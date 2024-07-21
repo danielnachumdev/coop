@@ -3,10 +3,10 @@
 //
 
 #include "Function.h"
-#include "../append_attr.h"
 #include "__init__.h"
 #include "../constants.h"
 #include "../macros.h"
+#include "../functions/attr/setattr.h"
 
 Object *Function = NULL;
 
@@ -24,9 +24,9 @@ Object *new_function(const char *name, void *(*impl)(), Object *return_type, Obj
     if (res == NULL) return NULL;
 
 //    diagrams/flow2.png
-    append_attr(res, new__name__field(name));
-    append_attr(res, new_field(RETURN_TYPE, return_type));
-    append_attr(res, new_field(ARGS, arguments_array));
+    __append_attr(res, new__name__field(name));
+    __append_attr(res, new_field(RETURN_TYPE, return_type));
+    __append_attr(res, new_field(ARGS, arguments_array));
 
     res->data = impl;
     return res;
