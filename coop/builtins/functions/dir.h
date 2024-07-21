@@ -6,8 +6,9 @@
 #define COOP_DIR_H
 
 #include "../object.h"
+#include "../../backend/linked_list.h"
 
-void _dir(const Object *obj, bool recursive, char *prev_print_prefix, const Object ***visited, int *visited_length_ptr);
+void _dir(const Object *obj, bool recursive, int current_depth, char *prev_print_prefix, LinkedList *ll);
 
-#define dir(obj, recursive) _dir(obj,recursive,NULL,NULL,NULL)
+#define dir(obj, recursive) _dir(obj,recursive,0,NULL,NULL)
 #endif //COOP_DIR_H

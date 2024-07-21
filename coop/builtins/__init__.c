@@ -26,17 +26,19 @@ void flow1(void) {
     __global__name__attr__->key = NAME;
     __global__name__attr__->value = new_object(String);
     __global__name__attr__->value->data = NAME;
-    __global__name__attr__->value->num_attributes = 1;
+    __global__name__attr__->value->num_attributes = 2;
     __global__name__attr__->value->attributes = acquire(sizeof(Attribute));
-    __global__name__attr__->value->attributes[0] = *__global__name__attr__;
-
     __global__len__attr__ = acquire(sizeof(Attribute));
     __global__len__attr__->key = LEN;
     __global__len__attr__->value = new_object(String);
     __global__len__attr__->value->data = LEN;
-    __global__len__attr__->value->num_attributes = 1;
+    __global__len__attr__->value->num_attributes = 2;
     __global__len__attr__->value->attributes = acquire(sizeof(Attribute));
+
+    __global__name__attr__->value->attributes[0] = *__global__name__attr__;
     __global__len__attr__->value->attributes[0] = *__global__name__attr__;
+    __global__name__attr__->value->attributes[1] = *__global__len__attr__;
+    __global__len__attr__->value->attributes[1] = *__global__len__attr__;
 }
 
 void init_builtins(void) {
