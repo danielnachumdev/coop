@@ -42,13 +42,12 @@ void flow1(void) {
 void init_builtins(void) {
     init_types();
     flow1();
-//    setattr(Type, NAME, new__name__field("Type"));
-//    setattr(String, NAME, new__name__field("String"));
-//    setattr(Number, NAME, new__name__field("Number"));
-//    setattr(Integer, NAME, new__name__field("Integer"));
-//    setattr(Function, NAME, new__name__field("Function"));
-//    setattr(Field, NAME, new__name__field("Field"));
-//    setattr(Array, NAME, new__name__field("Array"));
-//    setattr(Boolean, NAME, new__name__field("Boolean"));
-//    setattr(Union, NAME, new__name__field("Union"));
+    setattr(Type, NAME, new_string("Type"));
+    setattr(String, NAME, new_string("String"));
+    setattr(Number, NAME, new_string("Number"));
+    setattr(Integer, NAME, new_string("Integer"));
+    setattr(Function, NAME, new_string("Function"));
+    setattr(Array, NAME, new_string("Array"));
+    setattr(Boolean, NAME, new_string("Boolean"));
+    setattr(Union, NAME, new_string("Union"));
 }

@@ -6,11 +6,5 @@
 #include "coop/__init__.h"
 
 void _main(void) {
-//    dir(__global__name__attr__, true, NULL, NULL,NULL);
-    Object *obj = new_object(Type);
-    obj->num_attributes = 1;
-    obj->attributes = acquire(sizeof(Object *));
-    obj->attributes[0] = new_attr("life",new_integer(1));
-
-    dir(obj, false);
+    dir(__global__len__attr__->value, true);
 }

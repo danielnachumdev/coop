@@ -37,5 +37,5 @@ bool string_equals(const Object *a, const Object *b) {
 
 void string_print(const Object *s) {
     if (s == NULL) return;
-    printf("%s", cast(s->data, char *));
+    printf("\"%s\"", cast(s->data, char *));
 }
