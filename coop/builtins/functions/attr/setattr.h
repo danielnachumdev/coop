@@ -7,8 +7,6 @@
 
 #include "../../object.h"
 
-bool __append_attr(Object *obj, Object *attr);
-
 void setattr(Object *obj, const char *key, Object *value);
 
 #endif //COOP_SETATTR_H

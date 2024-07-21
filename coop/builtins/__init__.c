@@ -4,9 +4,10 @@
 
 #include <string.h>
 #include "__init__.h"
+#include "../memory/allocator.h"
 
-Object *__global__field__name__field__name__ = NULL;
-Object *__global__field__len__field__name__ = NULL;
+Attribute *__global__name__attr__ = NULL;
+Attribute *__global__len__attr__ = NULL;
 
 void init_types(void) {
     //    THE ORDER MATTERS!
@@ -15,41 +16,39 @@ void init_types(void) {
     __init_string();
     __init_integer();
     __init_function();
-    __init_field();
     __init_array();
     __init_boolean();
     __init_union();
 }
 
 void flow1(void) {
-    //  diagrams/flow1.png
-    Object *string__len__ = new_string_explicit(LEN, NULL);
-    Object *string__len__value__len__ = new_integer(strlen(LEN));
-    Object *string__name__ = new_string_explicit(NAME, NULL);
-    Object *string__name__value__len__ = new_integer(strlen(NAME));
+    __global__name__attr__ = acquire(sizeof(Attribute));
+    __global__name__attr__->key = NAME;
+    __global__name__attr__->value = new_object(String);
+    __global__name__attr__->value->data = NAME;
+    __global__name__attr__->value->num_attributes = 1;
+    __global__name__attr__->value->attributes = acquire(sizeof(Attribute));
+    __global__name__attr__->value->attributes[0] = *__global__name__attr__;
 
-    Object *string__name__field__len__ = new_field_explicit(NULL, string__name__value__len__);
-    Object *string__len__field__len__ = new_field_explicit(NULL, string__len__value__len__);
-    __global__field__len__field__name__ = new_field_explicit(NULL, string__len__);
-    __global__field__name__field__name__ = new_field_explicit(NULL, string__name__);
-
-    __append_attr(string__name__field__len__, __global__field__len__field__name__);
-    __append_attr(string__len__field__len__, __global__field__len__field__name__);
-    __append_attr(__global__field__len__field__name__, __global__field__name__field__name__);
-    __append_attr(__global__field__name__field__name__, __global__field__name__field__name__);
-//    end diagrams/flow1.png
+    __global__len__attr__ = acquire(sizeof(Attribute));
+    __global__len__attr__->key = LEN;
+    __global__len__attr__->value = new_object(String);
+    __global__len__attr__->value->data = LEN;
+    __global__len__attr__->value->num_attributes = 1;
+    __global__len__attr__->value->attributes = acquire(sizeof(Attribute));
+    __global__len__attr__->value->attributes[0] = *__global__name__attr__;
 }
 
 void init_builtins(void) {
     init_types();
     flow1();
-    __append_attr(Type, new__name__field("Type"));
-    __append_attr(String, new__name__field("String"));
-    __append_attr(Number, new__name__field("Number"));
-    __append_attr(Integer, new__name__field("Integer"));
-    __append_attr(Function, new__name__field("Function"));
-    __append_attr(Field, new__name__field("Field"));
-    __append_attr(Array, new__name__field("Array"));
-    __append_attr(Boolean, new__name__field("Boolean"));
-    __append_attr(Union, new__name__field("Union"));
+//    setattr(Type, NAME, new__name__field("Type"));
+//    setattr(String, NAME, new__name__field("String"));
+//    setattr(Number, NAME, new__name__field("Number"));
+//    setattr(Integer, NAME, new__name__field("Integer"));
+//    setattr(Function, NAME, new__name__field("Function"));
+//    setattr(Field, NAME, new__name__field("Field"));
+//    setattr(Array, NAME, new__name__field("Array"));
+//    setattr(Boolean, NAME, new__name__field("Boolean"));
+//    setattr(Union, NAME, new__name__field("Union"));
 }

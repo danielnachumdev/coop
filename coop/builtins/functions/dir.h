@@ -7,6 +7,7 @@
 
 #include "../object.h"
 
-void dir(const Object *obj);
+void _dir(const Object *obj, bool recursive, char *prev_print_prefix, const Object ***visited, int *visited_length_ptr);
 
+#define dir(obj, recursive) _dir(obj,recursive,NULL,NULL,NULL)
 #endif //COOP_DIR_H

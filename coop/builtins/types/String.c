@@ -8,6 +8,7 @@
 #include "../macros.h"
 #include "__init__.h"
 #include "../functions/attr/setattr.h"
+#include "../constants.h"
 
 Object *String = NULL;
 
@@ -15,19 +16,15 @@ void __init_string(void) {
     String = new_object(Type);
 }
 
-Object *new_string_explicit(const char *s, Object *length_field) {
+Object *new_string(const char *s) {
     Object *res = new_object(String);
     if (res == NULL) return NULL;
-    __append_attr(res, length_field);
+    setattr(res, LEN, new_integer((long long) strlen(s)));
     if (s != NULL) {
         res->data = acquire(strlen(s) + 1);
         strcpy(res->data, s);
     }
     return res;
-}
-
-Object *new_string(const char *s) {
-    return new_string_explicit(s, new__len__field(strlen(s)));
 }
 
 bool string_equals(const Object *a, const Object *b) {

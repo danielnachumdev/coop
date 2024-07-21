@@ -23,10 +23,7 @@ Object *new_function(const char *name, void *(*impl)(), Object *return_type, Obj
     Object *res = new_object(Function);
     if (res == NULL) return NULL;
 
-//    diagrams/flow2.png
-    __append_attr(res, new__name__field(name));
-    __append_attr(res, new_field(RETURN_TYPE, return_type));
-    __append_attr(res, new_field(ARGS, arguments_array));
+//    TODO
 
     res->data = impl;
     return res;

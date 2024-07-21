@@ -12,8 +12,8 @@
 #include "macros.h"
 #include "object.h"
 
-extern Object *__global__field__name__field__name__;
-extern Object *__global__field__len__field__name__;
+extern Attribute *__global__name__attr__;
+extern Attribute *__global__len__attr__;
 
 void init_builtins(void);
 

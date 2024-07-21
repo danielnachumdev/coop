@@ -31,7 +31,7 @@ Object *new_union(unsigned long int num_types, ...) {
     va_list valist;
     va_start(valist, num_types);
     for (unsigned int i = 0; i < num_types; ++i) {
-        Object *cur = va_arg(valist, Object*);
+        Object *cur = va_arg(valist, Object * );
         if (not(isinstance(cur, Type))) return NULL;
         array_set(res->data, i, cur);
     }
@@ -49,8 +49,8 @@ bool union_equals(const Object *a, const Object *b) {
     if (a == NULL || b == NULL) return false;
     if (not(a->type == b->type)) return false;
     if (not(a->type == Union)) return false;
-    long long length1 = *cast(cast(getattr(a->data, LEN)->data, Object * )->data, long long *);
-    long long length2 = *cast(cast(getattr(b->data, LEN)->data, Object * )->data, long long *);
+    long long length1 = array_length(a->data);
+    long long length2 = array_length(b->data);
     if (not(length1 == length2)) return false;
     for (long long i = 0; i < length1; ++i)
         if (not(union_contains(b, array_get(a->data, i)))) return false;

@@ -6,5 +6,5 @@
 #include "../../__framework__.h"
 
 void test_union(void) {
-    ASSERT_OBJECT_EQUALS(new_union(2, Field, Function), new_union(2, Function, Field));
+    ASSERT_OBJECT_EQUALS(new_union(2, Integer, Function), new_union(2, Function, Integer));
 }

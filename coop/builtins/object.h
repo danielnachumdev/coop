@@ -8,12 +8,18 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+struct Attribute;
 typedef struct Object {
     const struct Object *type;
     unsigned long num_attributes;
-    struct Object **attributes;
+    struct Attribute *attributes;
     void *data;
 } Object;
+
+typedef struct Attribute {
+    const char *key;
+    Object *value;
+} Attribute;
 
 extern Object *Type;
 extern Object *String;
@@ -31,5 +37,7 @@ Object *new_object_impl(Object *type);
 #define new_object(type) new_object_impl(type)
 
 bool object_equals(const Object *a, const Object *b);
+
+Attribute new_attr(const char *key, Object *value);
 
 #endif //LOCAL_PLAYGROUND_OBJECT_H

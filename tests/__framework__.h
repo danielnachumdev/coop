@@ -26,6 +26,7 @@ extern int passed_tests;
             new_string("  => FALSE\n\tExpected  : TRUE\n")\
         );                               \
     num_tests+=1;                              \
+    fflush(stdout);\
 )
 #define ASSERT_OBJECT_NOT_EQUALS(obj1, obj2) EXPR( \
     bool res=not(object_equals(obj1, obj2));        \
@@ -45,7 +46,8 @@ extern int passed_tests;
             obj2,                           \
             new_string("  => FALSE\n\tExpected  : TRUE\n")\
         );                               \
-    num_tests+=1;                              \
+    num_tests+=1;                                  \
+    fflush(stdout);\
 )
 #define ASSERT_TRUE(x) EXPR( \
     bool res=(x);        \
@@ -79,7 +81,8 @@ extern int passed_tests;
             new_boolean(x),   \
             new_string("\n\tExpected  : false")\
         );                               \
-    num_tests+=1;                              \
+    num_tests+=1;             \
+    fflush(stdout);\
 )
 #define ASSERT_NULL(x) EXPR( \
     bool res=(x)==NULL;        \
@@ -96,7 +99,8 @@ extern int passed_tests;
             x,  \
             new_string("== NULL  => FALSE\n\tExpected  : TRUE")\
         );                               \
-    num_tests+=1;                              \
+    num_tests+=1;            \
+    fflush(stdout);\
 )
 #define ASSERT_NOT_NULL(x) EXPR( \
     bool res=(x)!=NULL;        \
@@ -113,7 +117,8 @@ extern int passed_tests;
             x,  \
             new_string("!= NULL  => FALSE\n\tExpected  : TRUE")\
         );                               \
-    num_tests+=1;                              \
+    num_tests+=1;                \
+    fflush(stdout);\
 )
 #define TEST_START(segment) printf("============== TEST '%s' STARTED ==============\n", segment)
 #define TEST_END(segment) printf("============== TEST '%s' FINISHED ==============\n", segment)

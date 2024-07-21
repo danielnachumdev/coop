@@ -19,7 +19,6 @@ void __print_object(Object *obj) {
     else if (obj->type == Boolean) boolean_print(obj);
     else if (obj->type == Integer) integer_print(obj);
     else if (obj->type == String) string_print(obj);
-    else if (obj->type == Field) field_print(obj);
     else if (obj->type == Union) union_print(obj);
 }
 
