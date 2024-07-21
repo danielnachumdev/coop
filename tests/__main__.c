@@ -20,16 +20,16 @@ int passed_tests = 0;
 
 
 int main(void) {
-    test_start("BACKEND");
+    TEST_START("BACKEND");
     test_backend();
-    test_end("BACKEND");
+    TEST_END("BACKEND");
     init_coop();
-    test_start("TESTING");
+    TEST_START("TESTING");
     test_testing();
-    test_end("TESTING");
-    test_start("BUILTINS");
+    TEST_END("TESTING");
+    TEST_START("BUILTINS");
     test_builtins();
-    test_end("BUILTINS");
+    TEST_END("BUILTINS");
     shutdown();
     printf("============= %d / %d tests have passed =============\n", passed_tests, num_tests);
     return 0;

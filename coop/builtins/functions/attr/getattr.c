@@ -3,12 +3,23 @@
 //
 
 #include <string.h>
+#include <stdarg.h>
 #include "../../object.h"
 #include "../../macros.h"
 #include "../../constants.h"
 
-Object *getattr(const Object *obj, const char *name) {
-    if (obj == NULL || name == NULL) return NULL;
+Object *_getattr(const Object *obj, const char *key, unsigned int num_args, ...) {
+    Object *default_return_value = NULL;
+    if (num_args > 0) {
+        if (num_args > 1)
+            printf("\nWarning: getattr(obj,key,default) does not use more that one optional argument\n");
+        va_list valist;
+        va_start(valist, 1);
+        default_return_value = va_arg(valist, Object *);
+        va_end(valist);
+    }
+    if (obj == NULL || key == NULL) return default_return_value;
+    if (strcmp(key, TYPE) == 0) return (Object *) obj->type;
     for (unsigned long i = 0; i < obj->num_attributes; ++i) {
         Object *attr = obj->attributes[i];
         if (not(attr->type == Field)) continue;
@@ -17,10 +28,10 @@ Object *getattr(const Object *obj, const char *name) {
             if (not(sub_attr->type == Field)) continue;
             if (not(cast(sub_attr->data, Object * )->type == String)) continue;
             const char *attr_name = ((char *) ((Object *) sub_attr->data)->data);
-            const void *attr_value = ((void *) ((Object *) attr->data)->data);
-            if (strcmp(attr_name, name) != 0) continue;
+//            const void *attr_value = ((void *) ((Object *) attr->data)->data);
+            if (strcmp(attr_name, key) != 0) continue;
             return attr;
         }
     }
-    return NULL;
+    return default_return_value;
 }

@@ -9,7 +9,7 @@ int main() {
     _LOG("Starting main\n", DEBUG_LOG_SEVERITY);
     _main();
     _DEBUG("Finished main\n");
-    get_allocator()->clear(get_allocator());
+    shutdown();
     return 0;
 }
 

@@ -18,15 +18,26 @@ void test_getattr(void) {
     obj->attributes = builtin_new(sizeof(Object *));
     obj->attributes[0] = length_field;
 
-    assert_objects_equal(getattr(obj, LEN)->data, length);
+    ASSERT_OBJECT_EQUALS(getattr(obj, LEN)->data, length);
 
     builtin_free(length_field->attributes);
     builtin_free(obj->attributes);
 
-    assert_objects_equal(getattr(__global__field__name__field__name__, NAME),
+    ASSERT_NULL(getattr(__global__field__name__field__name__, "asfjhbaslkjgfbalskbgag"));
+    ASSERT_NULL(getattr(__global__field__name__field__name__, "asfjhbaslkjgfbalskbgag", NULL));
+    ASSERT_NOT_NULL(getattr(__global__field__name__field__name__, "asfjhbaslkjgfbalskbgag", new_boolean(true)));
+    ASSERT_OBJECT_EQUALS(getattr(__global__field__name__field__name__, "asfjhbaslkjgfbalskbgag", new_string("hashdjbasjhdjbasd")),
+                         new_string("hashdjbasjhdjbasd"));
+    ASSERT_NOT_NULL(getattr(__global__field__name__field__name__, NAME));
+    ASSERT_NOT_NULL(getattr(__global__field__name__field__name__, LEN));
+    ASSERT_NOT_NULL(getattr(__global__field__len__field__name__, NAME));
+    ASSERT_NOT_NULL(getattr(__global__field__len__field__name__, LEN));
+    ASSERT_TRUE(__global__field__name__field__name__->type == Field);
+    ASSERT_OBJECT_EQUALS(getattr(__global__field__name__field__name__, NAME),
                          __global__field__name__field__name__);
-    assert_objects_equal(getattr(__global__field__len__field__name__, NAME), __global__field__name__field__name__);
-    assert_objects_equal(getattr(__global__field__name__field__name__, NAME),
-                             getattr(__global__field__len__field__name__, NAME));
-
+    ASSERT_OBJECT_EQUALS(getattr(__global__field__len__field__name__, NAME), __global__field__name__field__name__);
+    ASSERT_OBJECT_EQUALS(getattr(__global__field__name__field__name__, NAME),
+                         getattr(__global__field__len__field__name__, NAME));
+    ASSERT_OBJECT_NOT_EQUALS(getattr(__global__field__name__field__name__, LEN),
+                             getattr(__global__field__len__field__name__, LEN));
 }

@@ -6,12 +6,12 @@
 #include "../../coop/__init__.h"
 
 void test_testing(void) {
-    assert_objects_equal(new_boolean(true), new_boolean(true));
-    assert_objects_equal(new_boolean(false), new_boolean(false));
-    assert_objects_not_equal(new_boolean(true), new_boolean(false));
-    assert_not_null(new_boolean(true));
-    assert_null(NULL);
-    assert_objects_equal(new_string("Daniel"), new_string("Daniel"));
-    assert_objects_not_equal(new_string("Danielle"), new_string("Daniel"));
-    assert_objects_not_equal(new_string("Daniel"), new_string("Danielle"));
+    ASSERT_OBJECT_EQUALS(new_boolean(true), new_boolean(true));
+    ASSERT_OBJECT_EQUALS(new_boolean(false), new_boolean(false));
+    ASSERT_OBJECT_NOT_EQUALS(new_boolean(true), new_boolean(false));
+    ASSERT_NOT_NULL(new_boolean(true));
+    ASSERT_NULL(NULL);
+    ASSERT_OBJECT_EQUALS(new_string("Daniel"), new_string("Daniel"));
+    ASSERT_OBJECT_NOT_EQUALS(new_string("Danielle"), new_string("Daniel"));
+    ASSERT_OBJECT_NOT_EQUALS(new_string("Daniel"), new_string("Danielle"));
 }

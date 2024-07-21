@@ -4,7 +4,6 @@
 //
 
 #include "dir.h"
-#include "../types/__init__.h"
 #include "../constants.h"
 #include "attr/getattr.h"
 #include "print.h"
