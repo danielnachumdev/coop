@@ -3,7 +3,7 @@
 //
 
 #include "test_setattr.h"
-#include "../../../../coop/__init__.h"
+#include "../../../__framework__.h"
 void test_setattr(void) {
 
 }

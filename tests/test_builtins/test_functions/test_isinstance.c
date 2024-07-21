@@ -3,7 +3,7 @@
 //
 
 #include "test_isinstance.h"
-#include "../../../coop/__init__.h"
+#include "../../__framework__.h"
 
 void test_isinstance(void) {
     ASSERT_TRUE(isinstance(Integer, Number));

@@ -3,7 +3,7 @@
 //
 
 #include "__init__.h"
-#include "../../coop/__init__.h"
+#include "../__framework__.h"
 
 void test_testing(void) {
     ASSERT_OBJECT_EQUALS(new_boolean(true), new_boolean(true));

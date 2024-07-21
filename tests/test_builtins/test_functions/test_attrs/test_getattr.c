@@ -3,7 +3,7 @@
 //
 
 #include "test_getattr.h"
-#include "../../../../coop/__init__.h"
+#include "../../../__framework__.h"
 
 void test_getattr(void) {
     Object *length = new_integer(6);

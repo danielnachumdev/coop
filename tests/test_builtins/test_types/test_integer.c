@@ -3,7 +3,7 @@
 //
 
 #include "test_integer.h"
-#include "../../../coop/__init__.h"
+#include "../../__framework__.h"
 
 void test_integer(void) {
     ASSERT_TRUE(isinstance(new_integer(1), Integer));

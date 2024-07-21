@@ -4,8 +4,8 @@
 #include <string.h>
 #include <stdio.h>
 #include "__init__.h"
-#include "../coop/testing/__init__.h"
 #include "../coop/__init__.h"
+#include "__framework__.h"
 
 int num_tests = 0;
 int passed_tests = 0;

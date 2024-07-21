@@ -1,12 +1,10 @@
 //
-// Created by danie on 28/05/2024.
+// Created by danie on 21/07/2024.
 //
 
-#ifndef COOP_TEST_H
-#define COOP_TEST_H
-
-#include "../builtins/object.h"
-
+#ifndef COOP___FRAMEWORK___H
+#define COOP___FRAMEWORK___H
+#include "../coop/__init__.h"
 extern int num_tests;
 extern int passed_tests;
 #define ASSERT_OBJECT_EQUALS(obj1, obj2) EXPR( \
@@ -88,5 +86,4 @@ extern int passed_tests;
 #define TEST_START(segment) printf("============== TEST '%s' STARTED ==============\n", segment)
 #define TEST_END(segment) printf("============== TEST '%s' FINISHED ==============\n", segment)
 
-
-#endif //COOP_TEST_H
+#endif //COOP___FRAMEWORK___H

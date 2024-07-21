@@ -3,7 +3,7 @@
 //
 
 #include "test_union.h"
-#include "../../../coop/__init__.h"
+#include "../../__framework__.h"
 
 void test_union(void) {
     ASSERT_OBJECT_EQUALS(new_union(2, Field, Function), new_union(2, Function, Field));

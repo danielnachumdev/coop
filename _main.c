@@ -5,9 +5,6 @@
 #include "_main.h"
 #include "coop/__init__.h"
 
-int num_tests = 0;
-int passed_tests = 0;
-
 void _main(void) {
     Object *function_new_string = new_function(
             "__init__",
