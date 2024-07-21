@@ -29,9 +29,9 @@ Object *new_array(unsigned int num_objects, Object *items_type) {
     res->attributes = acquire(sizeof(Attribute) * 3);
     if (res->attributes == NULL) return NULL;
     res->num_attributes = 3;
-    Attribute len_field = new_attr(LEN, new_integer(num_objects));
-    Attribute name_field = new_attr(NAME, new_string("Array"));
-    Attribute item_type_field = new_attr(TYPE, items_type);
+    Attribute *len_field = new_attr(LEN, new_integer(num_objects));
+    Attribute *name_field = new_attr(NAME, new_string("Array"));
+    Attribute *item_type_field = new_attr(TYPE, items_type);
     res->attributes[0] = len_field;
     res->attributes[1] = name_field;
     res->attributes[2] = item_type_field;

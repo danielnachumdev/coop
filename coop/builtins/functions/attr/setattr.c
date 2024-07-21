@@ -16,7 +16,7 @@ void setattr(Object *obj, const char *key, Object *value) {
         existing->data = value;
         return;
     }
-    Attribute *new_attrs = acquire(sizeof(Attribute *) * (obj->num_attributes + 1));
+    Attribute **new_attrs = acquire(sizeof(Attribute *) * (obj->num_attributes + 1));
     if (new_attrs == NULL) return;
     if (obj->attributes != NULL) {
         memcpy(new_attrs, obj->attributes, sizeof(Attribute) * obj->num_attributes);

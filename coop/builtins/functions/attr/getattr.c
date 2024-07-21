@@ -19,7 +19,7 @@ Object *_getattr(const Object *obj, const char *key, unsigned int num_args, ...)
     }
     if (obj == NULL || key == NULL) return default_return_value;
     for (unsigned long i = 0; i < obj->num_attributes; ++i) {
-        Attribute *attr = obj->attributes + i;
+        Attribute *attr = obj->attributes[i];
         if (strcmp(attr->key, key) == 0) return attr->value;
     }
     return default_return_value;

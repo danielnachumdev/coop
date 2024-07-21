@@ -42,8 +42,15 @@ bool object_equals(const Object *a, const Object *b) {
     return a == b;
 }
 
-Attribute new_attr(const char *key, Object *value) {
+Attribute *new_attr(const char *key, Object *value) {
     char *dup_key = acquire(sizeof(char) * (strlen(key) + 1));
+    if (dup_key == NULL) return NULL;
     strcpy(dup_key, key);
-    return (Attribute) {dup_key, value};
+    Attribute *res = acquire(sizeof(Attribute));
+    if (res == NULL) {
+        release(dup_key);
+        return NULL;
+    }
+    *res = (Attribute) {dup_key, value};
+    return res;
 }

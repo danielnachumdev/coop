@@ -7,4 +7,5 @@
 
 void _main(void) {
     dir(__global__name__attr__->value, true);
+    dir(__global__len__attr__->value, true);
 }

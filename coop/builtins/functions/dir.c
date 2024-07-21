@@ -23,7 +23,11 @@ print_attrs(const Object *obj, bool recursive, int current_depth, char *prev_pri
     if (obj->num_attributes > 0)
         printf(" // length = %lu\n", obj->num_attributes);
     for (int i = 0; i < obj->num_attributes; ++i) {
-        Attribute *attr = obj->attributes + i;
+        Attribute *attr = obj->attributes[i];
+        if (attr == NULL) {
+            printf("%s\t\tNULL: \n", prev_print_prefix);
+            continue;
+        }
         if (recursive) {
             printf("%s\t\t'%s': ", prev_print_prefix, (char *) attr->key);
             _dir(attr->value, true, current_depth + 1, current_print_prefix, ll);
@@ -63,11 +67,10 @@ void _dir(const Object *obj, bool recursive, int current_depth, char *prev_print
 
     printf("Object ( // %p\n", obj);
     printf("%s\ttype: %s // %p\n", prev_print_prefix, (char *) getattr(obj->type, NAME)->data, obj->type);
-    print_attrs(obj, recursive, current_length, prev_print_prefix, current_print_prefix, ll);
     printf("%s\tdata: ", prev_print_prefix);
     println(obj);
+    print_attrs(obj, recursive, current_length, prev_print_prefix, current_print_prefix, ll);
     printf("%s)\n", prev_print_prefix);
-
     if (current_depth == 0)
         linkedlist_free(&ll);
 }

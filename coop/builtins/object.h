@@ -12,7 +12,7 @@ struct Attribute;
 typedef struct Object {
     const struct Object *type;
     unsigned long num_attributes;
-    struct Attribute *attributes;
+    struct Attribute **attributes;
     void *data;
 } Object;
 
@@ -38,6 +38,6 @@ Object *new_object_impl(Object *type);
 
 bool object_equals(const Object *a, const Object *b);
 
-Attribute new_attr(const char *key, Object *value);
+Attribute *new_attr(const char *key, Object *value);
 
 #endif //LOCAL_PLAYGROUND_OBJECT_H
