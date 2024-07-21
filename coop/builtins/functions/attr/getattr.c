@@ -16,8 +16,10 @@ Object *getattr(const Object *obj, const char *name) {
             Object *sub_attr = attr->attributes[j];
             if (not(sub_attr->type == Field)) continue;
             if (not(cast(sub_attr->data, Object * )->type == String)) continue;
-            if (strcmp(cast(cast(sub_attr->data, Object * )->data, char *), NAME) != 0) continue;
-
+            const char *attr_name = ((char *) ((Object *) sub_attr->data)->data);
+            const void *attr_value = ((void *) ((Object *) attr->data)->data);
+            if (strcmp(attr_name, name) != 0) continue;
+            return attr;
         }
     }
     return NULL;

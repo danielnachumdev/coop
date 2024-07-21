@@ -6,10 +6,10 @@
 #include "../../../coop/__init__.h"
 
 void test_integer(void) {
-    ASSERT_TRUE(isinstance(new_integer(1), Integer));
-    ASSERT_TRUE(isinstance(new_integer(1), Number));
-    ASSERT_TRUE(isinstance(new_integer(1), Type));
-    ASSERT_OBJECT_EQUALS(new_integer(1), new_integer(1));
-    ASSERT_OBJECT_EQUALS(new_integer(0), new_integer(0));
-    ASSERT_OBJECT_EQUALS(new_integer(-1), new_integer(-1));
+    assert_true(isinstance(new_integer(1), Integer));
+    assert_true(isinstance(new_integer(1), Number));
+    assert_true(isinstance(new_integer(1), Type));
+    assert_objects_equal(new_integer(1), new_integer(1));
+    assert_objects_equal(new_integer(0), new_integer(0));
+    assert_objects_equal(new_integer(-1), new_integer(-1));
 }

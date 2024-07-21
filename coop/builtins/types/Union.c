@@ -9,6 +9,8 @@
 #include "../macros.h"
 #include "../functions/attr/getattr.h"
 #include "../constants.h"
+#include "../functions/print.h"
+#include "../../memory/allocator.h"
 
 Object *Union = NULL;
 
@@ -21,6 +23,10 @@ Object *new_union(unsigned long int num_types, ...) {
     if (res == NULL) return NULL;
 
     res->data = new_array(num_types, Type);
+    if (res->data == NULL) {
+        release(res);
+        return NULL;
+    }
 
     va_list valist;
     va_start(valist, num_types);
@@ -43,10 +49,18 @@ bool union_equals(const Object *a, const Object *b) {
     if (a == NULL || b == NULL) return false;
     if (not(a->type == b->type)) return false;
     if (not(a->type == Union)) return false;
-    if (not(object_equals(getattr(a->data, LEN), getattr(b->data, LEN)))) return false;
-    for (unsigned int i = 0; i < *cast(getattr(a->data, LEN)->data, unsigned int *); ++i)
+    long long length1 = *cast(cast(getattr(a->data, LEN)->data, Object * )->data, long long *);
+    long long length2 = *cast(cast(getattr(b->data, LEN)->data, Object * )->data, long long *);
+    if (not(length1 == length2)) return false;
+    for (long long i = 0; i < length1; ++i)
         if (not(union_contains(b, array_get(a->data, i)))) return false;
-    for (unsigned int i = 0; i < *cast(getattr(b->data, LEN)->data, unsigned int *); ++i)
+    for (long long i = 0; i < length2; ++i)
         if (not(union_contains(a, array_get(b->data, i)))) return false;
     return true;
+}
+
+void union_print(const Object *obj) {
+    printf("Union(");
+    __print_object(obj->data);
+    printf(")");
 }

@@ -10,10 +10,8 @@
 #include "test_stack.h"
 
 void test_backend(void) {
-    printf("============================ TESTING BACKEND ==========================\n");
     test_node();
     test_linkedlist();
     test_hashset();
     test_stack();
-    printf("========================== FINISHED TESTING BACKEND ============================\n");
 }

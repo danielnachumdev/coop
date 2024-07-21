@@ -15,4 +15,6 @@ bool union_contains(const Object *uni, const Object *T);
 
 bool union_equals(const Object *a, const Object *b);
 
+void union_print(const Object *obj);
+
 #endif //COOP_UNION_H

@@ -8,5 +8,5 @@
 
 void test_functions(void) {
     test_attrs();
-//    test_isinstance();
+    test_isinstance();
 }

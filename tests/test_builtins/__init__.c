@@ -8,8 +8,6 @@
 #include "test_functions/__init__.h"
 
 void test_builtins(void) {
-    printf("============================TESTING BUILTINS==========================\n");
-//    test_types();
     test_functions();
-    printf("==========================FINISHED TESTING BUILTINS============================\n");
+    test_types();
 }

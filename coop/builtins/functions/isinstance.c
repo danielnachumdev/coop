@@ -25,7 +25,7 @@ bool isinstance(const Object *obj, const Object *T) {
             if (cur_type == T) return true;
             cur_type = cur_type->type;
         }
-        if (cur_type == Type) return true;
+        if (cur_type == Type && T == Type) return true;
     }
     return false;
 }

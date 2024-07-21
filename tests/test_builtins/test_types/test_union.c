@@ -6,5 +6,5 @@
 #include "../../../coop/__init__.h"
 
 void test_union(void) {
-    ASSERT_OBJECT_EQUALS(new_union(2, Field, Function), new_union(2, Function, Field));
+    assert_objects_equal(new_union(2, Field, Function), new_union(2, Function, Field));
 }

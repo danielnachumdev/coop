@@ -31,3 +31,7 @@ bool boolean_equals(const Object *a, const Object *b) {
     if (not(a->type == Boolean)) return false;
     return *cast(a->data, bool *) == *cast(b->data, bool *);
 }
+
+void boolean_print(const Object *obj) {
+    printf("%s", *cast(obj->data, bool *) ? "true" : "false");
+}

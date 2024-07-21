@@ -32,3 +32,8 @@ bool integer_equals(const Object *a, const Object *b) {
     if (not(a->type == Integer)) return false;
     return *cast(a->data, long long int *) == *cast(b->data, long long int *);
 }
+
+void integer_print(const Object *o) {
+    if (o == NULL) return;
+    printf("%lu", *cast(o->data, unsigned long *));
+}

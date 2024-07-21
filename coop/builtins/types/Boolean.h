@@ -14,4 +14,6 @@ Object *new_boolean(bool v);
 
 bool boolean_equals(const Object *a, const Object *b);
 
+void boolean_print(const Object *obj);
+
 #endif //COOP_BOOLEAN_H

@@ -15,4 +15,6 @@ Object *new_string(const char *s);
 
 bool string_equals(const Object *a, const Object *b);
 
+void string_print(const Object *s);
+
 #endif //LOCAL_PLAYGROUND_STRING_H

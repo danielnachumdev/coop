@@ -14,6 +14,10 @@ void __init_function(void) {
     Function = new_object(Type);
 }
 
+bool function_equals(const Object *a, const Object *b) {
+    return false;
+}
+
 Object *new_function(const char *name, void *(*impl)(), Object *return_type, Object *arguments_array) {
     if (name == NULL || impl == NULL) return NULL;
     Object *res = new_object(Function);

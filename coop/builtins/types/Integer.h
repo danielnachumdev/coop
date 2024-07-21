@@ -13,4 +13,6 @@ Object *new_integer(long long int n);
 
 bool integer_equals(const Object *a, const Object *b);
 
+void integer_print(const Object *o);
+
 #endif //LOCAL_PLAYGROUND_INTEGER_H

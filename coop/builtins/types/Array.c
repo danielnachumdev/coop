@@ -10,6 +10,7 @@
 #include "Field.h"
 #include "../constants.h"
 #include "../functions/attr/getattr.h"
+#include "../functions/print.h"
 
 Object *Array = NULL;
 
@@ -63,25 +64,27 @@ Object *new_array(unsigned int num_objects, Object *items_type) {
 
 Object *array_get(const Object *arr, unsigned int index) {
     if (arr == NULL) return NULL;
-    Object *length = getattr(arr, LEN);
-    if (*cast(length, unsigned int *) <= index) return NULL;
-    return cast(arr->data, Object * *)[index];
+    Object *length_attr = getattr(arr, LEN);
+    long long length = *cast(cast(length_attr->data, Object * )->data, long long *);
+    if (length <= index) return NULL;
+    return cast(arr->data, Object **)[index];
 }
 
 void array_set(Object *arr, unsigned int index, Object *value) {
     if (arr == NULL) return;
-    Object *length = getattr(arr, LEN);
-    if (*cast(length, unsigned int *) <= index) return;
-    cast(arr->data, Object * *)[index] = value;
+    Object *length_attr = getattr(arr, LEN);
+    long long length = *cast(cast(length_attr->data, Object * )->data, long long *);
+    if (length <= index) return;
+    cast(arr->data, Object **)[index] = value;
 }
 
 bool array_contains(const Object *arr, const Object *obj) {
     if (arr == NULL || obj == NULL) return false;
-    Object *len = getattr(arr, LEN);
-    for (unsigned int i = 0; i < *cast(len->data, unsigned int *);
-         ++i) {
+    Object *length_attr = getattr(arr, LEN);
+    long long length = *cast(cast(length_attr->data, Object * )->data, long long *);
+    for (long long i = 0; i < length; ++i)
         if (object_equals(obj, array_get(arr, i))) return true;
-    }
+
     return false;
 }
 
@@ -95,4 +98,16 @@ bool array_equals(const Object *a, const Object *b) {
     for (unsigned int i = 0; i < *cast(len->data, unsigned int *); ++i)
         if (not(object_equals(array_get(a, i), array_get(b, i)))) return false;
     return true;
+}
+
+void array_print(const Object *obj) {
+    printf("[");
+    Object *array_length = getattr(obj, LEN);
+    if (array_length != NULL)
+        __print_object(array_get(obj, 0));
+    for (unsigned int i = 1; i < *cast(array_length->data, unsigned int *); ++i) {
+        printf(", ");
+        __print_object(array_get(obj, i));
+    }
+    printf("]");
 }

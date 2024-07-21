@@ -20,4 +20,6 @@ bool array_contains(const Object *arr, const Object *obj);
 
 bool array_equals(const Object *a, const Object *b);
 
+void array_print(const Object *obj);
+
 #endif //COOP_ARRAY_H

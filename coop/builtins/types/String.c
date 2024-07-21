@@ -37,3 +37,8 @@ bool string_equals(const Object *a, const Object *b) {
     if (not(a->type == String)) return false;
     return strcmp(a->data, b->data) == 0;
 }
+
+void string_print(const Object *s) {
+    if (s == NULL) return;
+    printf("%s", cast(s->data, char *));
+}

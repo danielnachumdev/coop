@@ -7,7 +7,7 @@
 
 #include "../object.h"
 #include "../macros.h"
-
+void __print_object(Object *obj);
 void print_imp(const char *sep, const char *end, unsigned int n, ...);
 
 #define print(...) print_imp(" ","", NUM_POINTERS(__VA_ARGS__), ## __VA_ARGS__)

@@ -34,8 +34,11 @@ bool object_equals(const Object *a, const Object *b) {
     if (a->type == Type) return object_equals(getattr(a, NAME), getattr(b, NAME));
     if (a->type == String) return string_equals(a, b);
     if (a->type == Integer) return integer_equals(a, b);
+    if (a->type == Number) return number_equals(a, b);
     if (a->type == Boolean) return boolean_equals(a, b);
     if (a->type == Array) return array_equals(a, b);
     if (a->type == Union) return union_equals(a, b);
+    if (a->type == Field) return field_equals(a, b);
+    if (a->type == Function) return function_equals(a, b);
     return a == b;
 }
