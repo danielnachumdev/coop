@@ -5,11 +5,14 @@
 #include "Integer.h"
 #include "../../memory/allocator.h"
 #include "../macros.h"
+#include "String.h"
+#include "../functions/attr/setattr.h"
 
 Object *Integer = NULL;
 
 void __init_integer(void) {
     Integer = new_object(Number);
+    setattr(Integer, "__name__", new_string("Integer"));
 }
 
 

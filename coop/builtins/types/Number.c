@@ -8,12 +8,15 @@
 #include "../../memory/allocator.h"
 #include "../functions/print.h"
 #include "../functions/attr/getattr.h"
-#include "../constants.h"
+#include "../functions/attr/setattr.h"
+#include "String.h"
+
 
 Object *Number = NULL;
 
 void __init_number(void) {
     Number = new_object(Type);
+    setattr(Number, "__name__", new_string("Number"));
 }
 
 bool number_equals(const Object *a, const Object *b) {
@@ -22,6 +25,6 @@ bool number_equals(const Object *a, const Object *b) {
 
 void number_print(const Object *obj) {
     printf("Type(Subtype=Number, name=");
-    __print_object(getattr(obj, NAME));
+    __print_object(getattr(obj, "__name__"));
     printf(")");
 }

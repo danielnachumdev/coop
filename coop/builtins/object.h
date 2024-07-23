@@ -32,9 +32,9 @@ extern Object *Boolean;
 extern Object *Union;
 
 
-Object *new_object_impl(Object *type);
+Object *_new_object_impl(Object *type);
 
-#define new_object(type) new_object_impl(type)
+#define new_object(type) _new_object_impl(type)
 
 bool object_equals(const Object *a, const Object *b);
 

@@ -9,7 +9,7 @@
 #include "../memory/allocator.h"
 #include "macros.h"
 #include "functions/attr/getattr.h"
-#include "constants.h"
+
 #include "types/__init__.h"
 
 
@@ -20,7 +20,7 @@
     .data=NULL                       \
 }
 
-Object *new_object_impl(Object *type) {
+Object *_new_object_impl(Object *type) {
     Object *res = acquire(sizeof(Object));
     if (res != NULL)
         *res = init_object(type);
@@ -31,7 +31,7 @@ bool object_equals(const Object *a, const Object *b) {
     if (a == NULL && b == NULL) return true;
     if (a == NULL || b == NULL) return false;
     if (not(a->type == b->type)) return false;
-    if (a->type == Type) return object_equals(getattr(a, NAME), getattr(b, NAME));
+    if (a->type == Type) return object_equals(getattr(a, "__name__"), getattr(b, "__name__"));
     if (a->type == String) return string_equals(a, b);
     if (a->type == Integer) return integer_equals(a, b);
     if (a->type == Number) return number_equals(a, b);

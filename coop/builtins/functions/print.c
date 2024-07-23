@@ -6,7 +6,7 @@
 #include <stdarg.h>
 #include "../object.h"
 #include "attr/getattr.h"
-#include "../constants.h"
+
 #include "../types/Array.h"
 #include "../macros.h"
 #include "../types/__init__.h"
@@ -23,7 +23,7 @@ void __print_object(Object *obj) {
 }
 
 
-void print_imp(const char *sep, const char *end, unsigned int n, ...) {
+void _print_imp(const char *sep, const char *end, unsigned int n, ...) {
     if (sep == NULL || end == NULL) return;
     va_list valist;
     va_start(valist, n);

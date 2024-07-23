@@ -20,7 +20,10 @@ Object *_getattr(const Object *obj, const char *key, unsigned int num_args, ...)
     }
     if (obj == NULL || key == NULL) return default_return_value;
     unsigned int index = 0;
-    if (not(get_attr_index(obj, key, &index)))
-        return default_return_value;
+    if (not(get_attr_index(obj, key, &index))) {
+        if (obj->type == Type)
+            return default_return_value;
+        return _getattr(obj->type, key, 1, default_return_value);
+    }
     return obj->attributes[index]->value;
 }

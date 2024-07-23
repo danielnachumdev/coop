@@ -13,6 +13,6 @@
 #include "iscallable.h"
 #include "call.h"
 #include "len.h"
-
+#include "init.h"
 
 #endif //COOP_BUILTINS_FUNCTIONS___INIT___H

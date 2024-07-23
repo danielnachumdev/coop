@@ -5,7 +5,6 @@
 
 #include <string.h>
 #include "dir.h"
-#include "../constants.h"
 #include "attr/getattr.h"
 #include "print.h"
 #include "../../memory/__init__.h"
@@ -66,7 +65,7 @@ void _dir(const Object *obj, bool recursive, int current_depth, char *prev_print
     }
 
     printf("Object ( // %p\n", obj);
-    printf("%s\ttype: %s // %p\n", prev_print_prefix, (char *) getattr(obj->type, NAME)->data, obj->type);
+    printf("%s\ttype: %s // %p\n", prev_print_prefix, (char *) getattr(obj->type, "__name__")->data, obj->type);
     printf("%s\tdata: ", prev_print_prefix);
     println(obj);
     print_attrs(obj, recursive, current_length, prev_print_prefix, current_print_prefix, ll);

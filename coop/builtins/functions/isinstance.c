@@ -4,7 +4,7 @@
 
 #include "isinstance.h"
 #include "../__init__.h"
-#include "../constants.h"
+
 
 bool isinstance(const Object *obj, const Object *T) {
     if (obj == NULL || T == NULL) return false;

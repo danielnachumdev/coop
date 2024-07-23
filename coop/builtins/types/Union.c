@@ -8,15 +8,16 @@
 #include "../functions/isinstance.h"
 #include "../macros.h"
 #include "../functions/attr/getattr.h"
-#include "../constants.h"
 #include "../functions/print.h"
 #include "../../memory/allocator.h"
 #include "../functions/len.h"
+#include "../functions/attr/setattr.h"
 
 Object *Union = NULL;
 
 void __init_union(void) {
     Union = new_object(Type);
+    setattr(Union, "__name__", new_string("Union"));
 }
 
 Object *new_union(unsigned long int num_types, ...) {

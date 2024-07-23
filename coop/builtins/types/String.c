@@ -8,18 +8,20 @@
 #include "../macros.h"
 #include "__init__.h"
 #include "../functions/attr/setattr.h"
-#include "../constants.h"
+
 
 Object *String = NULL;
 
 void __init_string(void) {
     String = new_object(Type);
+    setattr(String, "__init__", new_function("__init__", cast(new_string, void*(*)()), NULL, NULL));
+    setattr(String, "__name__", new_string("String"));
 }
 
 Object *new_string(const char *s) {
     Object *res = new_object(String);
     if (res == NULL) return NULL;
-    setattr(res, LEN, new_integer((long long) strlen(s)));
+    setattr(res, "__len__", new_integer((long long) strlen(s)));
     if (s != NULL) {
         res->data = acquire(strlen(s) + 1);
         strcpy(res->data, s);

@@ -7,6 +7,8 @@
 
 #include "../object.h"
 
-long long len(const Object *obj);
+typedef long long IndexT;
+
+IndexT len(const Object *obj);
 
 #endif //COOP_LEN_H

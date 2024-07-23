@@ -7,14 +7,15 @@
 
 
 #include "../object.h"
+#include "../functions/len.h"
 
 void __init_array(void);
 
-Object *new_array(unsigned int num_objects, Object *items_type);
+Object *new_array(IndexT num_objects, Object *items_type);
 
-Object *array_get(const Object *arr, unsigned int index);
+Object *array_get(const Object *arr, IndexT index);
 
-void array_set(Object *arr, unsigned int index, Object *value);
+void array_set(Object *arr, IndexT index, Object *value);
 
 bool array_contains(const Object *arr, const Object *obj);
 

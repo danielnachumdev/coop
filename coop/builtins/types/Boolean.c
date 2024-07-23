@@ -5,11 +5,14 @@
 #include "Boolean.h"
 #include "../../memory/allocator.h"
 #include "../macros.h"
+#include "String.h"
+#include "../functions/attr/setattr.h"
 
 Object *Boolean = NULL;
 
 void __init_boolean(void) {
     Boolean = new_object(Type);
+    setattr(Boolean, "__name__", new_string("Boolean"));
 }
 
 Object *new_boolean(bool v) {

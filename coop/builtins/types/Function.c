@@ -4,7 +4,7 @@
 
 #include "Function.h"
 #include "__init__.h"
-#include "../constants.h"
+
 #include "../macros.h"
 #include "../functions/attr/setattr.h"
 
@@ -12,6 +12,7 @@ Object *Function = NULL;
 
 void __init_function(void) {
     Function = new_object(Type);
+    setattr(Function, "__name__", new_string("Function"));
 }
 
 bool function_equals(const Object *a, const Object *b) {
@@ -22,9 +23,9 @@ Object *new_function(const char *name, void *(*impl)(), Object *return_type, Obj
     if (name == NULL || impl == NULL) return NULL;
     Object *res = new_object(Function);
     if (res == NULL) return NULL;
-
-//    TODO
-
+    setattr(res, "__name__", new_string(name));
+    setattr(res, "__return__", return_type);
+    setattr(res, "__args__", arguments_array);
     res->data = impl;
     return res;
 }
