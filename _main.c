@@ -3,9 +3,8 @@
 //
 
 #include "_main.h"
-#include "coop/__init__.h"
+#include "coop/builtins/macros.h"
 
 void _main(void) {
-    dir(__global__name__attr__->value, true);
-    dir(__global__len__attr__->value, true);
+    PASS;
 }

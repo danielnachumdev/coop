@@ -31,17 +31,21 @@ Object *new_union(unsigned long int num_types, ...) {
     va_list valist;
     va_start(valist, num_types);
     for (unsigned int i = 0; i < num_types; ++i) {
-        Object *cur = va_arg(valist, Object * );
-        if (not(isinstance(cur, Type))) return NULL;
+        Object *cur = va_arg(valist, Object *);
+        if (not(isinstance(cur, Type))) {
+            release(res->data);
+            release(res);
+            return NULL;
+        }
         array_set(res->data, i, cur);
     }
     va_end(valist);
     return res;
 }
 
-bool union_contains(const Object *uni, const Object *T) {
-    if (uni == NULL || T == NULL) return false;
-    return array_contains(uni->data, T);
+bool union_contains(const Object *union_, const Object *T) {
+    if (union_ == NULL || T == NULL) return false;
+    return array_contains(union_->data, T);
 }
 
 bool union_equals(const Object *a, const Object *b) {

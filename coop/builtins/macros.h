@@ -67,5 +67,4 @@
 
 #define VA_ARGS_LIST_1_ARG(name, type) va_list valist; va_start(valist, 1); /*the last named argument warning is safe to ignore in this context*/ type name = va_arg(valist, type*); va_end(valist)
 
-
 #endif //LOCAL_PLAYGROUND_MACROS_H

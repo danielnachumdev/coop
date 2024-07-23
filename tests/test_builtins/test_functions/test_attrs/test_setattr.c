@@ -11,7 +11,7 @@ void test_setattr(void) {
     Object *v1 = new_integer(1);
     Object *v2 = new_integer(2);
     setattr(obj, key, v1);
-    ASSERT_OBJECT_EQUALS(getattr(obj, key)->data, v1);
+    ASSERT_OBJECT_EQUALS(getattr(obj, key), v1);
     setattr(obj, key, v2);
-    ASSERT_OBJECT_EQUALS(getattr(obj, key)->data, v2);
+    ASSERT_OBJECT_EQUALS(getattr(obj, key), v2);
 }

@@ -7,13 +7,14 @@
 #include "getattr.h"
 #include "../../types/__init__.h"
 #include "../../../memory/__init__.h"
+#include "__attr_utils.h"
 
 
 void setattr(Object *obj, const char *key, Object *value) {
     if (obj == NULL || key == NULL || value == NULL)return;
-    Object *existing = getattr(obj, key, NULL);
-    if (existing != NULL) {
-        existing->data = value;
+    unsigned int index = 0;
+    if (get_attr_index(obj, key, &index)) {
+        obj->attributes[index]->value = value;
         return;
     }
     Attribute **new_attrs = acquire(sizeof(Attribute *) * (obj->num_attributes + 1));

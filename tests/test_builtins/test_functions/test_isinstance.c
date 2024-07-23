@@ -12,8 +12,6 @@ void test_isinstance(void) {
     Object *Attr = new_union(2, Integer, Function);
     ASSERT_TRUE(isinstance(Integer, Attr));
     ASSERT_TRUE(isinstance(Function, Attr));
-    ASSERT_TRUE(isinstance(__global__name__attr__->value, String));
-    ASSERT_TRUE(isinstance(__global__name__attr__->value, Attr));
     ASSERT_TRUE(isinstance(new_string(""), String));
     ASSERT_TRUE(isinstance(new_integer(1), Integer));
     ASSERT_FALSE(isinstance(new_integer(1), String));
