@@ -5,6 +5,6 @@
 #include "hasattr.h"
 #include "getattr.h"
 
-bool hasattr(Object *obj, const char *name) {
+bool hasattr(const Object *obj, const char *name) {
     return getattr(obj, name, NULL) != NULL;
 }

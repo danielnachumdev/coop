@@ -12,15 +12,12 @@
 #include "../functions/attr/setattr.h"
 #include "Integer.h"
 #include "String.h"
+#include "../functions/len.h"
 
 Object *Array = NULL;
 
 void __init_array(void) {
     Array = new_object(Type);
-}
-
-long long array_length(const Object *arr) {
-    return *cast(getattr(arr, LEN)->data, long long *);
 }
 
 Object *new_array(unsigned int num_objects, Object *items_type) {
@@ -41,21 +38,21 @@ Object *new_array(unsigned int num_objects, Object *items_type) {
 
 Object *array_get(const Object *arr, unsigned int index) {
     if (arr == NULL) return NULL;
-    long long length = array_length(arr);
+    long long length = len(arr);
     if (length <= index) return NULL;
     return cast(arr->data, Object **)[index];
 }
 
 void array_set(Object *arr, unsigned int index, Object *value) {
     if (arr == NULL) return;
-    long long length = array_length(arr);
+    long long length = len(arr);
     if (length <= index) return;
     cast(arr->data, Object **)[index] = value;
 }
 
 bool array_contains(const Object *arr, const Object *obj) {
     if (arr == NULL || obj == NULL) return false;
-    long long length = array_length(arr);
+    long long length = len(arr);
     for (long long i = 0; i < length; ++i)
         if (object_equals(obj, array_get(arr, i))) return true;
 
@@ -79,7 +76,7 @@ void array_print(const Object *arr) {
     Object *length_attr = getattr(arr, LEN);
     if (length_attr != NULL)
         __print_object(array_get(arr, 0));
-    long long length = array_length(arr);
+    long long length = len(arr);
     for (unsigned int i = 1; i < length; ++i) {
         printf(", ");
         __print_object(array_get(arr, i));

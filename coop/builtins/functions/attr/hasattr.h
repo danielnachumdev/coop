@@ -7,5 +7,6 @@
 
 #include "../../object.h"
 
-bool hasattr(Object *obj, const char *name);
+bool hasattr(const Object *obj, const char *name);
+
 #endif //COOP_HASATTR_H
