@@ -62,7 +62,7 @@ extern int passed_tests;
             new_string(#x),                           \
             new_string("\n\tEvaluation:"),    \
             new_boolean(x),   \
-            new_string("\n\tExpected  : true")\
+            new_string("\n\tExpected  : true\n")\
         );                               \
     num_tests+=1;                              \
 )
@@ -79,7 +79,7 @@ extern int passed_tests;
             new_string(#x),                           \
             new_string("\n\tEvaluation:"),    \
             new_boolean(x),   \
-            new_string("\n\tExpected  : false")\
+            new_string("\n\tExpected  : false\n")\
         );                               \
     num_tests+=1;             \
     fflush(stdout);\
@@ -97,7 +97,7 @@ extern int passed_tests;
             new_string(#x),                           \
             new_string("\n\tEvaluation:"),    \
             x,  \
-            new_string("== NULL  => FALSE\n\tExpected  : TRUE")\
+            new_string("== NULL  => FALSE\n\tExpected  : TRUE\n")\
         );                               \
     num_tests+=1;            \
     fflush(stdout);\
@@ -115,7 +115,7 @@ extern int passed_tests;
             new_string(#x),                           \
             new_string("\n\tEvaluation:"),    \
             x,  \
-            new_string("!= NULL  => FALSE\n\tExpected  : TRUE")\
+            new_string("!= NULL  => FALSE\n\tExpected  : TRUE\n")\
         );                               \
     num_tests+=1;                \
     fflush(stdout);\

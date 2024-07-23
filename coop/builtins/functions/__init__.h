@@ -10,5 +10,9 @@
 #include "throw.h"
 #include "dir.h"
 #include "isinstance.h"
+#include "iscallable.h"
+#include "call.h"
+#include "len.h"
+
 
 #endif //COOP_BUILTINS_FUNCTIONS___INIT___H

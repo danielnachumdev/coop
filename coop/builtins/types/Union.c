@@ -11,6 +11,7 @@
 #include "../constants.h"
 #include "../functions/print.h"
 #include "../../memory/allocator.h"
+#include "../functions/len.h"
 
 Object *Union = NULL;
 
@@ -53,8 +54,8 @@ bool union_equals(const Object *a, const Object *b) {
     if (a == NULL || b == NULL) return false;
     if (not(a->type == b->type)) return false;
     if (not(a->type == Union)) return false;
-    long long length1 = array_length(a->data);
-    long long length2 = array_length(b->data);
+    long long length1 = len(a->data);
+    long long length2 = len(b->data);
     if (not(length1 == length2)) return false;
     for (long long i = 0; i < length1; ++i)
         if (not(union_contains(b, array_get(a->data, i)))) return false;
