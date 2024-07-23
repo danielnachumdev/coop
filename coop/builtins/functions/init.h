@@ -9,5 +9,5 @@
 
 Object *__init_helper(const Object *T, Object *instance);
 
-#define init(type, ...) __init_helper(type,cast(getattr(type, "__init__")->data, Object*(*)())(__VA_ARGS__))
+#define init(type, prototype, ...) __init_helper(type, cast(getattr(type, "__init__")->data, prototype)(__VA_ARGS__))
 #endif //COOP_INIT_H

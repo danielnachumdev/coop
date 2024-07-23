@@ -30,8 +30,9 @@ void _main(void) {
 
     Object *person_methods = new_array(1, Function);
     array_set(person_methods, 0, new_function("__init__", cast(new_person, void*(*)()), NULL, NULL));
-    Object *Person = init(Class, "Person", person_methods);
 
-    Object *danielPerson = init(Person, "daniel");
+    Object *Person = init(Class, Object *(*)(const char *, Object*), "Person", person_methods);
+
+    Object *danielPerson = init(Person, Object *(*)(const char *), "daniel");
     dir(danielPerson);
 }
