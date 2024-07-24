@@ -5,7 +5,8 @@
 #include "_main.h"
 #include "coop/__init__.h"
 
-Object *class_init(const char *name, Object *methods) {
+
+DEF(Class, __init__, Object*, {
     Object *res = new_object(Type);
     setattr(res, "__name__", new_string(name));
     if (methods != NULL) {
@@ -16,23 +17,22 @@ Object *class_init(const char *name, Object *methods) {
         }
     }
     return res;
-}
+}, const char *name, Object *methods)
 
-Object *new_person(const char *name) {
+DEF(Person, __init__, Object*, {
     Object *res = new_object(Type);
     setattr(res, "name", new_string(name));
     return res;
-}
+}, const char *name)
 
 void _main(void) {
     Object *Class = new_object(Type);
-    setattr(Class, "__init__", new_function("__init__", cast(class_init, void*(*)()), NULL, NULL));
+    setfunc(Class, __init__);
 
     Object *person_methods = new_array(1, Function);
-    array_set(person_methods, 0, new_function("__init__", cast(new_person, void*(*)()), NULL, NULL));
+    array_set(person_methods, 0, new_function("__init__", cast(__init__Person, void*(*)()), NULL, NULL));
 
-    Object *Person = init(Class, Object *(*)(const char *, Object*), "Person", person_methods);
-
-    Object *danielPerson = init(Person, Object *(*)(const char *), "daniel");
+    Object *Person = getfunc(Class, __init__)("Person", person_methods);
+    Object *danielPerson = getfunc(Person, __init__)("daniel");
     dir(danielPerson);
 }

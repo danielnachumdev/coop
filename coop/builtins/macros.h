@@ -13,7 +13,7 @@
 #define PASTE3(a, b, c) a ## b ## c
 #define STRINGIFY(x) #x
 #define STR(x) STRINGIFY(x)
-#define NUM_ARGS(T, filler_item_of_type_T, ...) (sizeof((T[]){filler_item_of_type_T, ##__VA_ARGS__})/sizeof(T)-1)
+#define NUM_ARGS(T, filler, ...) (sizeof((T[]){filler, ##__VA_ARGS__})/sizeof(T)-1)
 #define NUM_POINTERS(...) NUM_ARGS(const void *, NULL, __VA_ARGS__)
 #define __IMPL_IS_EMPTY_RES(x) (x == 0)
 #define IS_EMPTY(x) PASTE2(__IMPL_, IS_EMPTY_RES(NUM_POINTERS(x)))
@@ -66,5 +66,20 @@
 
 
 #define VA_ARGS_LIST_1_ARG(name, type) va_list valist; va_start(valist, 1); /*the last named argument warning is safe to ignore in this context*/ type name = va_arg(valist, type*); va_end(valist)
+
+
+#define _PROTOTYPE_NAME(name) name##_prototype
+#define DEF(owner, name, ret, body, ...) \
+typedef ret(*_PROTOTYPE_NAME(name##owner))(__VA_ARGS__);\
+ret name##owner(__VA_ARGS__) {\
+    body\
+}
+#define DEFGLOBAL(name, ret, body, ...) DEF(,name, ret, body,##__VA_ARGS__)
+
+#define _setfuncfull(obj, name, impl) setattr(obj, name, new_function(name, cast(impl##obj, void*(*)()), NULL, NULL))
+#define setfunc(obj, impl) _setfuncfull(obj, STR(impl), impl)
+#define getfunc(obj, impl) cast(getattr(obj, STR(impl))->data,_PROTOTYPE_NAME(impl##obj))
+#define getglobalfunc(impl) getfunc(, impl)
+
 
 #endif //LOCAL_PLAYGROUND_MACROS_H
