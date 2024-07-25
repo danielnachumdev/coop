@@ -49,7 +49,7 @@ bool chashset_contains(const CHashSet *h, const void *p);
 
 bool chashset_add_impl(CHashSet *h, void *p, ...);
 
-#define hashset_add(h, p, ...) hashset_add_impl(h,p,## __VA_ARGS__,false)
+#define chashset_add(h, p, ...) chashset_add_impl(h,p,## __VA_ARGS__,false)
 
 void chashset_remove(CHashSet *h, void *p);
 

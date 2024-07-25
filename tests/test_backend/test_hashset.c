@@ -50,8 +50,8 @@ void test_hashset_insertion_and_removal() {
     int data2 = 123;
 
     // Insertion
-    assert(hashset_add(map, &data1));
-    assert(hashset_add(map, &data2));
+    assert(chashset_add(map, &data1));
+    assert(chashset_add(map, &data2));
 
     // Check contains
     assert(chashset_contains(map, &data1));
@@ -79,8 +79,8 @@ void test_hashset_contains() {
     int data2 = 123;
 
     // Insertion
-    assert(hashset_add(map, &data1));
-    assert(hashset_add(map, &data2));
+    assert(chashset_add(map, &data1));
+    assert(chashset_add(map, &data2));
 
     // Check contains
     assert(chashset_contains(map, &data1));
@@ -103,10 +103,10 @@ void test_hashset_insert_duplicate() {
     int data1 = 42;
 
     // Insertion
-    assert(hashset_add(map, &data1));
+    assert(chashset_add(map, &data1));
 
     // Attempt to insert duplicate
-    assert(hashset_add(map, &data1));
+    assert(chashset_add(map, &data1));
 
     chashset_free(&map);
     assert(map == NULL);
@@ -121,7 +121,7 @@ void test_hashset_remove_nonexistent() {
     int data1 = 42;
 
     // Insertion
-    assert(hashset_add(map, &data1));
+    assert(chashset_add(map, &data1));
 
     // Attempt to remove non-existent element
     int data2 = 123;
@@ -142,7 +142,7 @@ void test_hashset_resize_up() {
 
     // Insert elements to trigger resize up
     for (int i = 0; i < 4; ++i) {
-        assert(hashset_add(map, &i));
+        assert(chashset_add(map, &i));
     }
 
     // Verify length increased after resize up
@@ -159,7 +159,7 @@ void test_hashset_resize_down() {
 
     // Insert elements to trigger resize down
     for (int i = 0; i < 15; ++i) {
-        assert(hashset_add(map, &i));
+        assert(chashset_add(map, &i));
     }
 
     for (int i = 0; i < 10; ++i) {
@@ -177,7 +177,7 @@ void my_test(void) {
                                integer_hash);
     assert(h != NULL);
     for (int i = 0; i < 1000; ++i) {
-        hashset_add(h, &i);
+        chashset_add(h, &i);
     }
 
     chashset_free(&h);
