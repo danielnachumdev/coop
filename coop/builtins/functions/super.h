@@ -10,4 +10,6 @@
 
 Object *super(const Object *self, IntegerT steps);
 
+#define superfunc(obj,steps,name,prototype) cast(getattr(super(obj,steps),name)->data,prototype)
+
 #endif //COOP_SUPER_H

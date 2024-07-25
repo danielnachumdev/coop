@@ -33,23 +33,27 @@ DEF(Animal, speak, void, {
 DEF(Dog, speak, void, {
     if (self == NULL) return;
     cast(getattr(super(self, 1), "speak")->data, Animalspeak_prototype)(self);
-    printf("*woof woof*\n");
+    print(getattr(self, "animal_name"), explicitgetfunc(String, __init__)("the"), getattr(self, "animal_type"));
+    printf(": *woof woof*\n");
 }, const Object *self)
 
 DEF(Dog, __init__, Object *, {
     if (name == NULL) return NULL;
-    Object *res = cast(getattr(super(Dog, 1), "__init__")->data, Animal__init___prototype)("Dog");
+    Object *res = superfunc(Dog, 1, "__init__", Animal__init___prototype)("Dog");
     setattr(res, "animal_name", explicitgetfunc(String, __init__)(name));
     return res;
 }, const char *name)
 
-void main(void) {
+int main(void) {
     Animal = explicitgetfunc(Type, __init__)("Animal", 0l, (Object[]) {}, 0l, (Attribute[]) {});
     explicitsetfunc(Animal, __init__);
     explicitsetfunc(Animal, speak);
     Dog = explicitgetfunc(Animal, __init__)("Dog");
-    explicitgetfunc(Dog, speak)(Dog);
+    explicitsetfunc(Dog, __init__);
+    Object *rocky = explicitgetfunc(Dog, __init__)("Rocky");
+    explicitgetfunc(Dog, speak)(rocky);
     explicitsetfunc(Dog, speak);
-    explicitgetfunc(Dog, speak)(Dog);
+    explicitgetfunc(Dog, speak)(rocky);
+    return 0;
 }
 
