@@ -24,7 +24,7 @@ DECLARE(Array, __eq__, bool, const Object *a, const Object *b);
 
 DECLARE(Array, __print__, void, const Object *arr);
 
-DECLARE(Array, __len__, IndexT, const Object *self);
+DECLARE(Array, __len__, Object *, const Object *self);
 
 
 #endif //COOP_ARRAY_H

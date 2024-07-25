@@ -6,9 +6,21 @@
 #define COOP_UNION_H
 
 #include "../object.h"
+#include "../macros.h"
 #include "../functions/len.h"
+#include "Integer.h"
 
 void __init_union(void);
+
+DECLARE(Union, __init__, Object*, IntegerT num_types, ...);
+
+DECLARE(Union, __contains__, bool, const Object *union_, const Object *T);
+
+DECLARE(Union, __eq__, bool, const Object *a, const Object *b);
+
+DECLARE(Union, __print__, void, const Object *obj);
+
+DECLARE(Union, __len__, Object*, const Object *obj);
 
 Object *new_union(IndexT num_types, ...);
 

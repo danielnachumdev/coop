@@ -89,7 +89,8 @@ DEF(Array, __print__, void, {
     printf("]");
 }, const Object *arr)
 
-DEF(Array, __len__, IndexT, {
+DEF(Array, __len__, Object *, {
     if (self == NULL) return 0;
-    return *cast(getattr(self, "__len__")->data, IndexT * );
+    IntegerT res = *cast(getattr(self, "__len__")->data, IntegerT * );
+    return explicitgetfunc(Integer, __init__)(res);
 }, const Object *self)

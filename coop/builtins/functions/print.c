@@ -19,7 +19,7 @@ void __print_object(Object *obj) {
     else if (obj->type == Boolean)  explicitgetfunc(Boolean, __print__)(obj);
     else if (obj->type == Integer) explicitgetfunc(Integer, __print__)(obj);
     else if (obj->type == String) explicitgetfunc(String, __print__)(obj);
-    else if (obj->type == Union) union_print(obj);
+    else if (obj->type == Union) explicitgetfunc(Union, __print__)(obj);
     else if (obj->type == Function) explicitgetfunc(Function, __print__)(obj);
     else printf("Object %p", obj);
 }

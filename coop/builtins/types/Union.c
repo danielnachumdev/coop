@@ -14,10 +14,15 @@ Object *Union = NULL;
 void __init_union(void) {
     Union = new_object(Type);
     setattr(Union, "__name__", __new_string("Union"));
+    explicitsetfunc(Union, __init__);
+    explicitsetfunc(Union, __contains__);
+    explicitsetfunc(Union, __eq__);
+    explicitsetfunc(Union, __print__);
+    explicitsetfunc(Union, __len__);
 }
 
-Object *new_union(IndexT num_types, ...) {
-    Object * res = new_object(Union);
+DEF(Union, __init__, Object*, {
+    Object *res = new_object(Union);
     if (res == NULL) return NULL;
 
     res->data = explicitgetfunc(Array, __init__)(num_types, Type);
@@ -29,7 +34,7 @@ Object *new_union(IndexT num_types, ...) {
     va_list valist;
     va_start(valist, num_types);
     for (unsigned int i = 0; i < num_types; ++i) {
-        Object * cur = va_arg(valist, Object *);
+        Object *cur = va_arg(valist, Object * );
         if (not(isinstance(cur, Type))) {
             release(res->data);
             release(res);
@@ -39,14 +44,14 @@ Object *new_union(IndexT num_types, ...) {
     }
     va_end(valist);
     return res;
-}
+}, IntegerT num_types, ...);
 
-bool union_contains(const Object *union_, const Object *T) {
+DEF(Union, __contains__, bool, {
     if (union_ == NULL || T == NULL) return false;
     return explicitgetfunc(Array, __contains__)(union_->data, T);
-}
+}, const Object *union_, const Object *T);
 
-bool union_equals(const Object *a, const Object *b) {
+DEF(Union, __eq__, bool, {
     if (a == NULL && b == NULL) return true;
     if (a == NULL || b == NULL) return false;
     if (not(a->type == b->type)) return false;
@@ -54,15 +59,22 @@ bool union_equals(const Object *a, const Object *b) {
     long long length1 = len(a->data);
     long long length2 = len(b->data);
     if (not(length1 == length2)) return false;
+    Union__contains___prototype inu = Union__contains__;
+    Array__getitem___prototype at = Array__getitem__;
     for (long long i = 0; i < length1; ++i)
-        if (not(union_contains(b, explicitgetfunc(Array, __getitem__)(a->data, i)))) return false;
+        if (not(inu(b, at(a->data, i)))) return false;
     for (long long i = 0; i < length2; ++i)
-        if (not(union_contains(a, explicitgetfunc(Array, __getitem__)(b->data, i)))) return false;
+        if (not(inu(a, at(b->data, i)))) return false;
     return true;
-}
+}, const Object *a, const Object *b);
 
-void union_print(const Object *obj) {
+DEF(Union, __print__, void, {
     printf("Union(");
     __print_object(obj->data);
     printf(")");
-}
+}, const Object *obj);
+
+DEF(Union, __len__, Object*, {
+    if (obj == NULL) return explicitgetfunc(Integer, __init__)(0L);
+    return explicitgetfunc(Array, __len__)(obj->data);
+}, const Object *obj);
