@@ -10,12 +10,12 @@
 
 void __init_function(void);
 
-bool function_equals(const Object *a, const Object *b);
-
 Object *__new_function(const char *name, void *(*impl)(), Object *return_type, Object *arguments_array);
 
-Object *new_runnable(const char *name, void (*impl)(void));
+DECLARE(Function, __init__, Object *, const char *name, void *(*impl)(), Object *return_type, Object *arguments_array);
 
 DECLARE(Function, __print__, void, const Object*);
+
+DECLARE(Function, __eq__, bool, const Object *, const Object *);
 
 #endif //LOCAL_PLAYGROUND_FUNCTION_H

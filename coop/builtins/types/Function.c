@@ -15,7 +15,8 @@ Object *__new_function(const char *name, void *(*impl)(), Object *return_type, O
     Object *res = new_object(Function);
     if (res == NULL) return NULL;
 
-    setattr(res, "__name__", __new_string(name)); //should be explicitly __new_string because of __init_string that uses __new_function
+    setattr(res, "__name__",
+            __new_string(name)); //should be explicitly __new_string because of __init_string that uses __new_function
     setattr(res, "__return__", return_type);
     setattr(res, "__args__", arguments_array);
 
@@ -27,20 +28,23 @@ void __init_function(void) {
     Function = new_object(Type);
     setattr(Function, "__name__", __new_string("Function"));
     explicitsetfunc(Function, __print__);
-}
-
-bool function_equals(const Object *a, const Object *b) {
-    return false;
-}
-
-
-
-Object *new_runnable(const char *name, void (*impl)(void)) {
-    return __new_function(name, cast(impl, void *(*)()), NULL, NULL);
+    explicitsetfunc(Function, __eq__);
+    explicitsetfunc(Function, __init__);
 }
 
 DEF(Function, __print__, void, {
     if (self == NULL) return;
     if (self->type != Function) return;
-    printf("Function");
+    printf("Function @ %p", self->data);
 }, const Object *self);
+
+DEF(Function, __init__, Object *, {
+    return __new_function(name, impl, return_type, arguments_array);
+}, const char *name, void *(*impl)(), Object *return_type, Object *arguments_array);
+
+DEF(Function, __eq__, bool, {
+    if (self == NULL && other == NULL) return true;
+    if (not(self != NULL && other != NULL)) return false;
+    if (not(self->type == other->type)) return false;
+    if (not(self->type == Function)) return false;
+}, const Object *self, const Object *other)

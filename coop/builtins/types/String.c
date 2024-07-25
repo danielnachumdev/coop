@@ -15,7 +15,7 @@ Object *String = NULL;
 Object *__new_string(const char *s) {
     Object *res = new_object(String);
     if (res == NULL) return NULL;
-    setattr(res, "__len__", new_integer((long long) strlen(s)));
+    setattr(res, "__len__", new_integer((IndexT) strlen(s)));
     if (s != NULL) {
         res->data = acquire(strlen(s) + 1);
         strcpy(res->data, s);

@@ -47,6 +47,7 @@ void main(void) {
 ////    dir(danielPerson);
 //    explicitgetfunc(Person, say_hello)();
     dir(String);
+    dir(Function);
 //    linkedlist_print(__global_allocator__->structure);
 }
 
