@@ -13,6 +13,7 @@ void init_builtins(void) {
     setattr(Type, "__name__", __new_string("Type"));
     setattr(Integer, "__name__", __new_string("Integer"));
     __init_function();
+    __init_type_functions();
     __init_string_functions();
     __init_integer_functions();
 //    __init_number_functions();

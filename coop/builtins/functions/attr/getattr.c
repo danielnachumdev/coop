@@ -9,6 +9,7 @@
 #include "__attr_utils.h"
 
 Object *_getattr(const Object *obj, const char *key, unsigned int num_args, ...) {
+    if (obj == NULL) return NULL;
     Object *default_return_value = NULL;
     if (num_args > 0) {
         if (num_args > 1)

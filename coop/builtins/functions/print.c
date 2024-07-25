@@ -13,7 +13,7 @@
 
 void __print_object(Object *obj) {
     if (obj == NULL) printf("NULL");
-    else if (obj->type == Type) type_print(obj);
+    else if (obj->type == Type) explicitgetfunc(Type, __print__)(obj);
     else if (obj->type == Array) explicitgetfunc(Array, __print__)(obj);
     else if (obj->type == Number) number_print(obj);
     else if (obj->type == Boolean)  explicitgetfunc(Boolean, __print__)(obj);
