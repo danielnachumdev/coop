@@ -9,9 +9,11 @@ void init_builtins(void) {
     __init_type();
     __init_string();
     setattr(Type, "__name__", __new_string("Type"));
+    __init_function();
+    __init_string_functions();
+
     __init_number();
     __init_integer();
-    __init_function();
     __init_array();
     __init_boolean();
     __init_union();

@@ -10,28 +10,33 @@
 
 Object *Function = NULL;
 
+Object *__new_function(const char *name, void *(*impl)(), Object *return_type, Object *arguments_array) {
+    if (name == NULL || impl == NULL) return NULL;
+    Object *res = new_object(Function);
+    if (res == NULL) return NULL;
+
+    setattr(res, "__name__", __new_string(name)); //should be explicitly __new_string because of __init_string that uses __new_function
+    setattr(res, "__return__", return_type);
+    setattr(res, "__args__", arguments_array);
+
+    res->data = impl;
+    return res;
+}
+
 void __init_function(void) {
     Function = new_object(Type);
     setattr(Function, "__name__", __new_string("Function"));
+    explicitsetfunc(Function, __print__);
 }
 
 bool function_equals(const Object *a, const Object *b) {
     return false;
 }
 
-Object *new_function(const char *name, void *(*impl)(), Object *return_type, Object *arguments_array) {
-    if (name == NULL || impl == NULL) return NULL;
-    Object *res = new_object(Function);
-    if (res == NULL) return NULL;
-    setattr(res, "__name__", __new_string(name));
-    setattr(res, "__return__", return_type);
-    setattr(res, "__args__", arguments_array);
-    res->data = impl;
-    return res;
-}
+
 
 Object *new_runnable(const char *name, void (*impl)(void)) {
-    return new_function(name, cast(impl, void *(*)()), NULL, NULL);
+    return __new_function(name, cast(impl, void *(*)()), NULL, NULL);
 }
 
 DEF(Function, __print__, void, {

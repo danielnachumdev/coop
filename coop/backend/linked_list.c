@@ -19,10 +19,12 @@ LinkedList *linkedlist_new(DuplicatorT(data_dup), ConsumerT(data_free), Comparer
 void linkedlist_free(LinkedList **ll) {
     if (ll == NULL || *ll == NULL) return;
     Node *cur = (*ll)->head;
+    int index = 0;
     while (cur != NULL) {
         Node *next = cur->next;
         node_free(&cur);
         cur = next;
+        index += 1;
     }
     builtin_free(*ll);
     *ll = NULL;
@@ -40,6 +42,8 @@ bool linkedlist_contains(const LinkedList *ll, const void *p) {
     return false;
 }
 
+unsigned int allocation_index = 0;
+
 Node *linkedlist_add(LinkedList *ll, void *p) {
     if (ll == NULL || p == NULL) return NULL;
     Node *res = node_new(p, ll->data_dup, ll->data_free);
@@ -53,6 +57,7 @@ Node *linkedlist_add(LinkedList *ll, void *p) {
         res->next = prev_head;
         prev_head->prev = res;
     }
+    allocation_index += 1;
     return res;
 }
 

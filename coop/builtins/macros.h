@@ -7,6 +7,7 @@
 
 #include <malloc.h>
 #include <stdio.h>
+#include "functions/attr/__init__.h"
 
 #define EXPAND(x) x
 #define PASTE2(a, b) a ## b
@@ -79,7 +80,7 @@ ret funcname(owner,name)(__VA_ARGS__) {\
 }
 #define DEFGLOBAL(name, ret, body, ...) DEF(,name, ret, body,##__VA_ARGS__)
 
-#define setfunc(obj, name, impl) setattr(obj, name, new_function(name, cast(funcname(obj, impl), void*(*)()), NULL, NULL))
+#define setfunc(obj, name, impl) setattr(obj, name, __new_function(name, cast(funcname(obj, impl), void*(*)()), NULL, NULL))
 #define explicitsetfunc(obj, impl) setfunc(obj, STR(impl), impl)
 #define explicitgetfunc(obj, impl) cast(getattr(obj, STR(impl))->data, _PROTOTYPE_NAME(obj, impl))
 #define getglobalfunc(impl) explicitgetfunc(, impl)

@@ -43,22 +43,11 @@ DEF(String, __print__, void, {
 
 void __init_string(void) {
     String = new_object(Type);
-    explicitsetfunc(String, __init__);
-    explicitsetfunc(String, __eq__);
-    explicitsetfunc(String, __print__);
     setattr(String, "__name__", __new_string("String"));
 }
 
-
-bool string_equals(const Object *a, const Object *b) {
-    if (a == NULL && b == NULL) return true;
-    if (a == NULL || b == NULL) return false;
-    if (not(a->type == b->type)) return false;
-    if (not(a->type == String)) return false;
-    return strcmp(a->data, b->data) == 0;
-}
-
-void string_print(const Object *s) {
-    if (s == NULL) return;
-    printf("%s", cast(s->data, char *));
+void __init_string_functions(void) {
+    explicitsetfunc(String, __init__);
+    explicitsetfunc(String, __print__);
+    explicitsetfunc(String, __eq__);
 }
