@@ -10,6 +10,7 @@
 #include "../functions/attr/setattr.h"
 #include "Integer.h"
 #include "String.h"
+#include "Function.h"
 
 Object *Array = NULL;
 
@@ -17,6 +18,12 @@ void __init_array(void) {
     Array = new_object(Type);
     setattr(Array, "__name__", __new_string("Array"));
     explicitsetfunc(Array, __init__);
+    explicitsetfunc(Array, __getitem__);
+    explicitsetfunc(Array, __setitem__);
+    explicitsetfunc(Array, __contains__);
+    explicitsetfunc(Array, __eq__);
+    explicitsetfunc(Array, __print__);
+    explicitsetfunc(Array, __len__);
 }
 
 DEF(Array, __init__, Object *, {
