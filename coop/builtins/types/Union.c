@@ -20,11 +20,11 @@ void __init_union(void) {
     setattr(Union, "__name__", __new_string("Union"));
 }
 
-Object *new_union(unsigned long int num_types, ...) {
-    Object *res = new_object(Union);
+Object *new_union(IndexT num_types, ...) {
+    Object * res = new_object(Union);
     if (res == NULL) return NULL;
 
-    res->data = new_array(num_types, Type);
+    res->data = explicitgetfunc(Array, __init__)(num_types, Type);
     if (res->data == NULL) {
         release(res);
         return NULL;
@@ -33,13 +33,13 @@ Object *new_union(unsigned long int num_types, ...) {
     va_list valist;
     va_start(valist, num_types);
     for (unsigned int i = 0; i < num_types; ++i) {
-        Object *cur = va_arg(valist, Object *);
+        Object * cur = va_arg(valist, Object *);
         if (not(isinstance(cur, Type))) {
             release(res->data);
             release(res);
             return NULL;
         }
-        array_set(res->data, i, cur);
+        explicitgetfunc(Array, __setitem__)(res->data, i, cur);
     }
     va_end(valist);
     return res;
@@ -47,7 +47,7 @@ Object *new_union(unsigned long int num_types, ...) {
 
 bool union_contains(const Object *union_, const Object *T) {
     if (union_ == NULL || T == NULL) return false;
-    return array_contains(union_->data, T);
+    return explicitgetfunc(Array, __contains__)(union_->data, T);
 }
 
 bool union_equals(const Object *a, const Object *b) {
@@ -59,9 +59,9 @@ bool union_equals(const Object *a, const Object *b) {
     long long length2 = len(b->data);
     if (not(length1 == length2)) return false;
     for (long long i = 0; i < length1; ++i)
-        if (not(union_contains(b, array_get(a->data, i)))) return false;
+        if (not(union_contains(b, explicitgetfunc(Array, __getitem__)(a->data, i)))) return false;
     for (long long i = 0; i < length2; ++i)
-        if (not(union_contains(a, array_get(b->data, i)))) return false;
+        if (not(union_contains(a, explicitgetfunc(Array, __getitem__)(b->data, i)))) return false;
     return true;
 }
 

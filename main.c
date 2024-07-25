@@ -46,7 +46,7 @@ void main(void) {
 //    Object *danielPerson = explicitgetfunc(Person, __init__)("daniel");
 ////    dir(danielPerson);
 //    explicitgetfunc(Person, say_hello)();
-    dir(String);
+    dir(Array);
     dir(Function);
 //    linkedlist_print(__global_allocator__->structure);
 }

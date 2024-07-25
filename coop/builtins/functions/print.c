@@ -14,7 +14,7 @@
 void __print_object(Object *obj) {
     if (obj == NULL) printf("NULL");
     else if (obj->type == Type) type_print(obj);
-    else if (obj->type == Array) array_print(obj);
+    else if (obj->type == Array) explicitgetfunc(Array, __print__)(obj);
     else if (obj->type == Number) number_print(obj);
     else if (obj->type == Boolean) boolean_print(obj);
     else if (obj->type == Integer) integer_print(obj);

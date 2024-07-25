@@ -8,21 +8,23 @@
 
 #include "../object.h"
 #include "../functions/len.h"
+#include "../macros.h"
 
 void __init_array(void);
 
-Object *new_array(IndexT num_objects, Object *items_type);
+DECLARE(Array, __init__, Object *, IndexT num_objects, Object *items_type);
 
-Object *array_get(const Object *arr, IndexT index);
+DECLARE(Array, __getitem__, Object *, const Object *arr, IndexT index);
 
-void array_set(Object *arr, IndexT index, Object *value);
+DECLARE(Array, __setitem__, void, Object *arr, IndexT index, Object *value);
 
-bool array_contains(const Object *arr, const Object *obj);
+DECLARE(Array, __contains__, bool, const Object *arr, const Object *obj);
 
-bool array_equals(const Object *a, const Object *b);
+DECLARE(Array, __eq__, bool, const Object *a, const Object *b);
 
-void array_print(const Object *arr);
+DECLARE(Array, __print__, void, const Object *arr);
 
-long long array_length(const Object *arr);
+DECLARE(Array, __len__, IndexT, const Object *self);
+
 
 #endif //COOP_ARRAY_H

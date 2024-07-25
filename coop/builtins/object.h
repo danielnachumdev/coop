@@ -26,7 +26,6 @@ extern Object *String;
 extern Object *Number;
 extern Object *Integer;
 extern Object *Function;
-extern Object *Field;
 extern Object *Array;
 extern Object *Boolean;
 extern Object *Union;

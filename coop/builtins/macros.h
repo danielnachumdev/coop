@@ -8,6 +8,7 @@
 #include <malloc.h>
 #include <stdio.h>
 #include "functions/attr/__init__.h"
+#include "types/Function.h"
 
 #define EXPAND(x) x
 #define PASTE2(a, b) a ## b

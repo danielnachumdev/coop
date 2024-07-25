@@ -32,19 +32,29 @@ void __init_function(void) {
     explicitsetfunc(Function, __init__);
 }
 
+
+DEF(Function, __init__, Object *, {
+    return __new_function(name, impl, return_type, arguments_array);
+}, const char *name, void *(*impl)(), Object *return_type, Object *arguments_array);
+
 DEF(Function, __print__, void, {
     if (self == NULL) return;
     if (self->type != Function) return;
     printf("Function @ %p", self->data);
 }, const Object *self);
 
-DEF(Function, __init__, Object *, {
-    return __new_function(name, impl, return_type, arguments_array);
-}, const char *name, void *(*impl)(), Object *return_type, Object *arguments_array);
-
 DEF(Function, __eq__, bool, {
     if (self == NULL && other == NULL) return true;
     if (not(self != NULL && other != NULL)) return false;
     if (not(self->type == other->type)) return false;
     if (not(self->type == Function)) return false;
+    Object *ret1 = getattr(self, "__return__");
+    Object *ret2 = getattr(other, "__return__");
+    if ((ret1 == NULL ^ ret2 == NULL) == true) return false;
+    if (not(cast(getattr(ret1, "__eq__")->data, bool(*)(const Object*, const Object*))(ret1, ret2))) return false;
+    Object *args1 = getattr(self, "__args__");
+    Object *args2 = getattr(other, "__args__");
+    if ((args1 == NULL ^ args2 == NULL) == true) return false;
+    if (not(cast(getattr(args1, "__eq__")->data, bool(*)(const Object*, const Object*))(args1, args2))) return false;
+    return true;
 }, const Object *self, const Object *other)

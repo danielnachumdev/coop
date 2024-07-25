@@ -16,9 +16,10 @@ Object *Array = NULL;
 void __init_array(void) {
     Array = new_object(Type);
     setattr(Array, "__name__", __new_string("Array"));
+    explicitsetfunc(Array, __init__);
 }
 
-Object *new_array(IndexT num_objects, Object *items_type) {
+DEF(Array, __init__, Object *, {
     Object *res = new_object(Array);
     if (res == NULL) return NULL;
     res->attributes = acquire(sizeof(Attribute) * 3);
@@ -32,53 +33,59 @@ Object *new_array(IndexT num_objects, Object *items_type) {
     res->attributes[2] = item_type_field;
     res->data = acquire(sizeof(Object *) * num_objects);
     return res;
-}
+}, IndexT num_objects, Object *items_type)
 
-Object *array_get(const Object *arr, IndexT index) {
+DEF(Array, __getitem__, Object *, {
     if (arr == NULL) return NULL;
     IndexT length = len(arr);
     if (length <= index) return NULL;
-    return cast(arr->data, Object **)[index];
-}
+    return cast(arr->data, Object * *)[index];
+}, const Object *arr, IndexT index)
 
-void array_set(Object *arr, IndexT index, Object *value) {
+DEF(Array, __setitem__, void, {
     if (arr == NULL) return;
     IndexT length = len(arr);
     if (length <= index) return;
-    cast(arr->data, Object **)[index] = value;
-}
+    cast(arr->data, Object * *)[index] = value;
+}, Object *arr, IndexT index, Object *value)
 
-bool array_contains(const Object *arr, const Object *obj) {
+DEF(Array, __contains__, bool, {
     if (arr == NULL || obj == NULL) return false;
     IndexT length = len(arr);
     for (IndexT i = 0; i < length; ++i)
-        if (object_equals(obj, array_get(arr, i))) return true;
+        if (object_equals(obj, explicitgetfunc(Array, __getitem__)(arr, i))) return true;
 
     return false;
-}
+}, const Object *arr, const Object *obj)
 
-bool array_equals(const Object *a, const Object *b) {
+DEF(Array, __eq__, bool, {
     if (a == NULL && b == NULL) return true;
     if (a == NULL || b == NULL) return false;
     if (not(a->type == b->type)) return false;
     if (not(a->type == Array)) return false;
     Object *len;
     if (not(object_equals(len = getattr(a, "__len__"), getattr(b, "__len__")))) return false;
-    for (IndexT i = 0; i < *cast(len->data, IndexT *); ++i)
-        if (not(object_equals(array_get(a, i), array_get(b, i)))) return false;
+    for (IndexT i = 0; i < *cast(len->data, IndexT * ); ++i)
+        if (not(object_equals(explicitgetfunc(Array, __getitem__)(a, i),
+                              explicitgetfunc(Array, __getitem__)(b, i))))
+            return false;
     return true;
-}
+}, const Object *a, const Object *b)
 
-void array_print(const Object *arr) {
+DEF(Array, __print__, void, {
     printf("[");
     Object *length_attr = getattr(arr, "__len__");
     if (length_attr != NULL)
-        __print_object(array_get(arr, 0));
+        __print_object(explicitgetfunc(Array, __getitem__)(arr, 0));
     IndexT length = len(arr);
     for (IndexT i = 1; i < length; ++i) {
         printf(", ");
-        __print_object(array_get(arr, i));
+        __print_object(explicitgetfunc(Array, __getitem__)(arr, i));
     }
     printf("]");
-}
+}, const Object *arr)
 
+DEF(Array, __len__, IndexT, {
+    if (self == NULL) return 0;
+    return *cast(getattr(self, "__len__")->data, IndexT * );
+}, const Object *self)

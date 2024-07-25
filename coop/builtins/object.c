@@ -36,7 +36,7 @@ bool object_equals(const Object *a, const Object *b) {
     if (a->type == Integer) return integer_equals(a, b);
     if (a->type == Number) return number_equals(a, b);
     if (a->type == Boolean) return boolean_equals(a, b);
-    if (a->type == Array) return array_equals(a, b);
+    if (a->type == Array) return explicitgetfunc(Array, __eq__)(a, b);
     if (a->type == Union) return union_equals(a, b);
     if (a->type == Function) return explicitgetfunc(Function, __eq__)(a, b);
     return a == b;
