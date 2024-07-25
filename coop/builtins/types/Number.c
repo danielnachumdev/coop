@@ -16,7 +16,7 @@ Object *Number = NULL;
 
 void __init_number(void) {
     Number = new_object(Type);
-    setattr(Number, "__name__", new_string("Number"));
+    setattr(Number, "__name__", __new_string("Number"));
 }
 
 bool number_equals(const Object *a, const Object *b) {

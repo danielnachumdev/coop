@@ -22,7 +22,7 @@ void *int_duplicator(const void *item) {
 // Test function for stack operations
 void test_stack(void) {
     printf("Testing Stack - STARTED\n");
-    // Create a new stack
+    // Create self new stack
     Stack *stack = stack_new(int_duplicator, free);
 
     // Test empty stack

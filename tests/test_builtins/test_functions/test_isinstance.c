@@ -12,7 +12,7 @@ void test_isinstance(void) {
     Object *union_ = new_union(2, Integer, Function);
     ASSERT_TRUE(isinstance(Integer, union_));
     ASSERT_TRUE(isinstance(Function, union_));
-    ASSERT_TRUE(isinstance(new_string(""), String));
+    ASSERT_TRUE(isinstance(__new_string(""), String));
     ASSERT_TRUE(isinstance(new_integer(1), Integer));
     ASSERT_FALSE(isinstance(new_integer(1), String));
 }

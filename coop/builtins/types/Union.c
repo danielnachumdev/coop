@@ -17,7 +17,7 @@ Object *Union = NULL;
 
 void __init_union(void) {
     Union = new_object(Type);
-    setattr(Union, "__name__", new_string("Union"));
+    setattr(Union, "__name__", __new_string("Union"));
 }
 
 Object *new_union(unsigned long int num_types, ...) {

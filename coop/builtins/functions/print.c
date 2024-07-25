@@ -18,8 +18,10 @@ void __print_object(Object *obj) {
     else if (obj->type == Number) number_print(obj);
     else if (obj->type == Boolean) boolean_print(obj);
     else if (obj->type == Integer) integer_print(obj);
-    else if (obj->type == String) string_print(obj);
+    else if (obj->type == String) explicitgetfunc(String, __print__)(obj);
     else if (obj->type == Union) union_print(obj);
+    else if (obj->type == Function) explicitgetfunc(Function, __print__)(obj);
+    else printf("Object %p", obj);
 }
 
 
@@ -30,7 +32,8 @@ void _print_imp(const char *sep, const char *end, unsigned int n, ...) {
     for (unsigned int i = 0; i < n; ++i) {
         Object *cur = va_arg(valist, Object*);
         __print_object(cur);
-        printf("%s", sep);
+        if (i < n - 1)
+            printf("%s", sep);
     }
     va_end(valist);
     printf("%s", end);

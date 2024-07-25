@@ -20,7 +20,7 @@ string(REGEX MATCHALL "[^;]+" MY_LIST "${HEADER_FILES}")
 foreach (element IN LISTS MY_LIST)
     message(STATUS "\t${element}")
 endforeach ()
-add_executable(coop main.c _main.c _main.h ${SOURCE_FILES} ${HEADER_FILES})
+add_executable(coop main.c ${SOURCE_FILES} ${HEADER_FILES})
 
 message(STATUS "Printing all test files.")
 set(TESTS_SOURCE_DIR "${CMAKE_SOURCE_DIR}/tests")

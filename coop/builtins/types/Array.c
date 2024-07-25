@@ -15,7 +15,7 @@ Object *Array = NULL;
 
 void __init_array(void) {
     Array = new_object(Type);
-    setattr(Array, "__name__", new_string("Array"));
+    setattr(Array, "__name__", __new_string("Array"));
 }
 
 Object *new_array(IndexT num_objects, Object *items_type) {
@@ -25,7 +25,7 @@ Object *new_array(IndexT num_objects, Object *items_type) {
     if (res->attributes == NULL) return NULL;
     res->num_attributes = 3;
     Attribute *len_field = new_attr("__len__", new_integer(num_objects));
-    Attribute *name_field = new_attr("__name__", new_string("Array"));
+    Attribute *name_field = new_attr("__name__", __new_string("Array"));
     Attribute *item_type_field = new_attr("__type__", items_type);
     res->attributes[0] = len_field;
     res->attributes[1] = name_field;

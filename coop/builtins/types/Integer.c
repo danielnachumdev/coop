@@ -12,7 +12,7 @@ Object *Integer = NULL;
 
 void __init_integer(void) {
     Integer = new_object(Number);
-    setattr(Integer, "__name__", new_string("Integer"));
+    setattr(Integer, "__name__", __new_string("Integer"));
 }
 
 

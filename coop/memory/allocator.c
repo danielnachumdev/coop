@@ -82,15 +82,11 @@ Allocator *allocator_new_linkedlist(void) {
     return res;
 }
 
-void shutdown(void) {
-    __global_allocator__->clear(__global_allocator__);
-//    __user_allocator__->clear(__user_allocator__);
-//    __coop_allocator__->clear(__coop_allocator__);
-}
+
 
 Allocator *get_allocator(void) {
     if (__global_allocator__ == NULL) {
-        fprintf(stderr, "You must use first init_coop() before doing anything.\n");
+        fprintf(stderr, "You must use first coop_setup() before doing anything.\n");
         exit(1);
     }
     return __global_allocator__;

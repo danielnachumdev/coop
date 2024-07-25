@@ -13,9 +13,9 @@ int passed_tests = 0;
 //
 //void test_global_constants(void) {
 //    getattr(__global__name__attr__, LEN);
-//    ASSERT_OBJECT_EQUALS(getattr(__global__name__attr__, NAME), new_string(NAME));
+//    ASSERT_OBJECT_EQUALS(getattr(__global__name__attr__, NAME), __new_string(NAME));
 //    ASSERT_OBJECT_EQUALS(getattr(__global__name__attr__, LEN), new_integer(strlen(NAME)));
-//    ASSERT_OBJECT_EQUALS(getattr(__global__len__attr__, NAME), new_string(LEN));
+//    ASSERT_OBJECT_EQUALS(getattr(__global__len__attr__, NAME), __new_string(LEN));
 //}
 
 
@@ -23,14 +23,14 @@ int main(void) {
     TEST_START("BACKEND");
     test_backend();
     TEST_END("BACKEND");
-    init_coop();
+    coop_setup();
     TEST_START("TESTING");
     test_testing();
     TEST_END("TESTING");
     TEST_START("BUILTINS");
     test_builtins();
     TEST_END("BUILTINS");
-    shutdown();
+    coop_teardown();
     printf("============= %d / %d tests have passed =============\n", passed_tests, num_tests);
     return 0;
 }

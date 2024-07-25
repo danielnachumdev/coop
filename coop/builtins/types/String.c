@@ -12,13 +12,7 @@
 
 Object *String = NULL;
 
-void __init_string(void) {
-    String = new_object(Type);
-    setattr(String, "__init__", new_function("__init__", cast(new_string, void*(*)()), NULL, NULL));
-    setattr(String, "__name__", new_string("String"));
-}
-
-Object *new_string(const char *s) {
+Object *__new_string(const char *s) {
     Object *res = new_object(String);
     if (res == NULL) return NULL;
     setattr(res, "__len__", new_integer((long long) strlen(s)));
@@ -28,6 +22,33 @@ Object *new_string(const char *s) {
     }
     return res;
 }
+
+DEF(String, __init__, Object*, {
+    return __new_string(s);
+}, const char *s)
+
+DEF(String, __eq__, bool, {
+    if (self == NULL && other == NULL) return true;
+    if (self == NULL || other == NULL) return false;
+    if (not(self->type == other->type)) return false;
+    if (not(self->type == String)) return false;
+    return strcmp(self->data, other->data) == 0;
+}, const Object *self, const Object *other)
+
+DEF(String, __print__, void, {
+    if (self == NULL) return;
+    printf("%s", cast(self->data,
+    char *));
+}, const Object *self)
+
+void __init_string(void) {
+    String = new_object(Type);
+    explicitsetfunc(String, __init__);
+    explicitsetfunc(String, __eq__);
+    explicitsetfunc(String, __print__);
+    setattr(String, "__name__", __new_string("String"));
+}
+
 
 bool string_equals(const Object *a, const Object *b) {
     if (a == NULL && b == NULL) return true;

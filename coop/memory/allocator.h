@@ -42,8 +42,6 @@ Allocator *allocator_new_hashset(void);
 
 Allocator *allocator_new_linkedlist(void);
 
-void shutdown(void);
-
 #define acquire(n) get_allocator()->acquire(n)
 #define release(p) get_allocator()->release(p)
 #endif //LOCAL_PLAYGROUND_ALLOCATOR_H

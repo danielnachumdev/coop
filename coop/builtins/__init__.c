@@ -8,7 +8,7 @@ void init_builtins(void) {
     //    THE ORDER MATTERS!
     __init_type();
     __init_string();
-    setattr(Type, "__name__", new_string("Type"));
+    setattr(Type, "__name__", __new_string("Type"));
     __init_number();
     __init_integer();
     __init_function();

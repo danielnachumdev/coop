@@ -67,19 +67,22 @@
 
 #define VA_ARGS_LIST_1_ARG(name, type) va_list valist; va_start(valist, 1); /*the last named argument warning is safe to ignore in this context*/ type name = va_arg(valist, type*); va_end(valist)
 
-
-#define _PROTOTYPE_NAME(name) name##_prototype
+#define funcname(obj, name) obj##name
+#define _PROTOTYPE_NAME(obj, name) obj##name##_prototype
+#define _CREATE_TYPEDEF(owner,name,ret,...) typedef ret(*_PROTOTYPE_NAME(owner, name))(__VA_ARGS__)
+#define DECLARE(obj,name,ret,...) _CREATE_TYPEDEF(obj,name,ret,__VA_ARGS__); \
+ret funcname(obj,name)(__VA_ARGS__)
 #define DEF(owner, name, ret, body, ...) \
-typedef ret(*_PROTOTYPE_NAME(name##owner))(__VA_ARGS__);\
-ret name##owner(__VA_ARGS__) {\
+_CREATE_TYPEDEF(owner,name,ret,__VA_ARGS__);\
+ret funcname(owner,name)(__VA_ARGS__) {\
     body\
 }
 #define DEFGLOBAL(name, ret, body, ...) DEF(,name, ret, body,##__VA_ARGS__)
 
-#define _setfuncfull(obj, name, impl) setattr(obj, name, new_function(name, cast(impl##obj, void*(*)()), NULL, NULL))
-#define setfunc(obj, impl) _setfuncfull(obj, STR(impl), impl)
-#define getfunc(obj, impl) cast(getattr(obj, STR(impl))->data,_PROTOTYPE_NAME(impl##obj))
-#define getglobalfunc(impl) getfunc(, impl)
+#define setfunc(obj, name, impl) setattr(obj, name, new_function(name, cast(funcname(obj, impl), void*(*)()), NULL, NULL))
+#define explicitsetfunc(obj, impl) setfunc(obj, STR(impl), impl)
+#define explicitgetfunc(obj, impl) cast(getattr(obj, STR(impl))->data, _PROTOTYPE_NAME(obj, impl))
+#define getglobalfunc(impl) explicitgetfunc(, impl)
 
 
 #endif //LOCAL_PLAYGROUND_MACROS_H

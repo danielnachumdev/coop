@@ -12,7 +12,7 @@ Object *Boolean = NULL;
 
 void __init_boolean(void) {
     Boolean = new_object(Type);
-    setattr(Boolean, "__name__", new_string("Boolean"));
+    setattr(Boolean, "__name__", __new_string("Boolean"));
 }
 
 Object *new_boolean(bool v) {
