@@ -4,9 +4,8 @@
 
 #include "Boolean.h"
 #include "../../memory/allocator.h"
-#include "../macros.h"
 #include "String.h"
-#include "../functions/attr/setattr.h"
+#include "Function.h"
 
 Object *Boolean = NULL;
 
@@ -15,7 +14,7 @@ void __init_boolean(void) {
     setattr(Boolean, "__name__", __new_string("Boolean"));
 }
 
-Object *new_boolean(bool v) {
+DEF(Boolean, __init__, Object *, {
     Object *res = new_object(Boolean);
     if (res == NULL) return NULL;
     res->data = acquire(sizeof(bool));
@@ -23,18 +22,29 @@ Object *new_boolean(bool v) {
         release(res);
         return NULL;
     }
-    *cast(res->data, bool *) = v;
+    *cast(res->data, bool * ) = v;
     return res;
-}
+}, const bool v);
 
-bool boolean_equals(const Object *a, const Object *b) {
+DEF(Boolean, __eq__, bool, {
     if (a == NULL && b == NULL) return true;
     if (a == NULL || b == NULL) return false;
     if (not(a->type == b->type)) return false;
     if (not(a->type == Boolean)) return false;
-    return *cast(a->data, bool *) == *cast(b->data, bool *);
-}
+    return *cast(a->data, bool * ) == *cast(b->data, bool * );
+}, const Object *a, const Object *b);
 
-void boolean_print(const Object *obj) {
-    printf("%s", *cast(obj->data, bool *) ? "true" : "false");
-}
+DEF(Boolean, __print__, void, {
+    printf("%s", *cast(obj->data, bool * ) ? "true" : "false");
+}, const Object *obj);
+
+DEF(Boolean, __int__, Object *, {
+    if (obj == NULL) return NULL;
+    return explicitgetfunc(Integer, __init__)(*cast(obj->data,
+    int *)?1:0);
+}, const Object *obj);
+
+DEF(Boolean, __bool__, Object *, {
+    if (self == NULL) return NULL;
+    return explicitgetfunc(Boolean, __init__)(*cast(self->data, bool * ));
+}, const Object *self);

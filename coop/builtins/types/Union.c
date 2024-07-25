@@ -6,12 +6,8 @@
 #include "Union.h"
 #include "__init__.h"
 #include "../functions/isinstance.h"
-#include "../macros.h"
-#include "../functions/attr/getattr.h"
 #include "../functions/print.h"
 #include "../../memory/allocator.h"
-#include "../functions/len.h"
-#include "../functions/attr/setattr.h"
 
 Object *Union = NULL;
 

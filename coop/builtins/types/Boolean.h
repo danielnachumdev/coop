@@ -7,13 +7,18 @@
 
 
 #include "../object.h"
+#include "../macros.h"
 
 void __init_boolean(void);
 
-Object *new_boolean(bool v);
+DECLARE(Boolean, __init__, Object *, const bool v);
 
-bool boolean_equals(const Object *a, const Object *b);
+DECLARE(Boolean, __eq__, bool, const Object *, const Object *);
 
-void boolean_print(const Object *obj);
+DECLARE(Boolean, __print__, void, const Object *);
+
+DECLARE(Boolean, __int__, Object *, const Object *);
+
+DECLARE(Boolean, __bool__, Object *, const Object *);
 
 #endif //COOP_BOOLEAN_H

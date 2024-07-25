@@ -4,10 +4,7 @@
 
 #include "Array.h"
 #include "../../memory/allocator.h"
-#include "../macros.h"
-#include "../functions/attr/getattr.h"
 #include "../functions/print.h"
-#include "../functions/attr/setattr.h"
 #include "Integer.h"
 #include "String.h"
 #include "Function.h"

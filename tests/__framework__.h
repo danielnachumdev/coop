@@ -12,18 +12,18 @@ extern int passed_tests;
     passed_tests+=res;                   \
     if(not(res))                      \
         println(                         \
-            new_string(__FILE__ " at function"),   \
-            new_string(__func__),              \
-            new_string("at line"),\
+            __new_string(__FILE__ " at function"),   \
+            __new_string(__func__),              \
+            __new_string("at line"),\
             new_integer(__LINE__),       \
-            new_string("| FAILED\n\tInput1    :"),           \
-            new_string(#obj1 "\n\tInput2    :"),        \
-            new_string(#obj2),              \
-            new_string("\n\tEvaluation:"),    \
+            __new_string("| FAILED\n\tInput1    :"),           \
+            __new_string(#obj1 "\n\tInput2    :"),        \
+            __new_string(#obj2),              \
+            __new_string("\n\tEvaluation:"),    \
             obj1,                           \
-            new_string("=="),             \
+            __new_string("=="),             \
             obj2,                           \
-            new_string("  => FALSE\n\tExpected  : TRUE\n")\
+            __new_string("  => FALSE\n\tExpected  : TRUE\n")\
         );                               \
     num_tests+=1;                              \
     fflush(stdout);\
@@ -33,18 +33,18 @@ extern int passed_tests;
     passed_tests+=res;                   \
     if(not(res))                      \
         println(                         \
-            new_string(__FILE__ " at function"),   \
-            new_string(__func__),              \
-            new_string("at line"),\
+            __new_string(__FILE__ " at function"),   \
+            __new_string(__func__),              \
+            __new_string("at line"),\
             new_integer(__LINE__),       \
-            new_string("| FAILED\n\tInput1    :"),           \
-            new_string(#obj1 "\n\tInput2    :"),        \
-            new_string(#obj2),              \
-            new_string("\n\tEvaluation:"),    \
+            __new_string("| FAILED\n\tInput1    :"),           \
+            __new_string(#obj1 "\n\tInput2    :"),        \
+            __new_string(#obj2),              \
+            __new_string("\n\tEvaluation:"),    \
             obj1,                           \
-            new_string("!="),             \
+            __new_string("!="),             \
             obj2,                           \
-            new_string("  => FALSE\n\tExpected  : TRUE\n")\
+            __new_string("  => FALSE\n\tExpected  : TRUE\n")\
         );                               \
     num_tests+=1;                                  \
     fflush(stdout);\
@@ -54,15 +54,15 @@ extern int passed_tests;
     passed_tests+=res;                   \
     if(not(res))                      \
         println(                         \
-            new_string(__FILE__ " at function"),   \
-            new_string(__func__),              \
-            new_string("at line"),\
+            __new_string(__FILE__ " at function"),   \
+            __new_string(__func__),              \
+            __new_string("at line"),\
             new_integer(__LINE__),       \
-            new_string("| FAILED\n\tInput     :"),           \
-            new_string(#x),                           \
-            new_string("\n\tEvaluation:"),    \
+            __new_string("| FAILED\n\tInput     :"),           \
+            __new_string(#x),                           \
+            __new_string("\n\tEvaluation:"),    \
             new_boolean(x),   \
-            new_string("\n\tExpected  : true\n")\
+            __new_string("\n\tExpected  : true\n")\
         );                               \
     num_tests+=1;                              \
 )
@@ -71,15 +71,15 @@ extern int passed_tests;
     passed_tests+=res;                   \
     if(not(res))                      \
         println(                         \
-            new_string(__FILE__ " at function"),   \
-            new_string(__func__),              \
-            new_string("at line"),\
+            __new_string(__FILE__ " at function"),   \
+            __new_string(__func__),              \
+            __new_string("at line"),\
             new_integer(__LINE__),       \
-            new_string("| FAILED\n\tInput     :"),           \
-            new_string(#x),                           \
-            new_string("\n\tEvaluation:"),    \
+            __new_string("| FAILED\n\tInput     :"),           \
+            __new_string(#x),                           \
+            __new_string("\n\tEvaluation:"),    \
             new_boolean(x),   \
-            new_string("\n\tExpected  : false\n")\
+            __new_string("\n\tExpected  : false\n")\
         );                               \
     num_tests+=1;             \
     fflush(stdout);\
@@ -89,15 +89,15 @@ extern int passed_tests;
     passed_tests+=res;                   \
     if(not(res))                      \
         println(                         \
-            new_string(__FILE__ " at function"),   \
-            new_string(__func__),              \
-            new_string("at line"),\
+            __new_string(__FILE__ " at function"),   \
+            __new_string(__func__),              \
+            __new_string("at line"),\
             new_integer(__LINE__),       \
-            new_string("| FAILED\n\tInput     :"),           \
-            new_string(#x),                           \
-            new_string("\n\tEvaluation:"),    \
+            __new_string("| FAILED\n\tInput     :"),           \
+            __new_string(#x),                           \
+            __new_string("\n\tEvaluation:"),    \
             x,  \
-            new_string("== NULL  => FALSE\n\tExpected  : TRUE\n")\
+            __new_string("== NULL  => FALSE\n\tExpected  : TRUE\n")\
         );                               \
     num_tests+=1;            \
     fflush(stdout);\
@@ -107,15 +107,15 @@ extern int passed_tests;
     passed_tests+=res;                   \
     if(not(res))                      \
         println(                         \
-            new_string(__FILE__ " at function"),   \
-            new_string(__func__),              \
-            new_string("at line"),\
+            __new_string(__FILE__ " at function"),   \
+            __new_string(__func__),              \
+            __new_string("at line"),\
             new_integer(__LINE__),       \
-            new_string("| FAILED\n\tInput     :"),           \
-            new_string(#x),                           \
-            new_string("\n\tEvaluation:"),    \
+            __new_string("| FAILED\n\tInput     :"),           \
+            __new_string(#x),                           \
+            __new_string("\n\tEvaluation:"),    \
             x,  \
-            new_string("!= NULL  => FALSE\n\tExpected  : TRUE\n")\
+            __new_string("!= NULL  => FALSE\n\tExpected  : TRUE\n")\
         );                               \
     num_tests+=1;                \
     fflush(stdout);\
