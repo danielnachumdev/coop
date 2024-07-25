@@ -11,5 +11,6 @@
 #include "len.h"
 #include "print.h"
 #include "super.h"
+#include "input.h"
 
 #endif //COOP_BUILTINS_FUNCTIONS_GLOBALS___INIT___H
