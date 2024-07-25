@@ -21,9 +21,14 @@ All of my implementation boils down to clever use of one struct:
 typedef struct Object {
     const struct Object *type;
     unsigned long num_attributes;
-    struct Object **attributes;
+    struct Attribute **attributes;
     void *data;
 } Object;
+
+typedef struct Attribute {
+    const char *key;
+    Object *value;
+} Attribute;
 ```
 
 I create an instance that is the most basic type: `Type`.

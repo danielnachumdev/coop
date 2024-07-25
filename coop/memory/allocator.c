@@ -32,6 +32,7 @@ void default_release(void *p) {
 }
 
 void default_clear(Allocator *allocator) {
+    printf("Total bytes allocated = %lu\n", allocated_bytes);
     if (allocator == NULL) return;
     allocator->__impl_clear(&allocator->structure);
     builtin_free(allocator);
@@ -81,7 +82,6 @@ Allocator *allocator_new_linkedlist(void) {
     res->clear = default_clear;
     return res;
 }
-
 
 
 Allocator *get_allocator(void) {

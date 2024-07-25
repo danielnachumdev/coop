@@ -5,10 +5,10 @@
 #include "coop/__init__.h"
 
 void _main(void) {
-    Object *types[] = {Type, String, Integer, Number, Function, Field, Array, Boolean, Union};
+    Object *types[] = {Type, String, Integer, Number, Function, Array, Boolean, Union};
     for (int i = 0; i < 9; ++i) {
-        println(__new_string("Name ="), getattr(types[i], NAME), __new_string("dir ="));
-        dir(types[i], false);
+        println(explicitgetfunc(String, __init__)("Name ="), getattr(types[i], "__name__"));
+        dir(types[i]);
     }
 }
 
