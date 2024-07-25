@@ -6,13 +6,13 @@
 #define LOCAL_PLAYGROUND_LINKED_LIST_H
 
 #include <stdbool.h>
-#include "node.h"
+#include "cnode.h"
 
 #define ComparerT(name) __FUNCTION_POINTER_BUILDER(name,bool,const void *a,const void * b)
 
 typedef struct DoublyLinkedList {
-    Node *head;
-    Node *tail;
+    CNode *head;
+    CNode *tail;
 
     DuplicatorT(data_dup);
 
@@ -21,17 +21,17 @@ typedef struct DoublyLinkedList {
     ComparerT(data_comparer);
 
 } DoublyLinkedList;
-typedef DoublyLinkedList LinkedList;
+typedef DoublyLinkedList CLinkedList;
 
-LinkedList *linkedlist_new(DuplicatorT(data_dup), ConsumerT(data_free), ComparerT(data_comparer));
+CLinkedList *clinkedlist_new(DuplicatorT(data_dup), ConsumerT(data_free), ComparerT(data_comparer));
 
-void linkedlist_free(LinkedList **ll);
+void clinkedlist_free(CLinkedList **ll);
 
-bool linkedlist_contains(const LinkedList *ll, const void *p);
+bool clinkedlist_contains(const CLinkedList *ll, const void *p);
 
-Node *linkedlist_add(LinkedList *ll, void *p);
+CNode *clinkedlist_add(CLinkedList *ll, void *p);
 
-bool linkedlist_remove(LinkedList *ll, void *p);
+bool clinkedlist_remove(CLinkedList *ll, void *p);
 
 #define LINKEDLIST_FOREACH(cur_name, ll, body) EXPR( \
     Node * cur_name = ll->head;                    \

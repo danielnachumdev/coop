@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "allocator.h"
 #include "../builtins/macros.h"
-#include "../backend/hashset.h"
+#include "../backend/chashset.h"
 
 unsigned long int allocated_bytes = 0;
 unsigned long int freed_bytes = 0;
@@ -50,15 +50,16 @@ Allocator *allocator_new_hashset(void) {
     Allocator *res = builtin_new(sizeof(Allocator));
     if (res == NULL) return NULL;
     res->allocator_type = AllocatorHashSet;
-    res->structure = hashset_new(naive_dup__, naive_free__, default_hashset_pointer_comparer, &default_hashset_strategy,
-                                 pointer_hash);
+    res->structure = chashset_new(naive_dup__, naive_free__, default_chashset_pointer_comparer,
+                                  &default_chashset_strategy,
+                                  pointer_hash);
     if (res->structure == NULL) {
         builtin_free(res);
         return NULL;
     }
-    res->__impl_acquire = cast(hashset_add_impl, void *(*)(void *, void *));
-    res->__impl_release = cast(hashset_remove, bool(*)(void*, void*));
-    res->__impl_clear = cast(hashset_free, void(*)(void**));
+    res->__impl_acquire = cast(chashset_add_impl, void *(*)(void *, void *));
+    res->__impl_release = cast(chashset_remove, bool(*)(void*, void*));
+    res->__impl_clear = cast(chashset_free, void(*)(void**));
     res->acquire = default_acquire;
     res->release = default_release;
     res->clear = default_clear;
@@ -68,15 +69,15 @@ Allocator *allocator_new_hashset(void) {
 Allocator *allocator_new_linkedlist(void) {
     Allocator *res = builtin_new(sizeof(Allocator));
     if (res == NULL) return NULL;
-    res->structure = linkedlist_new(naive_dup__, naive_free__, default_hashset_pointer_comparer);
+    res->structure = clinkedlist_new(naive_dup__, naive_free__, default_chashset_pointer_comparer);
     res->allocator_type = AllocatorLinkedList;
     if (res->structure == NULL) {
         builtin_free(res);
         return NULL;
     }
-    res->__impl_acquire = cast(linkedlist_add, void *(*)(void *, void *));
-    res->__impl_release = cast(linkedlist_remove, bool(*)(void*, void*));
-    res->__impl_clear = cast(linkedlist_free, void(*)(void**));
+    res->__impl_acquire = cast(clinkedlist_add, void *(*)(void *, void *));
+    res->__impl_release = cast(clinkedlist_remove, bool(*)(void*, void*));
+    res->__impl_clear = cast(clinkedlist_free, void(*)(void**));
     res->acquire = default_acquire;
     res->release = default_release;
     res->clear = default_clear;

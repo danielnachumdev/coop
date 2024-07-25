@@ -5,7 +5,7 @@
 #include <assert.h>
 #include <memory.h>
 #include "test_hashset.h"
-#include "../../coop/backend/hashset.h"
+#include "../../coop/backend/chashset.h"
 
 void hashmap_naive_free(void *p) {
     builtin_free(p);
@@ -31,19 +31,19 @@ unsigned long integer_hash(const void *p) {
 
 void test_hashset_creation() {
     // Test creation of hashmap
-    HashSet *map = hashset_new(hashmap_int_dup, hashmap_naive_free, hashmap_int_comparer,
-                               &default_hashset_strategy, integer_hash);
+    CHashSet *map = chashset_new(hashmap_int_dup, hashmap_naive_free, hashmap_int_comparer,
+                                 &default_chashset_strategy, integer_hash);
     assert(map != NULL);
 
-    assert(memcmp(map->strategy, &default_hashset_strategy, sizeof(HashSetStrategy)) == 0);
-    hashset_free(&map);
+    assert(memcmp(map->strategy, &default_chashset_strategy, sizeof(CHashSetStrategy)) == 0);
+    chashset_free(&map);
     assert(map == NULL);
 }
 
 void test_hashset_insertion_and_removal() {
     // Test insertion and removal of elements
-    HashSet *map = hashset_new(hashmap_int_dup, hashmap_naive_free, hashmap_int_comparer, &default_hashset_strategy,
-                               integer_hash);
+    CHashSet *map = chashset_new(hashmap_int_dup, hashmap_naive_free, hashmap_int_comparer, &default_chashset_strategy,
+                                 integer_hash);
     assert(map != NULL);
 
     int data1 = 42;
@@ -54,25 +54,25 @@ void test_hashset_insertion_and_removal() {
     assert(hashset_add(map, &data2));
 
     // Check contains
-    assert(hashset_contains(map, &data1));
-    assert(hashset_contains(map, &data2));
+    assert(chashset_contains(map, &data1));
+    assert(chashset_contains(map, &data2));
 
     // Removal
-    hashset_remove(map, &data1);
-    assert(!hashset_contains(map, &data1));
-    assert(hashset_contains(map, &data2));
+    chashset_remove(map, &data1);
+    assert(!chashset_contains(map, &data1));
+    assert(chashset_contains(map, &data2));
 
-    hashset_remove(map, &data2);
-    assert(!hashset_contains(map, &data2));
+    chashset_remove(map, &data2);
+    assert(!chashset_contains(map, &data2));
 
-    hashset_free(&map);
+    chashset_free(&map);
     assert(map == NULL);
 }
 
 void test_hashset_contains() {
     // Test contains function
-    HashSet *map = hashset_new(hashmap_int_dup, hashmap_naive_free, hashmap_int_comparer, &default_hashset_strategy,
-                               integer_hash);
+    CHashSet *map = chashset_new(hashmap_int_dup, hashmap_naive_free, hashmap_int_comparer, &default_chashset_strategy,
+                                 integer_hash);
     assert(map != NULL);
 
     int data1 = 42;
@@ -83,21 +83,21 @@ void test_hashset_contains() {
     assert(hashset_add(map, &data2));
 
     // Check contains
-    assert(hashset_contains(map, &data1));
-    assert(hashset_contains(map, &data2));
+    assert(chashset_contains(map, &data1));
+    assert(chashset_contains(map, &data2));
 
     // Check non-existent element
     int data3 = 456;
-    assert(!hashset_contains(map, &data3));
+    assert(!chashset_contains(map, &data3));
 
-    hashset_free(&map);
+    chashset_free(&map);
     assert(map == NULL);
 }
 
 void test_hashset_insert_duplicate() {
     // Test insertion of duplicate element
-    HashSet *map = hashset_new(hashmap_int_dup, hashmap_naive_free, hashmap_int_comparer, &default_hashset_strategy,
-                               integer_hash);
+    CHashSet *map = chashset_new(hashmap_int_dup, hashmap_naive_free, hashmap_int_comparer, &default_chashset_strategy,
+                                 integer_hash);
     assert(map != NULL);
 
     int data1 = 42;
@@ -108,14 +108,14 @@ void test_hashset_insert_duplicate() {
     // Attempt to insert duplicate
     assert(hashset_add(map, &data1));
 
-    hashset_free(&map);
+    chashset_free(&map);
     assert(map == NULL);
 }
 
 void test_hashset_remove_nonexistent() {
     // Test removal of non-existent element
-    HashSet *map = hashset_new(hashmap_int_dup, hashmap_naive_free, hashmap_int_comparer, &default_hashset_strategy,
-                               integer_hash);
+    CHashSet *map = chashset_new(hashmap_int_dup, hashmap_naive_free, hashmap_int_comparer, &default_chashset_strategy,
+                                 integer_hash);
     assert(map != NULL);
 
     int data1 = 42;
@@ -125,19 +125,19 @@ void test_hashset_remove_nonexistent() {
 
     // Attempt to remove non-existent element
     int data2 = 123;
-    hashset_remove(map, &data2);
+    chashset_remove(map, &data2);
 
     // Verify original element still exists
-    assert(hashset_contains(map, &data1));
+    assert(chashset_contains(map, &data1));
 
-    hashset_free(&map);
+    chashset_free(&map);
     assert(map == NULL);
 }
 
 void test_hashset_resize_up() {
     // Test resizing up
-    HashSetStrategy strategy = {0.1, 0.9, 2.0, 2}; // Initial length is 5
-    HashSet *map = hashset_new(hashmap_int_dup, hashmap_naive_free, hashmap_int_comparer, &strategy, integer_hash);
+    CHashSetStrategy strategy = {0.1, 0.9, 2.0, 2}; // Initial length is 5
+    CHashSet *map = chashset_new(hashmap_int_dup, hashmap_naive_free, hashmap_int_comparer, &strategy, integer_hash);
     assert(map != NULL);
 
     // Insert elements to trigger resize up
@@ -148,13 +148,13 @@ void test_hashset_resize_up() {
     // Verify length increased after resize up
     assert(map->length > 5);
 
-    hashset_free(&map);
+    chashset_free(&map);
 }
 
 void test_hashset_resize_down() {
     // Test resizing down
-    HashSetStrategy strategy = {0.5, 0.9, 2.0, 10}; // Initial length is 20
-    HashSet *map = hashset_new(hashmap_int_dup, hashmap_naive_free, hashmap_int_comparer, &strategy, integer_hash);
+    CHashSetStrategy strategy = {0.5, 0.9, 2.0, 10}; // Initial length is 20
+    CHashSet *map = chashset_new(hashmap_int_dup, hashmap_naive_free, hashmap_int_comparer, &strategy, integer_hash);
     assert(map != NULL);
 
     // Insert elements to trigger resize down
@@ -163,28 +163,28 @@ void test_hashset_resize_down() {
     }
 
     for (int i = 0; i < 10; ++i) {
-        hashset_remove(map, &i);
+        chashset_remove(map, &i);
     }
 
     // Verify length decreased after resize down
     assert(map->length < 20);
 
-    hashset_free(&map);
+    chashset_free(&map);
 }
 
 void my_test(void) {
-    HashSet *h = hashset_new(hashmap_int_dup, hashmap_naive_free, hashmap_int_comparer, &default_hashset_strategy,
-                             integer_hash);
+    CHashSet *h = chashset_new(hashmap_int_dup, hashmap_naive_free, hashmap_int_comparer, &default_chashset_strategy,
+                               integer_hash);
     assert(h != NULL);
     for (int i = 0; i < 1000; ++i) {
         hashset_add(h, &i);
     }
 
-    hashset_free(&h);
+    chashset_free(&h);
 }
 
 void test_hashset(void) {
-    printf("Testing HashSet - STARTED\n");
+    printf("Testing CHashSet - STARTED\n");
     test_hashset_creation();
     test_hashset_insertion_and_removal();
     test_hashset_insert_duplicate();
@@ -193,5 +193,5 @@ void test_hashset(void) {
     test_hashset_resize_up();
     test_hashset_resize_down();
 //    my_test();
-    printf("Testing HashSet - PASSED\n");
+    printf("Testing CHashSet - PASSED\n");
 }

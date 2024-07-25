@@ -2,11 +2,11 @@
 // Created by t-danachum on 21/05/2024.
 //
 #include "../builtins/macros.h"
-#include "linked_list.h"
+#include "clinked_list.h"
 
-LinkedList *linkedlist_new(DuplicatorT(data_dup), ConsumerT(data_free), ComparerT(data_comparer)) {
+CLinkedList *clinkedlist_new(DuplicatorT(data_dup), ConsumerT(data_free), ComparerT(data_comparer)) {
     if (data_dup == NULL || data_free == NULL || data_comparer == NULL) return NULL;
-    LinkedList *res = builtin_new(sizeof(LinkedList));
+    CLinkedList *res = builtin_new(sizeof(CLinkedList));
     if (res == NULL) return NULL;
     res->head = NULL;
     res->tail = NULL;
@@ -16,13 +16,13 @@ LinkedList *linkedlist_new(DuplicatorT(data_dup), ConsumerT(data_free), Comparer
     return res;
 }
 
-void linkedlist_free(LinkedList **ll) {
+void clinkedlist_free(CLinkedList **ll) {
     if (ll == NULL || *ll == NULL) return;
-    Node *cur = (*ll)->head;
+    CNode *cur = (*ll)->head;
     int index = 0;
     while (cur != NULL) {
-        Node *next = cur->next;
-        node_free(&cur);
+        CNode *next = cur->next;
+        cnode_free(&cur);
         cur = next;
         index += 1;
     }
@@ -30,11 +30,11 @@ void linkedlist_free(LinkedList **ll) {
     *ll = NULL;
 }
 
-bool linkedlist_contains(const LinkedList *ll, const void *p) {
+bool clinkedlist_contains(const CLinkedList *ll, const void *p) {
     if (ll == NULL || p == NULL) return false;
-    Node *cur = ll->head;
+    CNode *cur = ll->head;
     while (cur != NULL) {
-        Node *next = cur->next;
+        CNode *next = cur->next;
         if (ll->data_comparer(cur->data, p))
             return true;
         cur = next;
@@ -44,15 +44,15 @@ bool linkedlist_contains(const LinkedList *ll, const void *p) {
 
 unsigned int allocation_index = 0;
 
-Node *linkedlist_add(LinkedList *ll, void *p) {
+CNode *clinkedlist_add(CLinkedList *ll, void *p) {
     if (ll == NULL || p == NULL) return NULL;
-    Node *res = node_new(p, ll->data_dup, ll->data_free);
+    CNode *res = cnode_new(p, ll->data_dup, ll->data_free);
     if (res == NULL) return NULL;
     if (ll->head == NULL) {
         ll->head = res;
         ll->tail = res;
     } else {
-        Node *prev_head = ll->head;
+        CNode *prev_head = ll->head;
         ll->head = res;
         res->next = prev_head;
         prev_head->prev = res;
@@ -61,11 +61,11 @@ Node *linkedlist_add(LinkedList *ll, void *p) {
     return res;
 }
 
-bool linkedlist_remove(LinkedList *ll, void *p) {
+bool clinkedlist_remove(CLinkedList *ll, void *p) {
     if (ll == NULL || p == NULL) return false;
-    Node *cur = ll->head;
+    CNode *cur = ll->head;
     while (cur != NULL) {
-        Node *next = cur->next;
+        CNode *next = cur->next;
         if (ll->data_comparer(cur->data, p)) {
             if (cur == ll->head) {
                 if (cur == ll->tail)
@@ -80,7 +80,7 @@ bool linkedlist_remove(LinkedList *ll, void *p) {
                 cur->prev->next = cur->next;
                 cur->next->prev = cur->prev;
             }
-            node_free(&cur);
+            cnode_free(&cur);
             return true;
         }
         cur = next;

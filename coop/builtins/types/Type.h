@@ -16,7 +16,7 @@ void type_print(const Object *obj);
 
 void __init_type_functions(void);
 
-DECLARE(Type, __init__, Object*, const char *name, IntegerT num_attributes, Attribute attrs[]);
+DECLARE(Type, __init__, Object*, const char *name, IntegerT num_parents, Object parents[], IntegerT num_attributes, Attribute attrs[]);
 
 DECLARE(Type, __print__, void, const Object *self);
 

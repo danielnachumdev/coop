@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "test_stack.h"
-#include "../../coop/backend/stack.h"
+#include "../../coop/backend/cstack.h"
 
 void *int_duplicator(const void *item) {
     int *ptr = (int *) malloc(sizeof(int));
@@ -23,30 +23,30 @@ void *int_duplicator(const void *item) {
 void test_stack(void) {
     printf("Testing Stack - STARTED\n");
     // Create self new stack
-    Stack *stack = stack_new(int_duplicator, free);
+    Stack *stack = cstack_new(int_duplicator, free);
 
     // Test empty stack
-    assert(stack_top(stack) == NULL);
+    assert(cstack_top(stack) == NULL);
 
     // Push items onto the stack
     int a = 10, b = 20, c = 30;
-    stack_push(stack, &a);
-    stack_push(stack, &b);
-    stack_push(stack, &c);
+    cstack_push(stack, &a);
+    cstack_push(stack, &b);
+    cstack_push(stack, &c);
 
     // Test stack top
-    assert(*((int *) stack_top(stack)) == 30);
+    assert(*((int *) cstack_top(stack)) == 30);
 
     // Test stack pop
-    int *popped_item = (int *) stack_pop(stack);
+    int *popped_item = (int *) cstack_pop(stack);
     assert(*popped_item == 30);
     free(popped_item);
 
     // Test stack top after pop
-    assert(*((int *) stack_top(stack)) == 20);
+    assert(*((int *) cstack_top(stack)) == 20);
 
     // Free the stack
-    stack_free(&stack);
+    cstack_free(&stack);
 
     // Test empty stack after free
     assert(stack == NULL);

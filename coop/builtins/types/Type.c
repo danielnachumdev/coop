@@ -28,7 +28,7 @@ DEF(Type, __init__, Object*, {
     for (IntegerT i = 0; i < num_attributes; ++i)
         setattr(T, attrs[i].key, attrs[i].value);
     return T;
-}, const char *name, IntegerT num_attributes, Attribute attrs[])
+}, const char *name, IntegerT num_parents, Object parents[], IntegerT num_attributes, Attribute attrs[])
 
 DEF(Type, __print__, void, {
     if (self == NULL)return;

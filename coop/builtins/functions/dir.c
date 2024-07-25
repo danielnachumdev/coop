@@ -17,7 +17,7 @@ void free_func(void *p) {}
 
 void
 print_attrs(const Object *obj, int max_recursion_depth, int current_depth, char *prev_print_prefix, char *current_print_prefix,
-            LinkedList *ll) {
+            CLinkedList *ll) {
     printf("%s\tAttributes: [", prev_print_prefix);
     if (obj->num_attributes > 0)
         printf(" // length = %lu\n", obj->num_attributes);
@@ -46,7 +46,7 @@ print_attrs(const Object *obj, int max_recursion_depth, int current_depth, char 
     printf("]\n");
 }
 
-void _dir(const Object *obj, int max_recursion_depth, int current_depth, char *prev_print_prefix, LinkedList *ll) {
+void _dir(const Object *obj, int max_recursion_depth, int current_depth, char *prev_print_prefix, CLinkedList *ll) {
     if (obj == NULL) return;
     if (prev_print_prefix == NULL) prev_print_prefix = "";
     int current_length = (int) strlen(prev_print_prefix);
@@ -57,14 +57,14 @@ void _dir(const Object *obj, int max_recursion_depth, int current_depth, char *p
     current_print_prefix[current_length + 2] = '\0';
     if (max_recursion_depth > 0 && current_depth < max_recursion_depth) {
         if (ll == NULL) {
-            ll = linkedlist_new(dup_func, free_func, (bool (*)(const void *, const void *)) object_equals);
-            linkedlist_add(ll, (void *) obj);
+            ll = clinkedlist_new(dup_func, free_func, (bool (*)(const void *, const void *)) object_equals);
+            clinkedlist_add(ll, (void *) obj);
         } else {
-            if (linkedlist_contains(ll, obj)) {
+            if (clinkedlist_contains(ll, obj)) {
                 printf("Object (...) // %p\n", obj);
                 return;
             }
-            linkedlist_add(ll, (void *) obj);
+            clinkedlist_add(ll, (void *) obj);
         }
     }
 
@@ -83,5 +83,5 @@ void _dir(const Object *obj, int max_recursion_depth, int current_depth, char *p
     print_attrs(obj, max_recursion_depth, current_length, prev_print_prefix, current_print_prefix, ll);
     printf("%s)\n", prev_print_prefix);
     if (current_depth == 0)
-        linkedlist_free(&ll);
+        clinkedlist_free(&ll);
 }

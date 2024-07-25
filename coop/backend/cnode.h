@@ -9,16 +9,16 @@
 
 typedef struct Node {
     void *data;
-    struct Node *next;
-    struct Node *prev;
+    struct CNode *next;
+    struct CNode *prev;
 
     DuplicatorT(data_dup);
 
     ConsumerT(data_free);
-} Node;
+} CNode;
 
-Node *node_new(const void *data, DuplicatorT(data_dup), ConsumerT(data_free));
+CNode *cnode_new(const void *data, DuplicatorT(data_dup), ConsumerT(data_free));
 
-void node_free(Node **n);
+void cnode_free(CNode **n);
 
 #endif //LOCAL_PLAYGROUND_NODE_H

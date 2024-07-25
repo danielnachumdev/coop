@@ -3,13 +3,13 @@
 //
 
 #include <stddef.h>
-#include "node.h"
+#include "cnode.h"
 #include "../builtins/macros.h"
 
 
-Node *node_new(const void *data, DuplicatorT(data_dup), ConsumerT(data_free)) {
+CNode *cnode_new(const void *data, DuplicatorT(data_dup), ConsumerT(data_free)) {
     if (data == NULL || data_dup == NULL || data_free == NULL) return NULL;
-    Node *res = builtin_new(sizeof(Node));
+    CNode *res = builtin_new(sizeof(CNode));
     if (res == NULL) return NULL;
     res->data = data_dup(data);
     if (res->data == NULL) {
@@ -23,7 +23,7 @@ Node *node_new(const void *data, DuplicatorT(data_dup), ConsumerT(data_free)) {
     return res;
 }
 
-void node_free(Node **n) {
+void cnode_free(CNode **n) {
     if (n == NULL || *n == NULL) return;
     (*n)->data_free((*n)->data);
     builtin_free(*n);

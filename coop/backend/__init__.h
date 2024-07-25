@@ -5,10 +5,10 @@
 #ifndef COOP_BACKEND____INIT___H
 #define COOP_BACKEND____INIT___H
 
-#include "node.h"
-#include "linked_list.h"
-#include "stack.h"
-#include "hashset.h"
+#include "cnode.h"
+#include "clinked_list.h"
+#include "cstack.h"
+#include "chashset.h"
 
 
 #endif //COOP_BACKEND____INIT___H

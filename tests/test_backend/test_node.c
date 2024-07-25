@@ -5,7 +5,7 @@
 #include <malloc.h>
 #include <assert.h>
 #include "test_node.h"
-#include "../../coop/backend/node.h"
+#include "../../coop/backend/cnode.h"
 
 
 void int_free(void *data) {
@@ -23,18 +23,18 @@ void *int_dup(const void *data) {
 void test_node_creation_and_free() {
     int data = 42;
 
-    Node *node = node_new(&data, int_dup, int_free);
+    CNode *node = cnode_new(&data, int_dup, int_free);
     assert(node != NULL);
     assert(*(int *) (node->data) == 42);
 
-    node_free(&node);
+    cnode_free(&node);
     assert(node == NULL);
 }
 
 void test_node_duplication() {
     int data = 24;
 
-    Node *node = node_new(&data, int_dup, int_free);
+    CNode *node = cnode_new(&data, int_dup, int_free);
     assert(node != NULL);
     assert(*(int *) (node->data) == 24);
 
@@ -42,13 +42,13 @@ void test_node_duplication() {
     assert(*(int *) dup_data == 24);
 
     free(dup_data);
-    node_free(&node);
+    cnode_free(&node);
     assert(node == NULL);
 }
 
 void test_node(void) {
-    printf("Testing Node - STARTED\n");
+    printf("Testing CNode - STARTED\n");
     test_node_creation_and_free();
     test_node_duplication();
-    printf("Testing Node - PASSED\n");
+    printf("Testing CNode - PASSED\n");
 }
