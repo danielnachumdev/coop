@@ -5,11 +5,13 @@
 #include "isinstance.h"
 #include "../../__init__.h"
 
-
 bool isinstance(const Object *obj, const Object *T) {
     if (obj == NULL || T == NULL) return false;
     if (T->type == Union) {
-//        TODO
+        IntegerT length = *(IntegerT *) explicitgetfunc(Array, __len__)(T->data)->data;
+        Array__getitem___prototype get = Array__getitem__;
+        for (IntegerT i = 0; i < length; ++i)
+            if (isinstance(obj, get(T->data, i))) return true;
     } else {
         const Object *cur_type = obj->type;
         if (obj->type == NULL) return false;

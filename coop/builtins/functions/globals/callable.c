@@ -7,7 +7,5 @@
 
 bool callable(const Object *obj) {
     if (obj == NULL) return false;
-    Object *attr = getattr(obj, "__call__");
-    if (attr == NULL) return false;
-    return attr->type == Function;
+    return getattr(obj, "__call__")->type == Function;
 }
