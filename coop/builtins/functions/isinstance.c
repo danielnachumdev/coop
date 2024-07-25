@@ -12,6 +12,7 @@ bool isinstance(const Object *obj, const Object *T) {
 //        TODO
     } else {
         const Object *cur_type = obj->type;
+        if (obj->type == NULL) return false;
         while (cur_type != Type) {
             if (cur_type == T) return true;
             cur_type = cur_type->type;

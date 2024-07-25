@@ -14,8 +14,8 @@ void __init_integer(void) {
 
 void __init_integer_functions(void) {
     explicitsetfunc(Integer, __init__);
-    explicitsetfunc(Integer, __init__);
-    explicitsetfunc(Integer, __init__);
+    explicitsetfunc(Integer, __eq__);
+    explicitsetfunc(Integer, __print__);
 }
 
 Object *__new_integer(IntegerT n) {

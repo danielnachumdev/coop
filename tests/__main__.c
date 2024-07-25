@@ -30,7 +30,6 @@ int main(void) {
     TEST_START("BUILTINS");
     test_builtins();
     TEST_END("BUILTINS");
-    coop_teardown();
     printf("============= %d / %d tests have passed =============\n", passed_tests, num_tests);
     return 0;
 }
