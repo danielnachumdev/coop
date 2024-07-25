@@ -3,6 +3,7 @@
 //
 
 #include "__init__.h"
+#include "types/Node.h"
 
 void init_builtins(void) {
     //    THE ORDER MATTERS!
@@ -21,4 +22,6 @@ void init_builtins(void) {
     __init_array();
     __init_boolean();
     __init_union();
+    __init_node();
+    __init_list();
 }

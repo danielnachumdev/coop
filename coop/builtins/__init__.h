@@ -6,6 +6,7 @@
 #define COOP_BUILTINS___INIT___H
 
 #include "types/__init__.h"
+#include "types/List.h"
 #include "functions/__init__.h"
 #include "exception.h"
 #include "macros.h"

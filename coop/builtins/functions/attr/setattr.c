@@ -11,7 +11,7 @@
 
 
 void setattr(Object *obj, const char *key, Object *value) {
-    if (obj == NULL || key == NULL || value == NULL)return;
+    if (obj == NULL || key == NULL)return;
     unsigned int index = 0;
     if (get_attr_index(obj, key, &index)) {
         obj->attributes[index]->value = value;

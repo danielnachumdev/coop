@@ -29,6 +29,8 @@ extern Object *Function;
 extern Object *Array;
 extern Object *Boolean;
 extern Object *Union;
+extern Object *Node;
+extern Object *List;
 
 
 Object *_new_object_impl(Object *type);
@@ -38,7 +40,6 @@ Object *_new_object_impl(Object *type);
 bool object_equals(const Object *a, const Object *b);
 
 Attribute *new_attr(const char *key, Object *value);
-
 
 
 #endif //LOCAL_PLAYGROUND_OBJECT_H

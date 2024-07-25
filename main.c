@@ -16,12 +16,6 @@ void dirall(void) {
 
 Object *Animal = NULL;
 
-Object *super(const Object *self, IntegerT steps) {
-    if (self == NULL) return NULL;
-    if (steps < 0) return NULL;
-    if (steps == 0) return (Object *) self;
-
-}
 
 DEF(Animal, __init__, Object*, {
     Object *res = new_object(Animal);
@@ -44,6 +38,13 @@ void main(void) {
     dir(Dog);
     dir(Cat);
 
+    println(explicitgetfunc(Boolean, __init__)(super(Integer, 1) == Number));
+    println(explicitgetfunc(Boolean, __init__)(super(Integer, 2) == Type));
+    println(super(Dog,1));
+    println(super(Dog,2));
+    println(super(Dog,3));
+
 //    explicitgetfunc(Dog, speak)();
 //    explicitgetfunc(Cat, speak)();
 }
+
