@@ -22,4 +22,6 @@ DECLARE(Integer, __eq__, bool, const Object *self, const Object *other);
 
 DECLARE(Integer, __print__, void, const Object *self);
 
+DECLARE(Integer, __bool__, bool, const Object *self);
+
 #endif //LOCAL_PLAYGROUND_INTEGER_H

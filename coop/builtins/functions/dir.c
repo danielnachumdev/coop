@@ -32,7 +32,7 @@ print_attrs(const Object *obj, int max_recursion_depth, int current_depth, char 
             _dir(attr->value, true, current_depth + 1, current_print_prefix, ll);
         } else {
             printf("%s\t\t", prev_print_prefix);
-            printf("'%s': ", (char *) attr->key);
+            printf("\"%s\"': ", (char *) attr->key);
             if (attr->value->type == String)
                 printf("\"");
             print(attr->value);
@@ -50,7 +50,7 @@ void _dir(const Object *obj, int max_recursion_depth, int current_depth, char *p
     if (obj == NULL) return;
     if (prev_print_prefix == NULL) prev_print_prefix = "";
     int current_length = (int) strlen(prev_print_prefix);
-    char *current_print_prefix = acquire(sizeof(char) * (current_length + 2));
+    char *current_print_prefix = acquire(sizeof(char) * (current_length + 3));
     strcpy(current_print_prefix, prev_print_prefix);
     current_print_prefix[current_length] = '\t';
     current_print_prefix[current_length + 1] = '\t';

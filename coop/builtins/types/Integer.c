@@ -16,6 +16,7 @@ void __init_integer_functions(void) {
     explicitsetfunc(Integer, __init__);
     explicitsetfunc(Integer, __eq__);
     explicitsetfunc(Integer, __print__);
+    explicitsetfunc(Integer, __bool__);
 }
 
 Object *__new_integer(IntegerT n) {
@@ -45,4 +46,9 @@ DEF(Integer, __eq__, bool, {
 DEF(Integer, __print__, void, {
     if (self == NULL) return;
     printf("%lld", *cast(self->data, IntegerT * ));
+}, const Object *self);
+
+DEF(Integer, __bool__, bool, {
+    if (self == NULL) return false;
+    return *cast(self->data, IntegerT * ) != 0L;
 }, const Object *self);

@@ -41,6 +41,11 @@ DEF(String, __print__, void, {
     char *));
 }, const Object *self)
 
+DEF(String, __bool__, bool, {
+    if (self == NULL) return false;
+    return len(self) > 0;
+}, const Object *self);
+
 void __init_string(void) {
     String = new_object(Type);
     setattr(String, "__name__", __new_string("String"));
@@ -50,4 +55,5 @@ void __init_string_functions(void) {
     explicitsetfunc(String, __init__);
     explicitsetfunc(String, __print__);
     explicitsetfunc(String, __eq__);
+    explicitsetfunc(String, __bool__);
 }
