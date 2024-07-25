@@ -10,7 +10,7 @@
 
 #define HashT(name) __FUNCTION_POINTER_BUILDER(name,unsigned long,const void *p)
 
-typedef struct HashSetStrategy {
+typedef struct CHashSetStrategy {
     double lower_bound;
     double upper_bound;
     double multiplier;
@@ -20,7 +20,7 @@ typedef struct HashSetStrategy {
 
 extern const CHashSetStrategy default_chashset_strategy;
 
-typedef struct HashSet {
+typedef struct CHashSet {
     HashT(hash);
 
     DuplicatorT(data_dup);

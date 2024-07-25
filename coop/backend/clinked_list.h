@@ -10,7 +10,7 @@
 
 #define ComparerT(name) __FUNCTION_POINTER_BUILDER(name,bool,const void *a,const void * b)
 
-typedef struct DoublyLinkedList {
+typedef struct CDoublyLinkedList {
     CNode *head;
     CNode *tail;
 
@@ -20,8 +20,8 @@ typedef struct DoublyLinkedList {
 
     ComparerT(data_comparer);
 
-} DoublyLinkedList;
-typedef DoublyLinkedList CLinkedList;
+} CDoublyLinkedList;
+typedef CDoublyLinkedList CLinkedList;
 
 CLinkedList *clinkedlist_new(DuplicatorT(data_dup), ConsumerT(data_free), ComparerT(data_comparer));
 

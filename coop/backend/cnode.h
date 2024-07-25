@@ -7,7 +7,7 @@
 
 #include "../builtins/macros.h"
 
-typedef struct Node {
+typedef struct CNode {
     void *data;
     struct CNode *next;
     struct CNode *prev;

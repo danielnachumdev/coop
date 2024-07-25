@@ -8,7 +8,7 @@
 #include "../builtins/macros.h"
 #include "cnode.h"
 
-typedef struct Stack {
+typedef struct CStack {
     DuplicatorT(data_dup);
 
     ConsumerT(data_free);

@@ -32,7 +32,7 @@ DEF(Animal, __init__, Object*, {
 
 DEF(Animal, speak, void, {
     if (self == NULL) return;
-    printf("")
+    printf("hello\n");
 }, const Object *self)
 
 void main(void) {
