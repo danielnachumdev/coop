@@ -3,7 +3,7 @@
 //
 
 #include "isinstance.h"
-#include "../__init__.h"
+#include "../../__init__.h"
 
 
 bool isinstance(const Object *obj, const Object *T) {

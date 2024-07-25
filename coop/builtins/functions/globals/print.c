@@ -4,12 +4,12 @@
 
 #include <stdio.h>
 #include <stdarg.h>
-#include "../object.h"
-#include "attr/getattr.h"
+#include "../../object.h"
+#include "../attr/getattr.h"
 
-#include "../types/Array.h"
-#include "../macros.h"
-#include "../types/__init__.h"
+#include "../../types/Array.h"
+#include "../../macros.h"
+#include "../../types/__init__.h"
 
 void __print_object(Object *obj) {
     if (obj == NULL) printf("NULL");

@@ -21,16 +21,17 @@ typedef struct Attribute {
     Object *value;
 } Attribute;
 
-extern Object *Type;
-extern Object *String;
-extern Object *Number;
-extern Object *Integer;
-extern Object *Function;
 extern Object *Array;
 extern Object *Boolean;
-extern Object *Union;
-extern Object *Node;
+extern Object *Function;
+extern Object *Integer;
 extern Object *List;
+extern Object *Node;
+extern Object *Number;
+extern Object *Set;
+extern Object *String;
+extern Object *Type;
+extern Object *Union;
 
 
 Object *_new_object_impl(Object *type);

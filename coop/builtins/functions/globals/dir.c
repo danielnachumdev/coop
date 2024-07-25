@@ -5,9 +5,9 @@
 
 #include <string.h>
 #include "dir.h"
-#include "attr/getattr.h"
+#include "../attr/getattr.h"
 #include "print.h"
-#include "../../memory/__init__.h"
+#include "../../../memory/__init__.h"
 
 void *dup_func(const void *p) {
     return (void *) p;
@@ -16,7 +16,8 @@ void *dup_func(const void *p) {
 void free_func(void *p) {}
 
 void
-print_attrs(const Object *obj, int max_recursion_depth, int current_depth, char *prev_print_prefix, char *current_print_prefix,
+print_attrs(const Object *obj, int max_recursion_depth, int current_depth, char *prev_print_prefix,
+            char *current_print_prefix,
             CLinkedList *ll) {
     printf("%s\tAttributes: [", prev_print_prefix);
     if (obj->num_attributes > 0)

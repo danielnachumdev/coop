@@ -11,6 +11,7 @@
 #include "Integer.h"
 #include "List.h"
 #include "Node.h"
+#include "Set.h"
 #include "Number.h"
 #include "String.h"
 #include "Type.h"

@@ -4,9 +4,9 @@
 
 #include "super.h"
 #include "isinstance.h"
-#include "../types/Union.h"
-#include "../types/List.h"
-#include "../types/Array.h"
+#include "../../types/Union.h"
+#include "../../types/List.h"
+#include "../../types/Array.h"
 
 Object *super(const Object *self, IntegerT steps) {
     if (self == NULL) return NULL;

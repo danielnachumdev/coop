@@ -3,7 +3,7 @@
 //
 
 #include "callable.h"
-#include "attr/getattr.h"
+#include "../attr/getattr.h"
 
 bool callable(const Object *obj) {
     if (obj == NULL) return false;

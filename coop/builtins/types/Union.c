@@ -5,8 +5,8 @@
 #include <stdarg.h>
 #include "Union.h"
 #include "__init__.h"
-#include "../functions/isinstance.h"
-#include "../functions/print.h"
+#include "../functions/globals/isinstance.h"
+#include "../functions/globals/print.h"
 #include "../../memory/allocator.h"
 
 Object *Union = NULL;

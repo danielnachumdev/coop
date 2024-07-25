@@ -5,7 +5,7 @@
 #ifndef COOP_LEN_H
 #define COOP_LEN_H
 
-#include "../object.h"
+#include "../../object.h"
 
 typedef long long IndexT;
 

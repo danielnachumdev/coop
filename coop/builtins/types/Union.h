@@ -7,7 +7,7 @@
 
 #include "../object.h"
 #include "../macros.h"
-#include "../functions/len.h"
+#include "../functions/globals/__init__.h"
 #include "Integer.h"
 
 void __init_union(void);

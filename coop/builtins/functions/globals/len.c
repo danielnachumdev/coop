@@ -3,7 +3,7 @@
 //
 
 #include "len.h"
-#include "attr/getattr.h"
+#include "../attr/getattr.h"
 
 IndexT len(const Object *obj) {
 //    TODO: should raise an exception when early termination

@@ -5,8 +5,8 @@
 #ifndef COOP_PRINT_H
 #define COOP_PRINT_H
 
-#include "../object.h"
-#include "../macros.h"
+#include "../../object.h"
+#include "../../macros.h"
 void __print_object(Object *obj);
 void _print_imp(const char *sep, const char *end, unsigned int n, ...);
 

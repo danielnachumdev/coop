@@ -6,7 +6,7 @@
 #include "Number.h"
 #include "../object.h"
 #include "../../memory/allocator.h"
-#include "../functions/print.h"
+#include "../functions/globals/print.h"
 #include "../functions/attr/getattr.h"
 #include "../functions/attr/setattr.h"
 #include "String.h"

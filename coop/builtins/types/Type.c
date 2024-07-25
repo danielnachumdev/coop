@@ -6,7 +6,7 @@
 #include "Type.h"
 #include "Function.h"
 #include "String.h"
-#include "../functions/print.h"
+#include "../functions/globals/print.h"
 
 Object *Type = NULL;
 

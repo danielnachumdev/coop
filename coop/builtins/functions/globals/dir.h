@@ -5,8 +5,8 @@
 #ifndef COOP_DIR_H
 #define COOP_DIR_H
 
-#include "../object.h"
-#include "../../backend/clinked_list.h"
+#include "../../object.h"
+#include "../../../backend/clinked_list.h"
 
 void _dir(const Object *obj, int max_recursion_depth, int current_depth, char *prev_print_prefix, CLinkedList *ll);
 

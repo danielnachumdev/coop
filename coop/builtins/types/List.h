@@ -6,7 +6,7 @@
 #define COOP_LIST_H
 
 #include "../object.h"
-#include "../functions/len.h"
+#include "../functions/globals/__init__.h"
 #include "../macros.h"
 
 void __init_list(void);

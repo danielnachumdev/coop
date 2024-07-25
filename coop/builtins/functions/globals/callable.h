@@ -5,7 +5,7 @@
 #ifndef COOP_CALLABLE_H
 #define COOP_CALLABLE_H
 
-#include "../object.h"
+#include "../../object.h"
 
 bool callable(const Object *obj);
 

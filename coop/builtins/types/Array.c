@@ -4,7 +4,7 @@
 
 #include "Array.h"
 #include "../../memory/allocator.h"
-#include "../functions/print.h"
+#include "../functions/globals/print.h"
 #include "Integer.h"
 #include "String.h"
 #include "Function.h"

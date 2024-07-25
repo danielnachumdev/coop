@@ -24,4 +24,5 @@ void init_builtins(void) {
     __init_union();
     __init_node();
     __init_list();
+    __init_set();
 }
