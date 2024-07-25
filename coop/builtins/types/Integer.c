@@ -4,9 +4,7 @@
 
 #include "Integer.h"
 #include "../../memory/allocator.h"
-#include "../macros.h"
-#include "String.h"
-#include "../functions/attr/setattr.h"
+#include "Function.h"
 
 Object *Integer = NULL;
 
@@ -14,8 +12,13 @@ void __init_integer(void) {
     Integer = new_object(Number);
 }
 
+void __init_integer_functions(void) {
+    explicitsetfunc(Integer, __init__);
+    explicitsetfunc(Integer, __init__);
+    explicitsetfunc(Integer, __init__);
+}
 
-Object *new_integer(long long int n) {
+Object *__new_integer(IntegerT n) {
     Object *res = new_object(Integer);
     if (res == NULL) return NULL;
     res->data = acquire(sizeof(long long int));
@@ -27,15 +30,19 @@ Object *new_integer(long long int n) {
     return res;
 }
 
-bool integer_equals(const Object *a, const Object *b) {
+DEF(Integer, __init__, Object*, {
+    return __new_integer(n);
+}, IntegerT n);
+
+DEF(Integer, __eq__, bool, {
     if (a == NULL && b == NULL) return true;
     if (a == NULL || b == NULL) return false;
     if (not(a->type == b->type)) return false;
     if (not(a->type == Integer)) return false;
-    return *cast(a->data, long long int *) == *cast(b->data, long long int *);
-}
+    return *cast(a->data, IntegerT * ) == *cast(b->data, IntegerT * );
+}, const Object *a, const Object *b);
 
-void integer_print(const Object *o) {
-    if (o == NULL) return;
-    printf("%lu", *cast(o->data, unsigned long *));
-}
+DEF(Integer, __print__, void, {
+    if (self == NULL) return;
+    printf("%lld", *cast(self->data, IntegerT * ));
+}, const Object *self);

@@ -4,7 +4,9 @@
 
 #ifndef COOP___FRAMEWORK___H
 #define COOP___FRAMEWORK___H
+
 #include "../coop/__init__.h"
+
 extern int num_tests;
 extern int passed_tests;
 #define ASSERT_OBJECT_EQUALS(obj1, obj2) EXPR( \
@@ -15,7 +17,7 @@ extern int passed_tests;
             __new_string(__FILE__ " at function"),   \
             __new_string(__func__),              \
             __new_string("at line"),\
-            new_integer(__LINE__),       \
+            __new_integer(__LINE__),       \
             __new_string("| FAILED\n\tInput1    :"),           \
             __new_string(#obj1 "\n\tInput2    :"),        \
             __new_string(#obj2),              \
@@ -36,7 +38,7 @@ extern int passed_tests;
             __new_string(__FILE__ " at function"),   \
             __new_string(__func__),              \
             __new_string("at line"),\
-            new_integer(__LINE__),       \
+            __new_integer(__LINE__),       \
             __new_string("| FAILED\n\tInput1    :"),           \
             __new_string(#obj1 "\n\tInput2    :"),        \
             __new_string(#obj2),              \
@@ -57,11 +59,11 @@ extern int passed_tests;
             __new_string(__FILE__ " at function"),   \
             __new_string(__func__),              \
             __new_string("at line"),\
-            new_integer(__LINE__),       \
+            __new_integer(__LINE__),       \
             __new_string("| FAILED\n\tInput     :"),           \
             __new_string(#x),                           \
             __new_string("\n\tEvaluation:"),    \
-            new_boolean(x),   \
+            explicitgetfunc(Boolean,__init__)(x),   \
             __new_string("\n\tExpected  : true\n")\
         );                               \
     num_tests+=1;                              \
@@ -74,11 +76,11 @@ extern int passed_tests;
             __new_string(__FILE__ " at function"),   \
             __new_string(__func__),              \
             __new_string("at line"),\
-            new_integer(__LINE__),       \
+            __new_integer(__LINE__),       \
             __new_string("| FAILED\n\tInput     :"),           \
             __new_string(#x),                           \
             __new_string("\n\tEvaluation:"),    \
-            new_boolean(x),   \
+            explicitgetfunc(Boolean,__init__)(x),   \
             __new_string("\n\tExpected  : false\n")\
         );                               \
     num_tests+=1;             \
@@ -92,7 +94,7 @@ extern int passed_tests;
             __new_string(__FILE__ " at function"),   \
             __new_string(__func__),              \
             __new_string("at line"),\
-            new_integer(__LINE__),       \
+            __new_integer(__LINE__),       \
             __new_string("| FAILED\n\tInput     :"),           \
             __new_string(#x),                           \
             __new_string("\n\tEvaluation:"),    \
@@ -110,7 +112,7 @@ extern int passed_tests;
             __new_string(__FILE__ " at function"),   \
             __new_string(__func__),              \
             __new_string("at line"),\
-            new_integer(__LINE__),       \
+            __new_integer(__LINE__),       \
             __new_string("| FAILED\n\tInput     :"),           \
             __new_string(#x),                           \
             __new_string("\n\tEvaluation:"),    \

@@ -6,10 +6,11 @@
 #include "../../__framework__.h"
 
 void test_integer(void) {
-    ASSERT_TRUE(isinstance(new_integer(1), Integer));
-    ASSERT_TRUE(isinstance(new_integer(1), Number));
-    ASSERT_TRUE(isinstance(new_integer(1), Type));
-    ASSERT_OBJECT_EQUALS(new_integer(1), new_integer(1));
-    ASSERT_OBJECT_EQUALS(new_integer(0), new_integer(0));
-    ASSERT_OBJECT_EQUALS(new_integer(-1), new_integer(-1));
+    Integer__init___prototype nint = Integer__init__;
+    ASSERT_TRUE(isinstance(nint(1), Integer));
+    ASSERT_TRUE(isinstance(nint(1), Number));
+    ASSERT_TRUE(isinstance(nint(1), Type));
+    ASSERT_OBJECT_EQUALS(nint(1), nint(1));
+    ASSERT_OBJECT_EQUALS(nint(0), nint(0));
+    ASSERT_OBJECT_EQUALS(nint(-1), nint(-1));
 }

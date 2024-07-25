@@ -29,7 +29,7 @@ DEF(Array, __init__, Object *, {
     res->attributes = acquire(sizeof(Attribute) * 3);
     if (res->attributes == NULL) return NULL;
     res->num_attributes = 3;
-    Attribute *len_field = new_attr("__len__", new_integer(num_objects));
+    Attribute *len_field = new_attr("__len__", explicitgetfunc(Integer, __init__)(num_objects));
     Attribute *name_field = new_attr("__name__", __new_string("Array"));
     Attribute *item_type_field = new_attr("__type__", items_type);
     res->attributes[0] = len_field;

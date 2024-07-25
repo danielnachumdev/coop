@@ -6,13 +6,20 @@
 #define LOCAL_PLAYGROUND_INTEGER_H
 
 #include "../object.h"
+#include "../macros.h"
+
+typedef long long int IntegerT;
 
 void __init_integer(void);
 
-Object *new_integer(long long int n);
+void __init_integer_functions(void);
 
-bool integer_equals(const Object *a, const Object *b);
+Object *__new_integer(IntegerT n);
 
-void integer_print(const Object *o);
+DECLARE(Integer, __init__, Object*, IntegerT);
+
+DECLARE(Integer, __eq__, bool, const Object *self, const Object *other);
+
+DECLARE(Integer, __print__, void, const Object *self);
 
 #endif //LOCAL_PLAYGROUND_INTEGER_H

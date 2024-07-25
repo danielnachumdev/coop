@@ -17,7 +17,7 @@ void __print_object(Object *obj) {
     else if (obj->type == Array) explicitgetfunc(Array, __print__)(obj);
     else if (obj->type == Number) number_print(obj);
     else if (obj->type == Boolean)  explicitgetfunc(Boolean, __print__)(obj);
-    else if (obj->type == Integer) integer_print(obj);
+    else if (obj->type == Integer) explicitgetfunc(Integer, __print__)(obj);
     else if (obj->type == String) explicitgetfunc(String, __print__)(obj);
     else if (obj->type == Union) union_print(obj);
     else if (obj->type == Function) explicitgetfunc(Function, __print__)(obj);

@@ -6,6 +6,7 @@
 #include "../../__framework__.h"
 
 void test_isinstance(void) {
+    Integer__init___prototype nint = Integer__init__;
     ASSERT_TRUE(isinstance(Integer, Number));
     ASSERT_TRUE(isinstance(Number, Type));
     ASSERT_TRUE(isinstance(Integer, Type));
@@ -13,6 +14,6 @@ void test_isinstance(void) {
     ASSERT_TRUE(isinstance(Integer, union_));
     ASSERT_TRUE(isinstance(Function, union_));
     ASSERT_TRUE(isinstance(__new_string(""), String));
-    ASSERT_TRUE(isinstance(new_integer(1), Integer));
-    ASSERT_FALSE(isinstance(new_integer(1), String));
+    ASSERT_TRUE(isinstance(nint(1), Integer));
+    ASSERT_FALSE(isinstance(nint(1), String));
 }

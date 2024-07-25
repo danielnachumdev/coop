@@ -5,6 +5,7 @@
 #include "Boolean.h"
 #include "../../memory/allocator.h"
 #include "String.h"
+#include "Integer.h"
 #include "Function.h"
 
 Object *Boolean = NULL;
@@ -12,6 +13,11 @@ Object *Boolean = NULL;
 void __init_boolean(void) {
     Boolean = new_object(Type);
     setattr(Boolean, "__name__", __new_string("Boolean"));
+    explicitsetfunc(Boolean, __init__);
+    explicitsetfunc(Boolean, __eq__);
+    explicitsetfunc(Boolean, __print__);
+    explicitsetfunc(Boolean, __int__);
+    explicitsetfunc(Boolean, __bool__);
 }
 
 DEF(Boolean, __init__, Object *, {
@@ -40,8 +46,8 @@ DEF(Boolean, __print__, void, {
 
 DEF(Boolean, __int__, Object *, {
     if (obj == NULL) return NULL;
-    return explicitgetfunc(Integer, __init__)(*cast(obj->data,
-    int *)?1:0);
+    IntegerT i = *((int *) obj->data) ? 1L : 0L;
+    return explicitgetfunc(Integer, __init__)(i);
 }, const Object *obj);
 
 DEF(Boolean, __bool__, Object *, {

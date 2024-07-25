@@ -21,7 +21,7 @@
 }
 
 Object *_new_object_impl(Object *type) {
-    Object *res = acquire(sizeof(Object));
+    Object * res = acquire(sizeof(Object));
     if (res != NULL)
         *res = init_object(type);
     return res;
@@ -33,7 +33,7 @@ bool object_equals(const Object *a, const Object *b) {
     if (not(a->type == b->type)) return false;
     if (a->type == Type) return object_equals(getattr(a, "__name__"), getattr(b, "__name__"));
     if (a->type == String) return explicitgetfunc(String, __eq__)(a, b);
-    if (a->type == Integer) return integer_equals(a, b);
+    if (a->type == Integer) return explicitgetfunc(Integer, __eq__)(a, b);
     if (a->type == Number) return number_equals(a, b);
     if (a->type == Boolean) return explicitgetfunc(Boolean, __eq__)(a, b);
     if (a->type == Array) return explicitgetfunc(Array, __eq__)(a, b);
