@@ -8,6 +8,7 @@
 #include "../functions/globals/isinstance.h"
 #include "../functions/globals/print.h"
 #include "../../memory/allocator.h"
+#include "../functions/globals/contains.h"
 
 Object *Union = NULL;
 
@@ -47,25 +48,28 @@ DEF(Union, __init__, Object*, {
 }, IntegerT num_types, ...);
 
 DEF(Union, __contains__, bool, {
-    if (union_ == NULL || T == NULL) return false;
-    return explicitgetfunc(Array, __contains__)(union_->data, T);
-}, const Object *union_, const Object *T);
+    if (self == NULL || T == NULL) return false;
+    return contains(self->data, T);
+}, const Object *self, const Object *T);
 
-DEF(Union, __eq__, bool, {
+bool union_eq(const Object *a, const Object *b) {
     if (a == NULL && b == NULL) return true;
     if (a == NULL || b == NULL) return false;
     if (not(a->type == b->type)) return false;
     if (not(a->type == Union)) return false;
-    long long length1 = len(a->data);
-    long long length2 = len(b->data);
+    IndexT length1 = len(a->data);
+    IndexT length2 = len(b->data);
     if (not(length1 == length2)) return false;
-    Union__contains___prototype inu = Union__contains__;
     Array__getitem___prototype at = Array__getitem__;
     for (long long i = 0; i < length1; ++i)
-        if (not(inu(b, at(a->data, i)))) return false;
+        if (not(contains(b, at(a->data, i)))) return false;
     for (long long i = 0; i < length2; ++i)
-        if (not(inu(a, at(b->data, i)))) return false;
+        if (not(contains(a, at(b->data, i)))) return false;
     return true;
+}
+
+DEF(Union, __eq__, bool, {
+    return union_eq(a, b);
 }, const Object *a, const Object *b);
 
 DEF(Union, __print__, void, {

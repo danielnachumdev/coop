@@ -37,7 +37,14 @@ DEF(Type, __print__, void, {
     printf(")");
 }, const Object *self)
 
-DEF(Type, __eq__, bool, {
+bool type_eq(const Object *self, const Object *other) {
+    if (self == NULL && other == NULL) return true;
+    if (self == NULL ^ other == NULL) return false;
+    if (self == other) return true;
     return object_equals(getattr(self, "__name__"), getattr(other, "__name__"));
+}
+
+DEF(Type, __eq__, bool, {
+    return type_eq(self, other);
 }, const Object *self, const Object *other)
 
