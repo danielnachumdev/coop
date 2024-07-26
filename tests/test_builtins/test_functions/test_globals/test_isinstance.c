@@ -3,7 +3,7 @@
 //
 
 #include "test_isinstance.h"
-#include "../../__framework__.h"
+#include "../../../__framework__.h"
 
 void test_isinstance(void) {
     Integer__init___prototype nint = Integer__init__;
