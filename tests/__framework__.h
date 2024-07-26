@@ -63,7 +63,7 @@ extern int passed_tests;
             __new_string("| FAILED\n\tInput     :"),           \
             __new_string(#x),                           \
             __new_string("\n\tEvaluation:"),    \
-            explicitgetfunc(Boolean,__init__)(x),   \
+            implicitgetfunc(Boolean,__init__)(x),   \
             __new_string("\n\tExpected  : true\n")\
         );                               \
     num_tests+=1;                              \
@@ -80,7 +80,7 @@ extern int passed_tests;
             __new_string("| FAILED\n\tInput     :"),           \
             __new_string(#x),                           \
             __new_string("\n\tEvaluation:"),    \
-            explicitgetfunc(Boolean,__init__)(x),   \
+            implicitgetfunc(Boolean,__init__)(x),   \
             __new_string("\n\tExpected  : false\n")\
         );                               \
     num_tests+=1;             \
