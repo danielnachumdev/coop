@@ -12,17 +12,17 @@ Object *super(const Object *self, IntegerT steps) {
     if (self == NULL) return NULL;
     if (steps <= 0) return NULL;
     if (steps == 1) return (Object *) self->type;
-    Object *queue = explicitgetfunc(List, __init__)();
-    explicitgetfunc(List, push)(queue, (Object *) self);
+    Object *queue = implicitgetfunc(List, __init__)();
+    implicitgetfunc(List, push)(queue, (Object *) self);
     Object *curT = NULL;
     for (IntegerT i = 0; i < steps; ++i) {
-        curT = explicitgetfunc(List, poplast)(queue);
+        curT = implicitgetfunc(List, poplast)(queue);
         if (isinstance(curT, Union)) {
-            IntegerT length = *(IntegerT *) explicitgetfunc(Union, __len__)(curT)->data;
+            IntegerT length = *(IntegerT *) implicitgetfunc(Union, __len__)(curT)->data;
             for (IntegerT j = 0; j < length; ++j)
-                explicitgetfunc(List, push)(queue, explicitgetfunc(Array, __getitem__)(curT->data, j));
+                implicitgetfunc(List, push)(queue, implicitgetfunc(Array, __getitem__)(curT->data, j));
         } else
-            explicitgetfunc(List, push)(queue, (Object *) curT->type);
+            implicitgetfunc(List, push)(queue, (Object *) curT->type);
     }
-    return explicitgetfunc(List, poplast)(queue);
+    return implicitgetfunc(List, poplast)(queue);
 }

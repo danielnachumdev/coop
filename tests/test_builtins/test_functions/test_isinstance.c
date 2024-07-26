@@ -10,7 +10,7 @@ void test_isinstance(void) {
     ASSERT_TRUE(isinstance(Integer, Number));
     ASSERT_TRUE(isinstance(Number, Type));
     ASSERT_TRUE(isinstance(Integer, Type));
-    Object *union_ = explicitgetfunc(Union, __init__)(2, Integer, Function);
+    Object *union_ = implicitgetfunc(Union, __init__)(2, Integer, Function);
     ASSERT_TRUE(isinstance(Integer, union_));
     ASSERT_TRUE(isinstance(Function, union_));
     ASSERT_TRUE(isinstance(__new_string(""), String));

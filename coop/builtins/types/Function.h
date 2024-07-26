@@ -10,7 +10,7 @@
 
 void __init_function(void);
 
-//DO NOT DELETE! explicitsetfunc uses this!
+//DO NOT DELETE! implicitsetfunc uses this!
 Object *__new_function(const char *name, void *(*impl)(), Object *return_type, Object *arguments_array);
 
 DECLARE(Function, __init__, Object *, const char *name, void *(*impl)(), Object *return_type, Object *arguments_array);

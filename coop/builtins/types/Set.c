@@ -9,11 +9,11 @@ Object *Set = NULL;
 
 void __init_set(void) {
     Set = new_object(Type);
-    explicitsetfunc(Set, __init__);
-    explicitsetfunc(Set, __len__);
-    explicitsetfunc(Set, __contains__);
-    explicitsetfunc(Set, add);
-    explicitsetfunc(Set, remove);
+    implicitsetfunc(Set, __init__);
+    implicitsetfunc(Set, __len__);
+    implicitsetfunc(Set, __contains__);
+    implicitsetfunc(Set, add);
+    implicitsetfunc(Set, remove);
 }
 
 DEF(Set, __init__, Object *, {}, void)

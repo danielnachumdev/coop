@@ -10,13 +10,13 @@ Object *List = NULL;
 
 void __init_list(void) {
     List = new_object(Type);
-    explicitsetfunc(List, __init__);
-    explicitsetfunc(List, push);
-    explicitsetfunc(List, popfirst);
-    explicitsetfunc(List, poplast);
-    explicitsetfunc(List, append);
-    explicitsetfunc(List, isempty);
-    explicitsetfunc(List, __bool__);
+    implicitsetfunc(List, __init__);
+    implicitsetfunc(List, push);
+    implicitsetfunc(List, popfirst);
+    implicitsetfunc(List, poplast);
+    implicitsetfunc(List, append);
+    implicitsetfunc(List, isempty);
+    implicitsetfunc(List, __bool__);
 }
 
 DEF(List, __init__, Object *, {
@@ -29,12 +29,12 @@ DEF(List, __init__, Object *, {
 void _push(Object *self, Object *obj) {
     if (self == NULL || obj == NULL) return;
     if (getattr(self, "head") == NULL) {
-        Object *new_head = explicitgetfunc(Node, __init__)(obj, NULL, NULL);
+        Object *new_head = implicitgetfunc(Node, __init__)(obj, NULL, NULL);
         setattr(self, "head", new_head);
         setattr(self, "tail", new_head);
     } else {
         Object *prev_head = getattr(self, "head");
-        Object *new_head = explicitgetfunc(Node, __init__)(obj, prev_head, NULL);
+        Object *new_head = implicitgetfunc(Node, __init__)(obj, prev_head, NULL);
         setattr(prev_head, "prev", new_head);
         setattr(self, "head", new_head);
     }
@@ -46,7 +46,7 @@ DEF(List, push, void, {
 
 DEF(List, popfirst, Object *, {
     if (self == NULL) return NULL;
-    if (explicitgetfunc(List, isempty)(self)) return NULL;
+    if (implicitgetfunc(List, isempty)(self)) return NULL;
     Object *head = getattr(self, "head");
     Object *tail = getattr(self, "tail");
     setattr(self, "head", getattr(head, "next"));
@@ -60,7 +60,7 @@ DEF(List, popfirst, Object *, {
 
 DEF(List, poplast, Object *, {
     if (self == NULL) return NULL;
-    if (explicitgetfunc(List, isempty)(self)) return NULL;
+    if (implicitgetfunc(List, isempty)(self)) return NULL;
     Object *head = getattr(self, "head");
     Object *tail = getattr(self, "tail");
     setattr(self, "tail", getattr(tail, "prev"));
@@ -75,19 +75,19 @@ DEF(List, poplast, Object *, {
 DEF(List, append, void, {
     if (self == NULL || obj == NULL) return;
     if (getattr(self, "head") == NULL) {
-        Object *new_head = explicitgetfunc(Node, __init__)(obj, NULL, NULL);
+        Object *new_head = implicitgetfunc(Node, __init__)(obj, NULL, NULL);
         setattr(self, "head", new_head);
         setattr(self, "tail", new_head);
     } else {
         Object *prev_tail = getattr(self, "tail");
-        Object *new_tail = explicitgetfunc(Node, __init__)(obj, NULL, prev_tail);
+        Object *new_tail = implicitgetfunc(Node, __init__)(obj, NULL, prev_tail);
         setattr(prev_tail, "next", new_tail);
         setattr(self, "tail", new_tail);
     }
 }, Object *self, Object *obj)
 
 DEF(List, __bool__, bool, {
-    return explicitgetfunc(List, isempty)(self);
+    return implicitgetfunc(List, isempty)(self);
 }, Object *self)
 
 DEF(List, isempty, bool, {

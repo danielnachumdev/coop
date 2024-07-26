@@ -16,15 +16,15 @@ void __init_type(void) {
 }
 
 void __init_type_functions(void) {
-    explicitsetfunc(Type, __init__);
-    explicitsetfunc(Type, __print__);
-    explicitsetfunc(Type, __eq__);
+    implicitsetfunc(Type, __init__);
+    implicitsetfunc(Type, __print__);
+    implicitsetfunc(Type, __eq__);
 }
 
 DEF(Type, __init__, Object*, {
     if (name == NULL) return NULL;
     Object *T = new_object(Type);
-    setattr(T, "__name__", explicitgetfunc(String, __init__)(name));
+    setattr(T, "__name__", implicitgetfunc(String, __init__)(name));
     for (IntegerT i = 0; i < num_attributes; ++i)
         setattr(T, attrs[i].key, attrs[i].value);
     return T;

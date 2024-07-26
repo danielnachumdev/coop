@@ -10,6 +10,6 @@
 
 Object *input(const Object *);
 
-#define strinput(s) input(explicitgetfunc(String,__init__)(s))
+#define strinput(s) input(implicitgetfunc(String,__init__)(s))
 
 #endif //COOP_INPUT_H

@@ -52,8 +52,8 @@ void __init_string(void) {
 }
 
 void __init_string_functions(void) {
-    explicitsetfunc(String, __init__);
-    explicitsetfunc(String, __print__);
-    explicitsetfunc(String, __eq__);
-    explicitsetfunc(String, __bool__);
+    implicitsetfunc(String, __init__);
+    implicitsetfunc(String, __print__);
+    implicitsetfunc(String, __eq__);
+    implicitsetfunc(String, __bool__);
 }

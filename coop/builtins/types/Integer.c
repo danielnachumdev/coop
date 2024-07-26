@@ -13,10 +13,10 @@ void __init_integer(void) {
 }
 
 void __init_integer_functions(void) {
-    explicitsetfunc(Integer, __init__);
-    explicitsetfunc(Integer, __eq__);
-    explicitsetfunc(Integer, __print__);
-    explicitsetfunc(Integer, __bool__);
+    implicitsetfunc(Integer, __init__);
+    implicitsetfunc(Integer, __eq__);
+    implicitsetfunc(Integer, __print__);
+    implicitsetfunc(Integer, __bool__);
 }
 
 Object *__new_integer(IntegerT n) {

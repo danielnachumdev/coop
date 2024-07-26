@@ -81,9 +81,9 @@ ret funcname(owner,name)(__VA_ARGS__) {\
 #define DEFGLOBAL(name, ret, body, ...) DEF(,name, ret, body,##__VA_ARGS__)
 
 #define setfunc(obj, name, impl) setattr(obj, name, __new_function(name, cast(funcname(obj, impl), void*(*)()), NULL, NULL))
-#define explicitsetfunc(obj, impl) setfunc(obj, STR(impl), impl)
-#define explicitgetfunc(obj, impl) cast(getattr(obj, STR(impl))->data, _PROTOTYPE_NAME(obj, impl))
-#define getglobalfunc(impl) explicitgetfunc(, impl)
+#define implicitsetfunc(obj, impl) setfunc(obj, STR(impl), impl)
+#define implicitgetfunc(obj, impl) cast(getattr(obj, STR(impl))->data, _PROTOTYPE_NAME(obj, impl))
+#define getglobalfunc(impl) implicitgetfunc(, impl)
 
 
 #endif //LOCAL_PLAYGROUND_MACROS_H

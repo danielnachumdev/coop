@@ -6,8 +6,8 @@
 #include "../../__framework__.h"
 
 void test_union(void) {
-    Object *u1 = explicitgetfunc(Union, __init__)(2, Integer, Function);
-    Object *u2 = explicitgetfunc(Union, __init__)(2, Function, Integer);
+    Object *u1 = implicitgetfunc(Union, __init__)(2, Integer, Function);
+    Object *u2 = implicitgetfunc(Union, __init__)(2, Function, Integer);
     ASSERT_OBJECT_EQUALS(u1, u2);
     ASSERT_TRUE(isinstance(Integer, u1));
     ASSERT_TRUE(isinstance(Integer, u2));

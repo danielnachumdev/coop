@@ -15,18 +15,18 @@ Object *Union = NULL;
 void __init_union(void) {
     Union = new_object(Type);
     setattr(Union, "__name__", __new_string("Union"));
-    explicitsetfunc(Union, __init__);
-    explicitsetfunc(Union, __contains__);
-    explicitsetfunc(Union, __eq__);
-    explicitsetfunc(Union, __print__);
-    explicitsetfunc(Union, __len__);
+    implicitsetfunc(Union, __init__);
+    implicitsetfunc(Union, __contains__);
+    implicitsetfunc(Union, __eq__);
+    implicitsetfunc(Union, __print__);
+    implicitsetfunc(Union, __len__);
 }
 
 DEF(Union, __init__, Object*, {
     Object *res = new_object(Union);
     if (res == NULL) return NULL;
 
-    res->data = explicitgetfunc(Array, __init__)(num_types, Type);
+    res->data = implicitgetfunc(Array, __init__)(num_types, Type);
     if (res->data == NULL) {
         release(res);
         return NULL;
@@ -41,7 +41,7 @@ DEF(Union, __init__, Object*, {
             release(res);
             return NULL;
         }
-        explicitgetfunc(Array, __setitem__)(res->data, i, cur);
+        implicitgetfunc(Array, __setitem__)(res->data, i, cur);
     }
     va_end(valist);
     return res;
@@ -79,6 +79,6 @@ DEF(Union, __print__, void, {
 }, const Object *obj);
 
 DEF(Union, __len__, Object*, {
-    if (obj == NULL) return explicitgetfunc(Integer, __init__)(0L);
-    return explicitgetfunc(Array, __len__)(obj->data);
+    if (obj == NULL) return implicitgetfunc(Integer, __init__)(0L);
+    return implicitgetfunc(Array, __len__)(obj->data);
 }, const Object *obj);
