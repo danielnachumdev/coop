@@ -4,11 +4,13 @@
 
 #include "Set.h"
 #include "Function.h"
+#include "String.h"
 
 Object *Set = NULL;
 
 void __init_set(void) {
     Set = new_object(Type);
+    setattr(Set, "__name__", implicitgetfunc(String, __init__)("Set"));
     implicitsetfunc(Set, __init__);
     implicitsetfunc(Set, __len__);
     implicitsetfunc(Set, __contains__);

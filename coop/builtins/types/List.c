@@ -10,6 +10,7 @@ Object *List = NULL;
 
 void __init_list(void) {
     List = new_object(Type);
+    setattr(List, "__name__", implicitgetfunc(String, __init__)("List"));
     implicitsetfunc(List, __init__);
     implicitsetfunc(List, push);
     implicitsetfunc(List, popfirst);

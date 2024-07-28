@@ -1,5 +1,6 @@
 import os, re
 import sys
+from typing import IO, List
 
 from danielutils import TemporaryFile
 
@@ -29,6 +30,19 @@ def parse_line(line: str) -> str:
     return res + "\n"
 
 
+def parse_lines(output: IO[str], lines: List[str]) -> None:
+    joined = "\n".join(lines)
+    OBJ_REGEX: re.Pattern = re.compile(r"Name = (\w+)\n([\s\S]+?Attributes: \[[\s\S]+?\]\n\))")
+    ATTRS_REGEX: re.Pattern = re.compile(r"Attributes: \[.*?\n([\s\S]+?)\n\]")
+    ATTR_REGEX: re.Pattern = re.compile(r"\"(\w+)\" ?: (.+)")
+    objs = OBJ_REGEX.findall(joined)
+    for name, obj in objs:
+        output.write(f"# Type name: `{name}`\n")
+        attrs = ATTR_REGEX.findall(ATTRS_REGEX.findall(obj)[0])
+        for attr_name, attr_value in attrs:
+            output.write(f"* `{attr_name}`: {attr_value}\n")
+
+
 def main(target_system: str) -> None:
     file_name = "./build_documentation.txt"
     cwd = os.getcwd()
@@ -42,8 +56,7 @@ def main(target_system: str) -> None:
     with open("Documentation.md", "w", encoding="utf8") as f:
         f.write("# COOP Documentation\n")
         f.write("## Implemented Classes\n")
-        for line in lines:
-            f.write(parse_line(line))
+        parse_lines(f, lines)
 
 
 if __name__ == '__main__':

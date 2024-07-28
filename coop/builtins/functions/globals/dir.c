@@ -33,7 +33,7 @@ print_attrs(const Object *obj, int max_recursion_depth, int current_depth, char 
             _dir(attr->value, true, current_depth + 1, current_print_prefix, ll);
         } else {
             printf("%s\t\t", prev_print_prefix);
-            printf("\"%s\"': ", (char *) attr->key);
+            printf("\"%s\": ", (char *) attr->key);
             if (attr->value->type == String)
                 printf("\"");
             print(attr->value);
