@@ -13,11 +13,11 @@ Object *Boolean = NULL;
 void __init_boolean(void) {
     Boolean = new_object(Type);
     setattr(Boolean, "__name__", __new_string("Boolean"));
-    implicitsetfunc(Boolean, __init__);
-    implicitsetfunc(Boolean, __eq__);
-    implicitsetfunc(Boolean, __print__);
-    implicitsetfunc(Boolean, __int__);
-    implicitsetfunc(Boolean, __bool__);
+    isetfunc(Boolean, __init__);
+    isetfunc(Boolean, __eq__);
+    isetfunc(Boolean, __print__);
+    isetfunc(Boolean, __int__);
+    isetfunc(Boolean, __bool__);
 }
 
 DEF(Boolean, __init__, Object *, {
@@ -47,10 +47,10 @@ DEF(Boolean, __print__, void, {
 DEF(Boolean, __int__, Object *, {
     if (obj == NULL) return NULL;
     IntegerT i = *((int *) obj->data) ? 1L : 0L;
-    return implicitgetfunc(Integer, __init__)(i);
+    return igetfunc(Integer, __init__)(i);
 }, const Object *obj);
 
 DEF(Boolean, __bool__, Object *, {
     if (self == NULL) return NULL;
-    return implicitgetfunc(Boolean, __init__)(*cast(self->data, bool * ));
+    return igetfunc(Boolean, __init__)(*cast(self->data, bool * ));
 }, const Object *self);

@@ -13,14 +13,14 @@
 
 void __print_object(Object *obj) {
     if (obj == NULL) printf("NULL");
-    else if (obj->type == Type) implicitgetfunc(Type, __print__)(obj);
-    else if (obj->type == Array) implicitgetfunc(Array, __print__)(obj);
+    else if (obj->type == Type) igetfunc(Type, __print__)(obj);
+    else if (obj->type == Array) igetfunc(Array, __print__)(obj);
     else if (obj->type == Number) number_print(obj);
-    else if (obj->type == Boolean)  implicitgetfunc(Boolean, __print__)(obj);
-    else if (obj->type == Integer) implicitgetfunc(Integer, __print__)(obj);
-    else if (obj->type == String) implicitgetfunc(String, __print__)(obj);
-    else if (obj->type == Union) implicitgetfunc(Union, __print__)(obj);
-    else if (obj->type == Function) implicitgetfunc(Function, __print__)(obj);
+    else if (obj->type == Boolean)  igetfunc(Boolean, __print__)(obj);
+    else if (obj->type == Integer) igetfunc(Integer, __print__)(obj);
+    else if (obj->type == String) igetfunc(String, __print__)(obj);
+    else if (obj->type == Union) igetfunc(Union, __print__)(obj);
+    else if (obj->type == Function) igetfunc(Function, __print__)(obj);
     else printf("Object %p", obj);
 }
 

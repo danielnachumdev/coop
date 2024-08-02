@@ -31,14 +31,14 @@ bool object_equals(const Object *a, const Object *b) {
     if (a == NULL && b == NULL) return true;
     if (a == NULL || b == NULL) return false;
     if (not(a->type == b->type)) return false;
-    if (a->type == Type) return implicitgetfunc(Type, __eq__)(a, b);
-    if (a->type == String) return implicitgetfunc(String, __eq__)(a, b);
-    if (a->type == Integer) return implicitgetfunc(Integer, __eq__)(a, b);
+    if (a->type == Type) return igetfunc(Type, __eq__)(a, b);
+    if (a->type == String) return igetfunc(String, __eq__)(a, b);
+    if (a->type == Integer) return igetfunc(Integer, __eq__)(a, b);
     if (a->type == Number) return number_equals(a, b);
-    if (a->type == Boolean) return implicitgetfunc(Boolean, __eq__)(a, b);
-    if (a->type == Array) return implicitgetfunc(Array, __eq__)(a, b);
-    if (a->type == Union) return implicitgetfunc(Union, __eq__)(a, b);
-    if (a->type == Function) return implicitgetfunc(Function, __eq__)(a, b);
+    if (a->type == Boolean) return igetfunc(Boolean, __eq__)(a, b);
+    if (a->type == Array) return igetfunc(Array, __eq__)(a, b);
+    if (a->type == Union) return igetfunc(Union, __eq__)(a, b);
+    if (a->type == Function) return igetfunc(Function, __eq__)(a, b);
     return a == b;
 }
 

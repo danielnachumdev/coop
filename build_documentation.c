@@ -6,7 +6,7 @@
 int main() {
     Object *types[] = {Array, Boolean, Function, Integer, List, Node, Number, Set, String, Type, Union};
     for (int i = 0; i < 11; ++i) {
-        println(implicitgetfunc(String, __init__)("Name ="), getattr(types[i], "__name__"));
+        println(igetfunc(String, __init__)("Name ="), getattr(types[i], "__name__"));
         dir(types[i]);
     }
     return 0;

@@ -11,5 +11,5 @@ Object *input(const Object *string) {
     print(string);
     char buffer[MAX_LENGTH] = {0};
     fgets(buffer, MAX_LENGTH, stdin);
-    return implicitgetfunc(String, __init__)(buffer);
+    return igetfunc(String, __init__)(buffer);
 }

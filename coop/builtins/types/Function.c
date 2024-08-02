@@ -27,9 +27,9 @@ Object *__new_function(const char *name, void *(*impl)(), Object *return_type, O
 void __init_function(void) {
     Function = new_object(Type);
     setattr(Function, "__name__", __new_string("Function"));
-    implicitsetfunc(Function, __print__);
-    implicitsetfunc(Function, __eq__);
-    implicitsetfunc(Function, __init__);
+    isetfunc(Function, __print__);
+    isetfunc(Function, __eq__);
+    isetfunc(Function, __init__);
 }
 
 

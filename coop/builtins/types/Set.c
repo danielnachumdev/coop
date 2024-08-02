@@ -10,12 +10,12 @@ Object *Set = NULL;
 
 void __init_set(void) {
     Set = new_object(Type);
-    setattr(Set, "__name__", implicitgetfunc(String, __init__)("Set"));
-    implicitsetfunc(Set, __init__);
-    implicitsetfunc(Set, __len__);
-    implicitsetfunc(Set, __contains__);
-    implicitsetfunc(Set, add);
-    implicitsetfunc(Set, remove);
+    setattr(Set, "__name__", igetfunc(String, __init__)("Set"));
+    isetfunc(Set, __init__);
+    isetfunc(Set, __len__);
+    isetfunc(Set, __contains__);
+    isetfunc(Set, add);
+    isetfunc(Set, remove);
 }
 
 DEF(Set, __init__, Object *, {}, void)

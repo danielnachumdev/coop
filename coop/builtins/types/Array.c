@@ -14,13 +14,13 @@ Object *Array = NULL;
 void __init_array(void) {
     Array = new_object(Type);
     setattr(Array, "__name__", __new_string("Array"));
-    implicitsetfunc(Array, __init__);
-    implicitsetfunc(Array, __getitem__);
-    implicitsetfunc(Array, __setitem__);
-    implicitsetfunc(Array, __contains__);
-    implicitsetfunc(Array, __eq__);
-    implicitsetfunc(Array, __print__);
-    implicitsetfunc(Array, __len__);
+    isetfunc(Array, __init__);
+    isetfunc(Array, __getitem__);
+    isetfunc(Array, __setitem__);
+    isetfunc(Array, __contains__);
+    isetfunc(Array, __eq__);
+    isetfunc(Array, __print__);
+    isetfunc(Array, __len__);
 }
 
 DEF(Array, __init__, Object *, {
@@ -29,7 +29,7 @@ DEF(Array, __init__, Object *, {
     res->attributes = acquire(sizeof(Attribute) * 3);
     if (res->attributes == NULL) return NULL;
     res->num_attributes = 3;
-    Attribute *len_field = new_attr("__len__", implicitgetfunc(Integer, __init__)(num_objects));
+    Attribute *len_field = new_attr("__len__", igetfunc(Integer, __init__)(num_objects));
     Attribute *name_field = new_attr("__name__", __new_string("Array"));
     Attribute *item_type_field = new_attr("__type__", items_type);
     res->attributes[0] = len_field;
@@ -57,7 +57,7 @@ DEF(Array, __contains__, bool, {
     if (arr == NULL || obj == NULL) return false;
     IndexT length = len(arr);
     for (IndexT i = 0; i < length; ++i)
-        if (object_equals(obj, implicitgetfunc(Array, __getitem__)(arr, i))) return true;
+        if (object_equals(obj, igetfunc(Array, __getitem__)(arr, i))) return true;
 
     return false;
 }, const Object *arr, const Object *obj)
@@ -70,8 +70,8 @@ DEF(Array, __eq__, bool, {
     Object *len;
     if (not(object_equals(len = getattr(a, "__len__"), getattr(b, "__len__")))) return false;
     for (IndexT i = 0; i < *cast(len->data, IndexT * ); ++i)
-        if (not(object_equals(implicitgetfunc(Array, __getitem__)(a, i),
-                              implicitgetfunc(Array, __getitem__)(b, i))))
+        if (not(object_equals(igetfunc(Array, __getitem__)(a, i),
+                              igetfunc(Array, __getitem__)(b, i))))
             return false;
     return true;
 }, const Object *a, const Object *b)
@@ -80,11 +80,11 @@ DEF(Array, __print__, void, {
     printf("[");
     Object *length_attr = getattr(arr, "__len__");
     if (length_attr != NULL)
-        __print_object(implicitgetfunc(Array, __getitem__)(arr, 0));
+        __print_object(igetfunc(Array, __getitem__)(arr, 0));
     IndexT length = len(arr);
     for (IndexT i = 1; i < length; ++i) {
         printf(", ");
-        __print_object(implicitgetfunc(Array, __getitem__)(arr, i));
+        __print_object(igetfunc(Array, __getitem__)(arr, i));
     }
     printf("]");
 }, const Object *arr)
@@ -92,5 +92,5 @@ DEF(Array, __print__, void, {
 DEF(Array, __len__, Object *, {
     if (self == NULL) return 0;
     IntegerT res = *cast(getattr(self, "__len__")->data, IntegerT * );
-    return implicitgetfunc(Integer, __init__)(res);
+    return igetfunc(Integer, __init__)(res);
 }, const Object *self)

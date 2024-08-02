@@ -11,7 +11,7 @@ bool isinstance(const Object *obj, const Object *T) {
         IntegerT length = len(T->data);
         Array__getitem___prototype get = Array__getitem__;
         for (IntegerT i = 0; i < length; ++i)
-            if (implicitgetfunc(Type, __eq__)(obj, get(T->data, i))) return true;
+            if (igetfunc(Type, __eq__)(obj, get(T->data, i))) return true;
     } else {
         const Object *cur_type = obj->type;
         if (obj->type == NULL) return false;

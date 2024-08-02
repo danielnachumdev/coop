@@ -10,8 +10,8 @@ Object *Node = NULL;
 
 void __init_node(void) {
     Node = new_object(Type);
-    setattr(Node, "__name__", implicitgetfunc(String, __init__)("Node"));
-    implicitsetfunc(Node, __init__);
+    setattr(Node, "__name__", igetfunc(String, __init__)("Node"));
+    isetfunc(Node, __init__);
 }
 
 DEF(Node, __init__, Object*, {

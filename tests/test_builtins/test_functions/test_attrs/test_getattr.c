@@ -14,6 +14,6 @@ void test_getattr(void) {
     ASSERT_TRUE(hasattr(String, "__print__"));
     ASSERT_TRUE(hasattr(String, "__bool__"));
     ASSERT_FALSE(hasattr(String, "dfskjbnlsdkfjnh"));
-    ASSERT_FALSE(hasattr(implicitgetfunc(String,__init__)("asdasd"), "dfskjbnlsdkfjnh"));
-    ASSERT_TRUE(hasattr(implicitgetfunc(String,__init__)("asdasd"), "__print__"));
+    ASSERT_FALSE(hasattr(igetfunc(String, __init__)("asdasd"), "dfskjbnlsdkfjnh"));
+    ASSERT_TRUE(hasattr(igetfunc(String, __init__)("asdasd"), "__print__"));
 }
