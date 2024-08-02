@@ -15,7 +15,8 @@ void dirall(void) {
 }
 
 int main(void) {
-    print(strinput("What is your name? "));
+    Object *name = strinput("What is your name? ");
+    print(S("Your name is:"), name);
     dir(Set);
     return 0;
 }

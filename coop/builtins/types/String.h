@@ -22,4 +22,6 @@ DECLARE(String, __print__, void, const Object*);
 
 DECLARE(String, __bool__, bool, const Object *self);
 
+#define S(string) igetfunc(String,__init__)(string)
+
 #endif //LOCAL_PLAYGROUND_STRING_H
